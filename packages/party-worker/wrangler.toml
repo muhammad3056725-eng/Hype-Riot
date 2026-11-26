@@ -1,0 +1,10 @@
+name = "hype-riot-party"
+main = "src/PartyRoomRelay.ts"
+compatibility_date = "2024-11-01"
+
+[durable_objects]
+bindings = [{ name = "PARTY_ROOM", class_name = "PartyRoom" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["PartyRoom"]

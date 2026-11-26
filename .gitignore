@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+# pipeline/output stays tracked: wikidata_entities.json accumulates
+# growth across data-build workflow runs and must persist in the repo.
