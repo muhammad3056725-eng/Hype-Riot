@@ -143,3 +143,5 @@ public/data/         compiled dataset (v1 + daily)
 art-source/          neon_32.gpl palette
 .github/workflows/   pages, ci, daily-riot, data-build (owner-pasted)
 ```
+
+<!-- deploy trigger 2026-11-26 -->
