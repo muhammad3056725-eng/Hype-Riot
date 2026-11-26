@@ -1,0 +1,133 @@
+# CLASH questions
+# Format: <max|min> | <Question> | <Option A> | <value A> | <Option B> | <value B> | <unit>
+# max = bigger value wins, min = smaller value wins (years: earlier wins)
+
+# ---------- Heights ----------
+max | Which is TALLER? | Statue of Liberty | 93 | Eiffel Tower | 330 | metres
+max | Which mountain is TALLER? | Mount Kilimanjaro | 5895 | Mont Blanc | 4806 | metres
+max | Which is TALLER? | Empire State Building | 443 | Burj Khalifa | 828 | metres
+max | Which mountain is TALLER? | Mount Fuji | 3776 | Matterhorn | 4478 | metres
+max | Which is TALLER? | Big Ben's tower | 96 | Leaning Tower of Pisa | 56 | metres
+max | Which is TALLER? | Taj Mahal | 73 | Great Pyramid of Giza | 139 | metres
+max | Which animal is TALLER? | Giraffe | 5 | African elephant | 3.3 | metres
+max | Which is TALLER? | CN Tower | 553 | Space Needle | 184 | metres
+min | Which mountain is SHORTER? | Snowdon | 1085 | Ben Nevis | 1345 | metres
+min | Which is LOWER off the ground? | Soccer goal crossbar | 2.44 | Basketball hoop | 3.05 | metres
+
+# ---------- Rivers & lengths ----------
+max | Which river is LONGER? | Mississippi | 3730 | Nile | 6650 | kilometres
+max | Which river is LONGER? | Danube | 2850 | Thames | 346 | kilometres
+max | Which river is LONGER? | Rhine | 1230 | Yangtze | 6300 | kilometres
+max | Which river is LONGER? | Volga | 3530 | Seine | 777 | kilometres
+max | Which river is LONGER? | Ganges | 2525 | Amazon | 6400 | kilometres
+min | Which river is SHORTER? | Rhine | 1230 | Thames | 346 | kilometres
+max | Which is LONGER? | Olympic swimming pool | 50 | Basketball court | 28 | metres
+max | Which bridge is LONGER? | Tower Bridge | 244 | Golden Gate Bridge | 2737 | metres
+max | Which lake is DEEPER? | Loch Ness | 230 | Lake Baikal | 1642 | metres
+
+# ---------- Animal weights ----------
+max | Which is HEAVIER? | Hippopotamus | 1500 | African elephant | 6000 | kg
+max | Which is HEAVIER? | Polar bear | 450 | Lion | 190 | kg
+max | Which is HEAVIER? | Whale shark | 19000 | Blue whale | 140000 | kg
+max | Which is HEAVIER? | Chimpanzee | 50 | Gorilla | 160 | kg
+max | Which bird is HEAVIER? | Ostrich | 110 | Emu | 40 | kg
+max | Which is HEAVIER? | Gray wolf | 40 | Grizzly bear | 270 | kg
+max | Which is HEAVIER? | Moose | 450 | White-tailed deer | 70 | kg
+min | Which is LIGHTER? | Beagle | 10 | House cat | 4.5 | kg
+min | Which bird is LIGHTER? | Ruby-throated hummingbird | 3 | House sparrow | 30 | grams
+min | Which egg is LIGHTER? | Ostrich egg | 1400 | Chicken egg | 50 | grams
+
+# ---------- Animal speeds ----------
+max | Which is FASTER? | Lion | 80 | Cheetah | 110 | km/h
+max | Which is FASTER? | Peregrine falcon dive | 320 | Cheetah | 110 | km/h
+max | Which is FASTER? | Ostrich | 70 | Elephant | 40 | km/h
+max | Which is FASTER? | House cat | 48 | Greyhound | 70 | km/h
+
+# ---------- Lifespans ----------
+max | Which typically lives LONGER? | Dog | 13 | Giant tortoise | 100 | years
+max | Which typically lives LONGER? | Elephant | 65 | Horse | 28 | years
+max | Which can live LONGER? | Gorilla | 50 | Bowhead whale | 200 | years
+max | Which typically lives LONGER? | Cat | 15 | Hamster | 2.5 | years
+min | Which has the SHORTER lifespan? | Rabbit | 9 | Mouse | 2 | years
+
+# ---------- Legs, arms, teeth, hearts ----------
+max | Which has MORE legs? | Ant | 6 | Spider | 8 | legs
+max | Which has MORE legs? | Lobster | 10 | Beetle | 6 | legs
+max | Which has MORE arms? | Octopus | 8 | Common starfish | 5 | arms
+max | Which has MORE legs? | Scorpion | 8 | Crab | 10 | legs
+max | Which has MORE teeth? | Adult human | 32 | Adult dog | 42 | teeth
+max | Which has MORE teeth? | Adult cat | 30 | Child (baby teeth) | 20 | teeth
+min | Which has FEWER legs? | Shrimp | 10 | Butterfly | 6 | legs
+min | Which has FEWER hearts? | Human | 1 | Octopus | 3 | hearts
+min | Which has FEWER teeth? | Adult cat | 30 | Adult dog | 42 | teeth
+max | Which has MORE chambers? | Fish heart | 2 | Human heart | 4 | chambers
+
+# ---------- Body ----------
+max | Which is LONGER? | Large intestine | 1.5 | Small intestine | 6 | metres
+max | Which is HEAVIER? | Human brain | 1.4 | Human heart | 0.3 | kg
+min | Which has FEWER bones? | Newborn baby | 300 | Adult human | 206 | bones
+
+# ---------- Space ----------
+max | Which planet is BIGGER? | Earth | 12742 | Saturn | 116460 | kilometres
+max | Which planet is BIGGER? | Mars | 6779 | Mercury | 4879 | kilometres
+max | Which is BIGGER? | Pluto | 2377 | Venus | 12104 | kilometres
+max | Which is BIGGER? | The Moon | 3474 | Pluto | 2377 | kilometres
+min | Which is SMALLER? | Mercury | 4879 | The Moon | 3474 | kilometres
+max | Which planet is FARTHER from the Sun? | Saturn | 1434 | Neptune | 4495 | million km
+max | Which planet is FARTHER from the Sun? | Jupiter | 778 | Mars | 228 | million km
+min | Which planet is CLOSER to the Sun? | Venus | 108 | Earth | 150 | million km
+max | Which planet has a LONGER year? | Earth | 365 | Mars | 687 | days
+max | Which planet has a LONGER year? | Venus | 225 | Mercury | 88 | days
+min | Which planet has a SHORTER year? | Mercury | 88 | Mars | 687 | days
+min | Which planet has a SHORTER day? | Earth | 24 | Jupiter | 10 | hours
+
+# ---------- Country areas ----------
+max | Which country is BIGGER? | Australia | 7692000 | Canada | 9985000 | km²
+max | Which country is BIGGER? | Spain | 505990 | Germany | 357588 | km²
+max | Which country is BIGGER? | India | 3287263 | Brazil | 8515767 | km²
+max | Which country is BIGGER? | Japan | 377975 | United Kingdom | 242495 | km²
+max | Which country is BIGGER? | Italy | 302073 | Egypt | 1002450 | km²
+max | Which country is BIGGER? | Argentina | 2780400 | Mexico | 1964375 | km²
+max | Which country is BIGGER? | Ireland | 70273 | Iceland | 103000 | km²
+min | Which country is SMALLER? | Monaco | 2.02 | Vatican City | 0.44 | km²
+min | Which country is SMALLER? | Belgium | 30689 | Portugal | 92212 | km²
+
+# ---------- Temperatures ----------
+max | Which has the HIGHER melting point? | Gold | 1064 | Iron | 1538 | °C
+max | Which has the HIGHER boiling point? | Water | 100 | Ethanol | 78 | °C
+max | Which has the HIGHER melting point? | Tungsten | 3422 | Copper | 1085 | °C
+max | Which has the HIGHER melting point? | Tin | 232 | Lead | 327 | °C
+max | Which is HOTTER? | Sun's surface | 5500 | Lava | 1200 | °C
+min | Which has the LOWER melting point? | Aluminium | 660 | Lead | 327 | °C
+min | Which has the LOWER freezing point? | Water | 0 | Mercury | -39 | °C
+min | Which is COLDER? | Liquid nitrogen | -196 | Dry ice | -78.5 | °C
+
+# ---------- Sports, music, shapes ----------
+max | Which team has MORE players on the field? | Soccer team | 11 | Rugby union team | 15 | players
+min | Which team has FEWER players on court? | Volleyball team | 6 | Basketball team | 5 | players
+max | Which has MORE strings? | Concert harp | 47 | Guitar | 6 | strings
+min | Which has FEWER strings? | Violin | 4 | Guitar | 6 | strings
+max | Which has MORE sides? | Hexagon | 6 | Octagon | 8 | sides
+max | Which has MORE squares? | Chessboard | 64 | Sudoku grid | 81 | squares
+
+# ---------- Which came FIRST? ----------
+min | Which came FIRST? | Nintendo founded | 1889 | Coca-Cola invented | 1886 | year
+min | Which came FIRST? | Facebook launched | 2004 | YouTube launched | 2005 | year
+min | Which came FIRST? | Google founded | 1998 | Amazon founded | 1994 | year
+min | Which came FIRST? | Microsoft founded | 1975 | Apple founded | 1976 | year
+min | Which came FIRST? | Super Mario Bros. | 1985 | Tetris | 1984 | year
+min | Which came FIRST? | Space Invaders | 1978 | Pac-Man | 1980 | year
+min | Which came FIRST? | Shrek | 2001 | Toy Story | 1995 | year
+min | Which came FIRST? | Disney's Snow White | 1937 | The Wizard of Oz film | 1939 | year
+min | Which came FIRST? | Star Wars | 1977 | Jaws | 1975 | year
+min | Which came FIRST? | Wright brothers' flight | 1903 | Titanic sinks | 1912 | year
+min | Which came FIRST? | First email sent | 1971 | First Moon landing | 1969 | year
+min | Which came FIRST? | Columbus reaches America | 1492 | Magellan sets sail | 1519 | year
+min | Which came FIRST? | Gagarin goes to space | 1961 | Sputnik 1 launch | 1957 | year
+min | Which came FIRST? | Pluto discovered | 1930 | First Moon landing | 1969 | year
+min | Which came FIRST? | Superman debuts | 1938 | Mickey Mouse debuts | 1928 | year
+min | Which came FIRST? | Wikipedia launched | 2001 | Twitter launched | 2006 | year
+min | Which came FIRST? | Among Us released | 2018 | Fortnite released | 2017 | year
+min | Who was born FIRST? | William Shakespeare | 1564 | Wolfgang Amadeus Mozart | 1756 | year
+min | Who was born FIRST? | Albert Einstein | 1879 | Charles Darwin | 1809 | year
+min | Which came FIRST? | World War I begins | 1914 | Russian Revolution | 1917 | year

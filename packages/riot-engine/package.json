@@ -1,1 +1,14 @@
-{"dependencies":{"@hype-riot/shared-types":"*"},"main":"src/index.ts","name":"@hype-riot/riot-engine","private":true,"scripts":{"test":"vitest run"},"type":"module","types":"src/index.ts","version":"0.1.0"}
+{
+  "name": "@hype-riot/riot-engine",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@hype-riot/shared-types": "*"
+  }
+}

@@ -1,0 +1,293 @@
+# FACT OR CAP?! claims
+# Format: F | <true claim> | <Category>   or   C | <false claim> | <Category>
+# 130 F + 130 C
+
+# ---------- Animals ----------
+F | Octopuses have three hearts | Animals
+F | A cow's stomach has four compartments | Animals
+F | Sharks are a type of fish | Animals
+F | Dolphins are mammals | Animals
+F | In seahorses, the males give birth to the babies | Animals
+F | Flamingos get their pink color from the food they eat | Animals
+F | A baby kangaroo is called a joey | Animals
+F | Polar bears have black skin under their fur | Animals
+F | Hummingbirds can fly backwards | Animals
+C | Bulls get angry at the color red | Animals
+C | Ostriches bury their heads in the sand when scared | Animals
+C | Bats are completely blind | Animals
+C | Spiders are insects | Animals
+C | Camels store water in their humps | Animals
+C | Porcupines can shoot their quills at attackers | Animals
+C | Touching a baby bird will make its parents abandon it | Animals
+C | Koalas are a type of bear | Animals
+C | Dogs can only see in black and white | Animals
+
+# ---------- Space ----------
+F | The Sun is a star | Space
+F | Venus is the hottest planet in our Solar System | Space
+F | Jupiter is the largest planet in our Solar System | Space
+F | Mercury is the closest planet to the Sun | Space
+F | Venus takes longer to spin once than to orbit the Sun | Space
+F | Mars has two moons | Space
+F | Sunlight takes about 8 minutes to reach Earth | Space
+F | Uranus rotates tipped over on its side | Space
+F | Pluto was reclassified as a dwarf planet in 2006 | Space
+C | The Great Wall of China is visible from the Moon with the naked eye | Space
+C | The Sun orbits the Earth | Space
+C | Saturn is the only planet with rings | Space
+C | The Moon makes its own light | Space
+C | One side of the Moon never gets any sunlight | Space
+C | Jupiter is a rocky planet like Earth | Space
+C | Earth's seasons are caused by its changing distance from the Sun | Space
+C | A light-year is a unit of time | Space
+C | Shooting stars are stars falling to Earth | Space
+
+# ---------- Science ----------
+F | Water is made of hydrogen and oxygen | Science
+F | Diamonds are made of carbon | Science
+F | Sound travels faster in water than in air | Science
+F | The chemical symbol for gold is Au | Science
+F | Helium is lighter than air | Science
+F | Lightning is hotter than the surface of the Sun | Science
+F | Glass is made mainly from sand | Science
+F | Mercury is a metal that is liquid at room temperature | Science
+F | Rust forms when iron reacts with oxygen and water | Science
+C | Lightning never strikes the same place twice | Science
+C | The chemical symbol for sodium is So | Science
+C | Sound travels faster than light | Science
+C | All metals are magnetic | Science
+C | Water boils at a higher temperature on a mountaintop than at sea level | Science
+C | In a vacuum, heavy objects fall faster than light ones | Science
+C | Oxygen is the most common gas in Earth's air | Science
+C | Water shrinks when it freezes | Science
+C | Rubber is a good conductor of electricity | Science
+
+# ---------- Body ----------
+F | An adult human skeleton usually has 206 bones | Body
+F | The femur, or thigh bone, is the longest bone in the human body | Body
+F | The smallest bone in the human body is in the ear | Body
+F | A full set of adult human teeth is 32, including wisdom teeth | Body
+F | The human heart has four chambers | Body
+F | Skin is the largest organ of the human body | Body
+F | Babies are born with more bones than adults have | Body
+F | Fingernails grow faster than toenails | Body
+F | The human liver can regrow damaged or removed tissue | Body
+C | Humans only use 10% of their brains | Body
+C | Blood in your veins is blue | Body
+C | Cracking your knuckles causes arthritis | Body
+C | Shaving makes hair grow back thicker | Body
+C | The tongue has separate zones for sweet, salty, sour and bitter | Body
+C | Your heart is on the right side of your chest | Body
+C | Swallowed gum stays in your stomach for seven years | Body
+C | Hair and nails keep growing after death | Body
+C | Humans have three lungs | Body
+
+# ---------- Food ----------
+F | Tomatoes are botanically a fruit | Food
+F | Bananas are botanically classed as berries | Food
+F | Peanuts are legumes, not true nuts | Food
+F | Tofu is made from soybeans | Food
+F | Saffron comes from crocus flowers | Food
+F | Hummus is made mainly from chickpeas | Food
+F | Vanilla comes from the pods of an orchid | Food
+F | Coffee beans are the seeds of a fruit | Food
+F | Cashews grow attached to a fruit called the cashew apple | Food
+C | Pineapples grow on trees | Food
+C | Eating lots of carrots lets you see in the dark | Food
+C | Sugar makes children hyperactive | Food
+C | Fortune cookies are a traditional food from China | Food
+C | Caesar salad is named after Julius Caesar | Food
+C | Brown eggs are more nutritious than white eggs | Food
+C | Mushrooms are a type of plant | Food
+C | Sushi always contains raw fish | Food
+C | Hot peppers get their heat from menthol | Food
+
+# ---------- Gaming ----------
+F | Mario was originally called Jumpman | Gaming
+F | Tetris was created in the Soviet Union | Gaming
+F | Pac-Man's ghosts are named Blinky, Pinky, Inky and Clyde | Gaming
+F | Pokemon Red and Green were first released in Japan | Gaming
+F | Luigi is Mario's brother | Gaming
+F | The original Game Boy was released in 1989 | Gaming
+F | In chess, each player starts with 16 pieces | Gaming
+F | Among Us was made by the studio Innersloth | Gaming
+F | In Minecraft, Creepers explode when they get close to you | Gaming
+C | Sonic the Hedgehog was created by Nintendo | Gaming
+C | In The Legend of Zelda, the hero you play as is named Zelda | Gaming
+C | The first ever video game console was the PlayStation | Gaming
+C | The Xbox is made by Sony | Gaming
+C | In chess, the pawn is the most powerful piece | Gaming
+C | Pikachu is a Fire-type Pokemon | Gaming
+C | In Tetris, every piece is made of five squares | Gaming
+C | Super Mario Bros. first came out on the Sega Genesis | Gaming
+C | In chess, the game ends when a player's queen is captured | Gaming
+
+# ---------- Music ----------
+F | A standard piano has 88 keys | Music
+F | A standard guitar has six strings | Music
+F | The Beatles came from Liverpool | Music
+F | Beethoven kept composing music after he became deaf | Music
+F | A violin has four strings | Music
+F | Elvis Presley was nicknamed "The King of Rock and Roll" | Music
+F | A quartet is a group of four musicians | Music
+F | Freddie Mercury was the lead singer of Queen | Music
+C | The tuba is a woodwind instrument | Music
+C | Elvis Presley was British | Music
+C | A trio is a group of five musicians | Music
+C | Bob Marley is best known for country music | Music
+C | Drums are string instruments | Music
+C | A standard ukulele has six strings | Music
+C | Mozart lived in the 20th century | Music
+C | The violin is the largest instrument in the string family | Music
+
+# ---------- Movies ----------
+F | Toy Story was the first fully computer-animated feature film | Movies
+F | In The Wizard of Oz, Dorothy's dog is named Toto | Movies
+F | Simba is the main character of The Lion King | Movies
+F | Shrek is an ogre | Movies
+F | In Finding Nemo, Nemo is a clownfish | Movies
+F | Elsa from Frozen has ice powers | Movies
+F | E.T. the Extra-Terrestrial was directed by Steven Spielberg | Movies
+F | Buzz Lightyear's catchphrase is "To infinity and beyond!" | Movies
+F | Jaws is about a great white shark | Movies
+C | In The Empire Strikes Back, Vader says "Luke, I am your father" | Movies
+C | In The Lion King, Simba's father is Scar | Movies
+C | In the original novel, Frankenstein is the name of the monster | Movies
+C | In Finding Nemo, Dory is a shark | Movies
+C | Harry Potter's owl is named Scabbers | Movies
+C | Shrek was made by Pixar | Movies
+C | In Frozen, Olaf is a reindeer | Movies
+C | The original Star Wars film was directed by Steven Spielberg | Movies
+C | In The Wizard of Oz, the Tin Man wants courage | Movies
+
+# ---------- Sports ----------
+F | A marathon is about 42.2 kilometres long | Sports
+F | A soccer team has 11 players on the field at once | Sports
+F | A basketball team has five players on the court at once | Sports
+F | The Olympic symbol is made of five interlocking rings | Sports
+F | The first modern Olympic Games were held in Athens in 1896 | Sports
+F | In tennis, a score of zero is called "love" | Sports
+F | In golf, one under par on a hole is called a birdie | Sports
+F | In soccer, a hat-trick means scoring three goals in one game | Sports
+F | In bowling, knocking down all ten pins with the first ball is a strike | Sports
+C | Ice hockey is played with a ball | Sports
+C | In cricket, the ball is oval-shaped | Sports
+C | In bowling, three strikes in a row is called an "eagle" | Sports
+C | A volleyball team has 11 players on the court at once | Sports
+C | A touchdown in American football is worth 3 points | Sports
+C | The Olympic Games began in ancient Rome | Sports
+C | Golf balls have a smooth surface with no dimples | Sports
+C | A soccer match is split into four 15-minute quarters | Sports
+C | The Super Bowl is a basketball championship | Sports
+
+# ---------- History ----------
+F | The Titanic sank in 1912 | History
+F | The Great Pyramid of Giza was built as a tomb for pharaoh Khufu | History
+F | World War II ended in 1945 | History
+F | The Berlin Wall fell in 1989 | History
+F | Julius Caesar was assassinated in 44 BC | History
+F | The first crewed Moon landing happened in 1969 | History
+F | Christopher Columbus first reached the Americas in 1492 | History
+F | The Wright brothers made their first powered flight in 1903 | History
+F | The Statue of Liberty was a gift from France | History
+C | Napoleon was unusually short for his time | History
+C | Vikings wore horned helmets in battle | History
+C | Albert Einstein failed math at school | History
+C | The Titanic sank in the Pacific Ocean | History
+C | Christopher Columbus proved that the Earth was round | History
+C | Julius Caesar was the first emperor of Rome | History
+C | George Washington had wooden teeth | History
+C | Humans lived at the same time as Tyrannosaurus rex | History
+C | The Eiffel Tower was built in the 1700s | History
+
+# ---------- Geography ----------
+F | Australia is both a country and a continent | Geography
+F | The Sahara is the largest hot desert on Earth | Geography
+F | Mount Everest is the highest mountain above sea level | Geography
+F | The Pacific is the largest ocean on Earth | Geography
+F | Russia is the largest country by area | Geography
+F | The Nile flows into the Mediterranean Sea | Geography
+F | The city of Istanbul is split between Europe and Asia | Geography
+F | Vatican City is the smallest country in the world by area | Geography
+F | Antarctica counts as a desert because it gets so little precipitation | Geography
+C | Sydney is the capital of Australia | Geography
+C | Mount Everest is in the Alps | Geography
+C | Africa is a country | Geography
+C | The Amazon River flows through Africa | Geography
+C | Greenland is larger than Africa | Geography
+C | Rio de Janeiro is the capital of Brazil | Geography
+C | New Zealand is part of Australia | Geography
+C | Switzerland has a coastline | Geography
+C | Mount Kilimanjaro is in South America | Geography
+
+# ---------- Words ----------
+F | The word "bookkeeper" has three double letters in a row | Words
+F | The word "alphabet" comes from the first two letters of the Greek alphabet | Words
+F | "Racecar" is a palindrome | Words
+F | The word "typewriter" can be typed using only the top letter row of a QWERTY keyboard | Words
+F | "Goodbye" comes from the phrase "God be with ye" | Words
+F | The word "robot" comes from Czech | Words
+F | The dot over a lowercase "i" is called a tittle | Words
+F | The word "hippopotamus" means "river horse" in Greek | Words
+C | The word "emoji" comes from the English word "emotion" | Words
+C | A herbivore is an animal that eats only meat | Words
+C | A nonagon has ten sides | Words
+C | In English, the letter "q" is always followed by "u" | Words
+C | Synonyms are words with opposite meanings | Words
+C | Nocturnal animals are most active during the day | Words
+C | A haiku is a poem with 14 lines | Words
+C | A "baker's dozen" means 10 | Words
+
+# ---------- Tech ----------
+F | WWW stands for World Wide Web | Tech
+F | Tim Berners-Lee invented the World Wide Web | Tech
+F | A byte is made up of 8 bits | Tech
+F | CPU stands for Central Processing Unit | Tech
+F | Bluetooth is named after a 10th-century Danish king | Tech
+F | USB stands for Universal Serial Bus | Tech
+F | Binary code uses only the digits 0 and 1 | Tech
+F | Email existed before the World Wide Web | Tech
+C | Microsoft was founded by Steve Jobs | Tech
+C | Google was founded before Microsoft | Tech
+C | PDF stands for "Printable Document File" | Tech
+C | A kilobyte is bigger than a gigabyte | Tech
+C | Mac computers cannot get viruses | Tech
+C | The "@" symbol was invented for email | Tech
+C | The first iPhone had a physical keyboard | Tech
+C | Microwave ovens cook food from the inside out | Tech
+
+# ---------- Nature ----------
+F | Bamboo is a type of grass | Nature
+F | Young sunflowers turn to follow the Sun across the sky | Nature
+F | Plants release oxygen during photosynthesis | Nature
+F | Venus flytraps are plants that catch insects | Nature
+F | You can estimate a tree's age by counting its growth rings | Nature
+F | Most of Earth's surface is covered by water | Nature
+F | Cacti store water in their thick stems | Nature
+F | Snowflakes usually have six-sided symmetry | Nature
+C | Tornadoes only happen in the United States | Nature
+C | Moss only grows on the north side of trees | Nature
+C | Coral is a type of plant | Nature
+C | Falling raindrops are shaped like teardrops | Nature
+C | Volcanoes are only found on land | Nature
+C | Trees get most of their mass from the soil | Nature
+C | Quicksand can suck a person completely under | Nature
+C | Icebergs are made of frozen seawater | Nature
+
+# ---------- Internet ----------
+F | The first video uploaded to YouTube is called "Me at the zoo" | Internet
+F | Spam email is named after a Monty Python sketch | Internet
+F | Wikipedia launched in 2001 | Internet
+F | URL stands for Uniform Resource Locator | Internet
+F | The name Google comes from "googol", a 1 followed by 100 zeros | Internet
+F | Google was originally called BackRub | Internet
+F | Facebook was started by students at Harvard | Internet
+F | The :-) smiley was first proposed in 1982 | Internet
+C | The Internet and the World Wide Web are the same thing | Internet
+C | Wikipedia was founded by Mark Zuckerberg | Internet
+C | Incognito mode hides your browsing from your internet provider | Internet
+C | YouTube was originally created by Google | Internet
+C | Instagram launched before Facebook | Internet
+C | Only US companies can register .com domains | Internet
+C | The first website went online in 2005 | Internet
+C | A "404" error means a website is loading slowly | Internet

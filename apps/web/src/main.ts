@@ -1,217 +1,187 @@
-// HYPE RIOT — app bootstrap + game orchestration (Blueprint §2, §6).
-// Screens: menu / game (3 rounds) / summary / avatar / settings / party.
-// The arena canvas (MC VOLT + crowd + player avatar) runs throughout.
+// HYPE RIOT — app bootstrap + game orchestration.
+// Screens: menu / game (3 rounds + splashes) / summary / avatar / settings /
+// help / party. The full-screen arena canvas runs behind the DOM HUD.
 import "./styles.css";
-import { ARENA_THEMES, Renderer } from "./engine/Renderer";
-import { CrowdSystem } from "./engine/CrowdSystem";
-import { HostMcVolt } from "./engine/HostMcVolt";
-import { AvatarBuilder, COSMETICS } from "./engine/AvatarBuilder";
-import { ChiptuneSynth } from "./audio/ChiptuneSynth";
-import { LocalSaveDB } from "./db/LocalSaveDB";
 import {
-  dailyFor, loadEntities, loadManifest, loadPack, type DailyInfo,
-} from "./data";
-import { Round1Top5 } from "./game/Round1Top5";
-import { Round2FactOrCap } from "./game/Round2FactOrCap";
-import { PITCH_MAX_CHARS, Round3Pitch } from "./game/Round3Pitch";
-import { hypeCoins, tierForXp } from "./game/Progression";
+  ACTION_VERBS,
+  PITCH_MAX_CHARS,
+  displayName,
+  findActionVerb,
+  wildcardPresent,
+  type ShareData,
+  type ShareMode,
+} from "@hype-riot/riot-engine";
+import type { ContentPack, DataManifest, FactOrCapCard, PitchSetup } from "@hype-riot/shared-types";
+import { CATEGORIES } from "@hype-riot/shared-types";
+import { ChiptuneSynth } from "./audio/ChiptuneSynth";
+import { dailyFor, loadManifest, loadPack, loadPitchPool, type DailyInfo } from "./data";
+import { LocalSaveDB, type Equipped, type QualitySetting } from "./db/LocalSaveDB";
+import { COSMETICS, type CosmeticSlot } from "./engine/AvatarBuilder";
+import { ARENA_THEMES, Renderer } from "./engine/Renderer";
+import { HypeMeter } from "./game/HypeMeter";
+import {
+  QUICK_VICTORY_SCORE, VICTORY_BONUS, crowdBonus, hypeCoins, tierForXp, tierProgress,
+} from "./game/Progression";
+import { BLITZ_SECONDS, ROUND1_SECONDS, Round1Top5, TOP_N } from "./game/Round1Top5";
+import {
+  REVEAL_MS, Round2FactOrCap, SECONDS_PER_CARD, clashWinner, correctAnswerText, type CardResult,
+} from "./game/Round2FactOrCap";
+import { ROUND3_SECONDS, Round3Pitch } from "./game/Round3Pitch";
 import { downloadShareCardPng, shareText } from "./sharecard";
-import type { ContentPack } from "@hype-riot/shared-types";
-import type { ShareData } from "@hype-riot/riot-engine";
+import { $, countUp, esc, fmt, setText, trackViewport } from "./ui/dom";
+import { APP_HTML } from "./ui/templates";
 
-const PARTY_WS_URL =
-  (import.meta as unknown as { env: Record<string, string | undefined> }).env
-    .VITE_PARTY_WS_URL ?? "";
-
-const ZOOM_COLORS: Record<string, string> = {
-  ".": "#110E1B", K: "#110E1B", W: "#FFF8E7", R: "#E63946", G: "#38B000",
-  Y: "#FEE440", B: "#00BBF9", P: "#FF70A6", U: "#9B5DE5", C: "#FFF8E7",
-  O: "#F4A261", T: "#00F5D4", N: "#900C3F", S: "#C3B2FF",
-};
+const PARTY_WS_URL: string = import.meta.env.VITE_PARTY_WS_URL ?? "";
 
 type Mode = "daily" | "quick" | "blitz";
-type Phase = "menu" | "r1" | "r2" | "r3" | "summary";
+type Phase = "splash" | "r1" | "r2" | "r3" | "result" | "summary";
 
 interface MatchState {
+  token: number;
   mode: Mode;
+  practice: boolean; // a replay of an already-scored Daily
   pack: ContentPack;
+  pitch: PitchSetup;
   seed: number;
-  riotNumber: number;
-  daily: DailyInfo | null;
+  daily: DailyInfo;
   r1: Round1Top5 | null;
   r2: Round2FactOrCap | null;
   r3: Round3Pitch | null;
-  blitzTop10: Set<number> | null;
-  blitzTime: number;
   phase: Phase;
 }
 
+// ---------- boot DOM ----------
 const app = document.getElementById("app");
 if (!app) throw new Error("#app missing");
-
-app.innerHTML = `
-<header class="topbar">
-  <div class="logo pxfont">HYPE RIOT</div>
-  <div class="row">
-    <span class="chip pxfont">RANK <b id="chip-rank">—</b></span>
-    <span class="chip pxfont">XP <b id="chip-xp">0</b></span>
-    <span class="chip pxfont">⬡ <b id="chip-coins">0</b> HC</span>
-    <span class="chip pxfont">🔥 <b id="chip-streak">0</b> DAY STREAK</span>
-  </div>
-</header>
-<div class="stage-wrap">
-  <canvas id="stage" width="480" height="270"></canvas>
-  <div class="crt-overlay" id="crt"></div>
-</div>
-
-<section class="panel" id="panel-menu">
-  <div class="menu-grid">
-    <div>
-      <button class="primary" id="btn-daily" style="width:100%">▶ Daily Riot</button>
-      <div class="mode-desc" id="daily-desc">Today's global show — same pack for everyone. 3 rounds, ~90 seconds.</div>
-    </div>
-    <div>
-      <button id="btn-quick" style="width:100%">Quick Arcade</button>
-      <div class="mode-desc">Endless solo. Random pack every run — beat 3,500 HYPE for the +25 HC victory bonus.</div>
-    </div>
-    <div>
-      <button id="btn-blitz" style="width:100%">Brainstorm Blitz</button>
-      <div class="mode-desc">Relaxed 45 seconds, one prompt: hunt down its 10 most famous answers.</div>
-    </div>
-    <div>
-      <button id="btn-party" style="width:100%">Party Room</button>
-      <div class="mode-desc">2–12 players, 4-letter room codes, live pitch voting.</div>
-    </div>
-    <div>
-      <button id="btn-avatar" style="width:100%">Avatar Studio</button>
-      <div class="mode-desc">Spend Hype Coins on pure cosmetics. Zero pay-to-win, ever.</div>
-    </div>
-    <div>
-      <button id="btn-settings" style="width:100%">Settings</button>
-      <div class="mode-desc">CRT effect, motion, font, sound.</div>
-    </div>
-  </div>
-  <p class="note" id="dataset-line">Loading dataset…</p>
-</section>
-
-<section class="panel hidden" id="panel-game">
-  <div class="score-line pxfont"><span id="round-label">ROUND 1</span> · SCORE <b id="score-now">0</b></div>
-  <div class="prompt-bar" id="prompt-bar"></div>
-  <div class="timer-track"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
-  <div id="round-ui"></div>
-  <div class="feedback" id="feedback"></div>
-  <div class="found-list" id="found-list"></div>
-  <div class="row" style="margin-top:10px">
-    <button class="small" id="btn-quit">✕ Quit to menu</button>
-  </div>
-</section>
-
-<section class="panel hidden" id="panel-summary">
-  <h2 class="pxfont" style="color:var(--gold);font-size:15px">MATCH COMPLETE</h2>
-  <div class="summary-grid" id="summary-grid"></div>
-  <p class="note" id="summary-note"></p>
-  <pre class="share-text" id="share-text"></pre>
-  <div class="row">
-    <button class="small primary" id="btn-copy-share">Copy share card</button>
-    <button class="small" id="btn-png-share">Download PNG card</button>
-    <button class="small" id="btn-again">Play again</button>
-    <button class="small" id="btn-menu2">Menu</button>
-  </div>
-</section>
-
-<section class="panel hidden" id="panel-avatar">
-  <h2 class="pxfont" style="font-size:13px;color:var(--gold)">AVATAR STUDIO</h2>
-  <p class="note">Cosmetics only — they never change gameplay. Balance: <b id="avatar-coins">0</b> HC</p>
-  <div id="avatar-slots"></div>
-  <div class="row" style="margin-top:10px"><button class="small" id="btn-menu3">← Menu</button></div>
-</section>
-
-<section class="panel hidden" id="panel-settings">
-  <h2 class="pxfont" style="font-size:13px;color:var(--gold)">SETTINGS</h2>
-  <label class="setting">CRT scanlines
-    <select id="set-crt">
-      <option value="off">Off</option>
-      <option value="subtle">Subtle 15%</option>
-      <option value="arcade">Arcade 35%</option>
-    </select>
-  </label>
-  <label class="setting">Reduce motion (no shake / flash / parallax)
-    <input type="checkbox" id="set-motion" /></label>
-  <label class="setting">Legible font (Inter instead of pixel)
-    <input type="checkbox" id="set-font" /></label>
-  <label class="setting">Sound
-    <input type="checkbox" id="set-sound" /></label>
-  <div class="row" style="margin-top:10px"><button class="small" id="btn-menu4">← Menu</button></div>
-</section>
-
-<section class="panel hidden" id="panel-party">
-  <h2 class="pxfont" style="font-size:13px;color:var(--gold)">PARTY ROOM</h2>
-  <p class="note" id="party-status"></p>
-  <div class="row">
-    <input type="text" id="party-name" placeholder="Your name" maxlength="12" />
-  </div>
-  <div class="row" style="margin-top:8px">
-    <button class="small primary" id="btn-create-room">Create room</button>
-    <input type="text" id="party-code" placeholder="CODE" maxlength="4" style="max-width:110px;text-transform:uppercase" />
-    <button class="small" id="btn-join-room">Join room</button>
-  </div>
-  <p class="note">Party rooms run on a live WebSocket relay (Cloudflare Durable
-  Objects, packages/party-worker). Solo modes need no backend and are fully playable.</p>
-  <div class="row" style="margin-top:10px"><button class="small" id="btn-menu5">← Menu</button></div>
-</section>
-`;
-
-const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+app.innerHTML = APP_HTML;
 
 const db = new LocalSaveDB();
 const synth = new ChiptuneSynth();
-const canvas = $("stage") as unknown as HTMLCanvasElement;
-const renderer = new Renderer(canvas);
-const crowd = new CrowdSystem();
-const volt = new HostMcVolt();
-const avatar = new AvatarBuilder();
+const renderer = new Renderer($<HTMLCanvasElement>("arena"));
+const hype = new HypeMeter();
 
-let manifestPacks = 0;
-let entityCount = 0;
-let themeIndex = 0;
+let manifest: DataManifest | null = null;
 let match: MatchState | null = null;
+let matchToken = 0;
 let lastSummary: ShareData | null = null;
 let lastMode: Mode = "daily";
-let r2FlashUntil = 0;
+let celebrateUntil = 0;
+let inputLockedUntil = 0;
+let lastTickSecond = -1;
 
+const SCREENS = ["screen-menu", "screen-game", "screen-summary", "screen-avatar", "screen-settings", "screen-help", "screen-party"];
+
+function showScreen(id: string): void {
+  for (const s of SCREENS) $(s).classList.toggle("hidden", s !== id);
+  document.body.dataset.screen = id;
+  lastLayout = 0; // re-measure the HUD on the next frame
+  // Move focus to the screen's heading (not a button), so the Enter/Space
+  // that opened this screen can't also activate something on it.
+  const heading = $(id).querySelector<HTMLElement>("h1, h2, .kicker");
+  if (heading && id !== "screen-game") {
+    heading.tabIndex = -1;
+    heading.focus({ preventScroll: true });
+  }
+}
+
+function toast(text: string, ms = 2400): void {
+  const el = $("toast");
+  el.textContent = text;
+  el.classList.add("show");
+  window.clearTimeout((toast as unknown as { t?: number }).t);
+  (toast as unknown as { t?: number }).t = window.setTimeout(() => el.classList.remove("show"), ms);
+}
+
+function today(): DailyInfo | null {
+  return manifest ? dailyFor(new Date(), manifest) : null;
+}
+
+// ---------- settings ----------
 function applySettings(): void {
   const s = db.get().settings;
-  const crt = $("crt");
-  crt.className = "crt-overlay" + (s.crt === "subtle" ? " crt-subtle" : s.crt === "arcade" ? " crt-arcade" : "");
-  document.body.classList.toggle("legible", s.legibleFont);
   renderer.reducedMotion = s.reducedMotion;
+  renderer.setQualitySetting(s.quality);
   synth.enabled = s.sound;
-  ($("set-crt") as HTMLSelectElement).value = s.crt;
-  ($("set-motion") as HTMLInputElement).checked = s.reducedMotion;
-  ($("set-font") as HTMLInputElement).checked = s.legibleFont;
-  ($("set-sound") as HTMLInputElement).checked = s.sound;
+  document.body.classList.toggle("reduced-motion", s.reducedMotion);
+  $<HTMLInputElement>("set-sound").checked = s.sound;
+  $<HTMLInputElement>("set-motion").checked = s.reducedMotion;
+  $<HTMLSelectElement>("set-quality").value = s.quality;
 }
 
 function refreshChips(): void {
   const save = db.get();
-  $("chip-rank").textContent = tierForXp(save.xp);
-  $("chip-xp").textContent = String(save.xp);
-  $("chip-coins").textContent = String(save.coins);
-  $("chip-streak").textContent = String(save.dailyStreak);
+  const d = today();
+  setText($("chip-rank"), tierForXp(save.xp));
+  setText($("chip-coins"), fmt(save.coins));
+  setText($("chip-streak"), String(d ? db.currentStreak(d.date) : save.dailyStreak));
 }
 
-function showPanel(id: string): void {
-  for (const p of ["panel-menu", "panel-game", "panel-summary", "panel-avatar", "panel-settings", "panel-party"]) {
-    $(p).classList.toggle("hidden", p !== id);
-  }
+function refreshMenu(): void {
+  const d = today();
+  if (!manifest || !d) return;
+  const played = db.hasPlayedDaily(d.date);
+  $("daily-desc").textContent = played
+    ? `#${String(d.riotNumber).padStart(3, "0")} done (${fmt(db.get().dailyScores[d.date])} pts) — replay as practice`
+    : `Show #${String(d.riotNumber).padStart(3, "0")} — same show worldwide. One scored attempt.`;
+  $("menu-kicker").textContent = `TODAY: ${ARENA_THEMES[d.arenaTheme].name.toUpperCase()} · SHOW #${String(d.riotNumber).padStart(3, "0")}`;
+  refreshChips();
 }
+
+// ---------- splash ----------
+interface SplashOpts {
+  kicker: string;
+  title: string;
+  sub?: string;
+  bodyHtml?: string;
+  ms: number;
+  continueLabel?: string;
+}
+
+let splashResolve: (() => void) | null = null;
+
+function splash(o: SplashOpts): Promise<void> {
+  const el = $("splash");
+  $("splash-kicker").textContent = o.kicker;
+  $("splash-title").textContent = o.title;
+  $("splash-sub").textContent = o.sub ?? "";
+  $("splash-body").innerHTML = o.bodyHtml ?? "";
+  const cont = $<HTMLButtonElement>("splash-continue");
+  cont.classList.toggle("hidden", !o.continueLabel);
+  cont.textContent = o.continueLabel ?? "";
+  el.classList.remove("hidden");
+  el.classList.remove("out");
+  void el.offsetWidth; // restart CSS animation
+  el.classList.add("in");
+  synth.whoosh();
+  if (o.continueLabel) cont.focus({ preventScroll: true });
+  return new Promise((resolve) => {
+    const done = () => {
+      if (splashResolve !== done) return;
+      splashResolve = null;
+      window.clearTimeout(timer);
+      el.classList.remove("in");
+      el.classList.add("hidden");
+      resolve();
+    };
+    const timer = window.setTimeout(done, o.ms);
+    splashResolve = done;
+  });
+}
+
+function closeSplash(): void {
+  splashResolve?.();
+}
+
+$("splash-continue").addEventListener("click", closeSplash);
+$("splash").addEventListener("click", (e) => {
+  if (e.target === $("splash")) closeSplash();
+});
 
 // ---------- match flow ----------
-
-function setFeedback(text: string, color = "var(--gold)"): void {
+function setFeedback(text: string, tone: "good" | "bad" | "info" | "gold" = "info"): void {
   const el = $("feedback");
   el.textContent = text;
-  el.style.color = color;
+  el.dataset.tone = tone;
 }
 
 function totalScore(): number {
@@ -219,347 +189,586 @@ function totalScore(): number {
   return (match.r1?.score ?? 0) + (match.r2?.score ?? 0) + (match.r3?.result?.total ?? 0);
 }
 
-function startMatch(mode: Mode): void {
-  void (async () => {
-    const today = dailyFor(new Date(), manifestPacks);
-    let packId: number;
-    let seed: number;
-    let riotNumber: number;
-    let daily: DailyInfo | null = null;
-    if (mode === "daily") {
-      packId = today.packId;
-      seed = today.seed;
-      riotNumber = today.riotNumber;
-      themeIndex = today.arenaTheme;
-      daily = today;
-    } else {
-      packId = Math.floor(Math.random() * manifestPacks);
-      seed = today.seed;
-      riotNumber = today.riotNumber;
-      themeIndex = Math.floor(Math.random() * ARENA_THEMES.length);
-    }
-    const pack = await loadPack(packId);
-    renderer.startTransition(ARENA_THEMES[themeIndex].skyTop);
-    match = {
-      mode, pack, seed, riotNumber, daily,
-      r1: new Round1Top5(pack.round1),
-      r2: null, r3: null,
-      blitzTop10: mode === "blitz"
-        ? new Set(pack.round1.answers.slice(0, 10).map((a) => a.entityId))
-        : null,
-      blitzTime: 45,
-      phase: "r1",
-    };
-    if (mode === "blitz" && match.r1) match.r1.timeLeft = 45;
-    lastMode = mode;
-    showPanel("panel-game");
-    $("score-now").textContent = "0";
-    $("found-list").innerHTML = "";
-    renderR1();
-    volt.setState("IDLE_TALK");
-    crowd.react("glowstick", 0.4);
-  })();
+function alive(token: number): boolean {
+  return match !== null && match.token === token;
 }
 
-function renderR1(): void {
-  if (!match?.r1) return;
-  const p = match.pack.round1;
-  $("round-label").textContent =
-    match.mode === "blitz" ? "BRAINSTORM BLITZ" : "ROUND 1 — TOP 5 RIOT";
-  $("prompt-bar").innerHTML =
-    `${p.text}<br><span class="combo pxfont" style="font-size:10px">COMBO TAG: ${p.comboTag.label} = 2X HYPE</span>` +
-    (match.blitzTop10 ? `<br><span class="combo pxfont" style="font-size:10px">FIND THE TOP 10 MOST FAMOUS</span>` : "");
+function setModeButtonsEnabled(on: boolean): void {
+  for (const id of ["btn-daily", "btn-quick", "btn-blitz"]) $<HTMLButtonElement>(id).disabled = !on;
+}
+
+async function startMatch(mode: Mode): Promise<void> {
+  if (!manifest) return;
+  const d = dailyFor(new Date(), manifest);
+  const token = ++matchToken;
+  setModeButtonsEnabled(false);
+  try {
+    let packId = d.packId;
+    let theme = d.arenaTheme;
+    let seed = d.seed;
+    if (mode !== "daily") {
+      packId = Math.floor(Math.random() * manifest.packs);
+      theme = Math.floor(Math.random() * ARENA_THEMES.length);
+      seed = Math.floor(Math.random() * 1e9);
+    }
+    const pack = await loadPack(packId);
+    let pitch = pack.round3;
+    if (mode === "quick") {
+      try {
+        const pool = await loadPitchPool();
+        const pick = <T,>(a: T[]) => a[Math.floor(Math.random() * a.length)];
+        const wa = pick(pool.wildcards);
+        let wb = pick(pool.wildcards);
+        while (wb === wa && pool.wildcards.length > 1) wb = pick(pool.wildcards);
+        pitch = { template: pick(pool.templates), wildcardA: wa, wildcardB: wb };
+      } catch {
+        /* fall back to the pack's own pitch */
+      }
+    }
+    if (token !== matchToken) return;
+    match = {
+      token, mode, pack, pitch, seed, daily: d,
+      practice: mode === "daily" && db.hasPlayedDaily(d.date),
+      r1: null, r2: null, r3: null, phase: "splash",
+    };
+    lastMode = mode;
+    hype.reset();
+    renderer.setTheme(theme);
+    renderer.fadeIn("#000000");
+    renderer.volt.setState("IDLE_TALK");
+    $("found-list").innerHTML = "";
+    $("round-ui").innerHTML = "";
+    setFeedback("");
+    showScreen("screen-game");
+    await runRound1(token);
+  } catch (err) {
+    toast(`Couldn't load the show (${err instanceof Error ? err.message : "network error"}). Try again.`, 4000);
+    if (token === matchToken) {
+      match = null;
+      showScreen("screen-menu");
+    }
+  } finally {
+    setModeButtonsEnabled(true);
+  }
+}
+
+// ----- Round 1 -----
+async function runRound1(token: number): Promise<void> {
+  if (!match) return;
+  const m = match;
+  const p = m.pack.round1;
+  const blitz = m.mode === "blitz";
+  $("round-label").textContent = blitz ? "BRAINSTORM BLITZ" : "ROUND 1 · TOP 5 RIOT";
+  $("prompt-meta").textContent = `${CATEGORIES[p.categoryId] ?? "Brainstorm"} · ${p.answers.length} answers on the board`;
+  $("prompt-text").textContent = p.text;
+  $("prompt-sub").innerHTML = blitz
+    ? `🎯 Find the <b>top ${TOP_N}</b> most famous · ⚡ <b>${esc(p.comboTag.label)}</b> = 2×`
+    : `⚡ COMBO: <b>${esc(p.comboTag.label)}</b> = 2× HYPE`;
+  $("round-ui").innerHTML = "";
+  await splash({
+    kicker: blitz ? "BRAINSTORM BLITZ · 45 SECONDS" : `${m.practice ? "PRACTICE · " : ""}ROUND 1 · 25 SECONDS`,
+    title: blitz ? "FIND THE TOP 10" : "TOP 5 RIOT",
+    sub: p.text,
+    ms: 2200,
+  });
+  if (!alive(token)) return;
+  m.phase = "r1";
+  m.r1 = new Round1Top5(p, performance.now(), blitz ? BLITZ_SECONDS : ROUND1_SECONDS);
+  renderer.volt.setState("IDLE_TALK");
+  renderer.crowdReact("wave");
   $("round-ui").innerHTML = `
-    <form class="row" id="r1-form">
-      <input type="text" id="r1-input" placeholder="Type an answer and hit ENTER…" autocomplete="off" />
-      <button class="primary" type="submit">HIT IT</button>
+    <form class="answer-form" id="r1-form" autocomplete="off">
+      <input type="text" id="r1-input" placeholder="Type an answer + Enter" aria-label="Your answer"
+        autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" maxlength="60" />
+      <button class="btn primary" type="submit">HIT IT</button>
     </form>`;
-  const input = $("r1-input") as HTMLInputElement;
-  input.focus();
-  ($("r1-form") as HTMLFormElement).addEventListener("submit", (ev) => {
+  const input = $<HTMLInputElement>("r1-input");
+  input.focus({ preventScroll: true });
+  $<HTMLFormElement>("r1-form").addEventListener("submit", (ev) => {
     ev.preventDefault();
     submitR1(input.value);
     input.value = "";
-    input.focus();
+    input.focus({ preventScroll: true });
   });
+  setFeedback(blitz ? "Go! Famous answers first." : "Go! Every answer counts — typos are forgiven.");
 }
 
 function submitR1(raw: string): void {
-  if (!match?.r1) return;
-  const res = match.r1.submit(raw);
+  if (!match?.r1 || match.phase !== "r1") return;
+  const now = performance.now();
+  const res = match.r1.submit(raw, now);
   if (res === "DUPLICATE") {
-    setFeedback("Already on the board!", "var(--lav)");
+    setFeedback("Already on the board!", "info");
     return;
   }
   if (!res) {
-    setFeedback("The crowd shrugs… not on the board.", "var(--pink2)");
-    crowd.react("gasp", 0.25);
+    if (raw.trim()) {
+      setFeedback(`“${raw.trim().slice(0, 30)}” isn't on the board.`, "bad");
+      synth.miss();
+      hype.add(-3);
+    }
     return;
   }
   synth.hit(res.tier === "DEEP_CUT");
   if (res.combo) synth.combo();
-  renderer.floatText(240, 120, `+${res.points}`, res.combo ? "#FF2A85" : "#FEE440");
-  renderer.burst(240, 130, res.tier === "DEEP_CUT" ? "#FFD166" : "#00F5D4");
-  renderer.hitStop(30);
-  crowd.react(res.combo ? "sign" : "jump", res.tier === "DEEP_CUT" ? 0.7 : 0.45);
-  volt.setState(res.tier === "DEEP_CUT" ? "MIND_BLOWN" : "IDLE_TALK");
-  setFeedback(
-    res.combo
-      ? `⚡ COMBO! ${res.name} — ${res.points} HYPE`
-      : `${res.name} — +${res.points} HYPE${res.tier === "DEEP_CUT" ? " (DEEP CUT!)" : ""}`,
-  );
-  const chip = document.createElement("span");
-  chip.className = "found-item" + (res.combo ? " combo" : res.tier === "DEEP_CUT" ? " deep" : "");
-  chip.textContent = `${res.name} +${res.points}`;
-  $("found-list").appendChild(chip);
-  if (match.blitzTop10 && match.r1) {
-    const foundTop = [...match.blitzTop10].filter((id) =>
-      match!.r1!.hits.some((h) => match!.pack.round1.answers.find((a) => a.name === h.name)?.entityId === id),
-    ).length;
-    setFeedback(`Top-10 found: ${foundTop}/10 — ${res.name} +${res.points}`);
-    if (foundTop >= 10) finishMatch();
+  hype.add(res.tier === "DEEP_CUT" ? 12 : 8);
+  if (res.combo) {
+    hype.add(6);
+    renderer.shake(9, 0.3);
+    renderer.flash("#ff2d95", 0.18);
+    renderer.crowdReact("cheer");
+    synth.crowd("cheer", 0.8);
+  } else if (res.tier === "DEEP_CUT") {
+    renderer.crowdReact("cheer");
   }
+  renderer.sparks(0.5, 0.36, res.combo ? 40 : 22, res.combo ? 0 : res.tier === "DEEP_CUT" ? 1 : 2);
+  renderer.volt.setState(res.combo ? "HYPER_MIC_DROP" : res.tier === "DEEP_CUT" ? "MIND_BLOWN" : "IDLE_TALK");
+  const label = `${res.name} +${res.points}${res.combo ? " COMBO!" : res.tier === "DEEP_CUT" ? " DEEP CUT!" : ""}`;
+  setFeedback(match.mode === "blitz" ? `${label} · Top 10: ${match.r1.topFound}/${TOP_N}` : label, res.combo ? "gold" : "good");
+  const chip = document.createElement("span");
+  chip.className = "found-item" + (res.combo ? " combo" : res.tier === "DEEP_CUT" ? " deep" : "") + (res.topTen && match.mode === "blitz" ? " top" : "");
+  chip.textContent = `${res.topTen && match.mode === "blitz" ? "★ " : ""}${res.name} +${res.points}`;
+  const list = $("found-list");
+  list.prepend(chip);
+  if (match.mode === "blitz" && match.r1.topFound >= TOP_N) match.r1.endNow();
 }
 
-function advanceToR2(): void {
+async function endRound1(token: number): Promise<void> {
+  if (!match?.r1) return;
+  const m = match;
+  const r1 = m.r1!;
+  m.phase = "splash";
+  const missed = r1.matcher.missed();
+  const blitz = m.mode === "blitz";
+  const topMissed = missed.filter((a) => a.rank < TOP_N);
+  const shown = (blitz ? topMissed : missed).slice(0, blitz ? TOP_N : 14);
+  const body =
+    `<p class="splash-stat"><b>${r1.hits.length}</b> found · <b>${fmt(r1.score)}</b> pts${blitz ? ` · top 10: <b>${r1.topFound}/${TOP_N}</b>` : ""}</p>` +
+    (shown.length
+      ? `<p class="splash-small">${blitz ? "Top-10 answers you missed" : "Top answers you missed"}:</p><div class="missed">${shown
+          .map((a) => `<span class="${a.rank < TOP_N ? "top" : ""}">${esc(displayName(a.name))}</span>`)
+          .join("")}</div>`
+      : `<p class="splash-small">You cleared the board. Legendary.</p>`);
+  if (r1.hits.length >= 8) {
+    renderer.confetti(0.6);
+    synth.crowd("cheer", 1);
+  }
+  renderer.volt.setState(r1.hits.length >= 5 ? "CONFETTI_DANCE" : "SIDE_EYE");
+  await splash({
+    kicker: blitz ? "BLITZ OVER" : "TIME!",
+    title: blitz && r1.topFound >= TOP_N ? "TOP 10 CLEARED!" : `${r1.hits.length} ON THE BOARD`,
+    bodyHtml: body,
+    ms: 9000,
+    continueLabel: blitz ? "See results ▸" : "Round 2 ▸",
+  });
+  if (!alive(token)) return;
+  if (blitz) void finishMatch(token);
+  else void runRound2(token);
+}
+
+// ----- Round 2 -----
+async function runRound2(token: number): Promise<void> {
   if (!match) return;
-  match.phase = "r2";
-  match.r2 = new Round2FactOrCap(match.pack.round2);
+  const m = match;
   $("found-list").innerHTML = "";
-  volt.setState("FIRE_SUNGLASSES");
+  $("round-ui").innerHTML = "";
+  setFeedback("");
+  $("round-label").textContent = "ROUND 2 · FACT OR CAP?!";
+  renderer.volt.setState("FIRE_SUNGLASSES");
+  await splash({ kicker: "ROUND 2 · 4 CARDS · 7 SECONDS EACH", title: "FACT OR CAP?!", sub: "Streaks pay ×1.5, then ×2.", ms: 1900 });
+  if (!alive(token)) return;
+  m.phase = "r2";
+  m.r2 = new Round2FactOrCap(m.pack.round2, performance.now());
+  if (m.r2.finished) {
+    void runRound3(token); // no cards in this pack: never soft-lock
+    return;
+  }
   renderR2Card();
+}
+
+function cardKeyHint(card: FactOrCapCard): string {
+  if (card.type === "CLAIM") return "F = fact · C = cap";
+  if (card.type === "CLASH") return "A / B or ← / →";
+  return "keys 1–4";
 }
 
 function renderR2Card(): void {
   if (!match?.r2) return;
-  const card = match.r2.current;
-  $("round-label").textContent = "ROUND 2 — FACT OR CAP?!";
+  const r2 = match.r2;
+  const card = r2.current;
   if (!card) return;
-  const streak = match.r2.streak;
-  $("prompt-bar").innerHTML =
-    `Question ${match.r2.index + 1} / 4` +
-    (streak >= 2 ? ` · <span class="streak-fire pxfont" style="font-size:10px">🔥 ${streak} STREAK x${streak >= 3 ? "2.0" : "1.5"}</span>` : "");
+  const streak = r2.streak;
+  $("prompt-meta").textContent = `Card ${r2.index + 1} / ${r2.cards.length}${streak >= 1 ? ` · 🔥 streak ${streak}` : ""}${streak >= 1 ? ` · next ×${streak + 1 >= 3 ? "2" : "1.5"}` : ""}`;
+  $("prompt-sub").textContent = cardKeyHint(card);
   const ui = $("round-ui");
   if (card.type === "CLAIM") {
+    $("prompt-text").textContent = card.claim;
     ui.innerHTML = `
-      <div class="card-claim">“${card.claim}”</div>
-      <div class="big-buttons">
-        <button class="fact" id="btn-fact">✓ FACT</button>
-        <button class="cap" id="btn-cap">✕ CAP</button>
+      <div class="choice-row two">
+        <button class="choice fact" data-pick="FACT"><kbd>F</kbd> FACT</button>
+        <button class="choice cap" data-pick="CAP"><kbd>C</kbd> CAP</button>
       </div>`;
-    $("btn-fact").addEventListener("click", () => answerR2(() => match!.r2!.answerClaim(true)));
-    $("btn-cap").addEventListener("click", () => answerR2(() => match!.r2!.answerClaim(false)));
   } else if (card.type === "CLASH") {
+    $("prompt-text").textContent = card.question;
     ui.innerHTML = `
-      <div class="card-claim">${card.question}</div>
-      <div class="big-buttons">
-        <button id="btn-a">${card.a}</button>
-        <button id="btn-b">${card.b}</button>
+      <div class="choice-row two">
+        <button class="choice" data-pick="A"><kbd>A</kbd> <span>${esc(card.a)}</span><em class="val"></em></button>
+        <button class="choice" data-pick="B"><kbd>B</kbd> <span>${esc(card.b)}</span><em class="val"></em></button>
       </div>`;
-    $("btn-a").addEventListener("click", () => answerR2(() => match!.r2!.answerClash("A")));
-    $("btn-b").addEventListener("click", () => answerR2(() => match!.r2!.answerClash("B")));
   } else {
+    $("prompt-text").textContent = "What's in the picture?";
     ui.innerHTML = `
-      <div class="row">
-        <canvas id="zoomCanvas" width="160" height="160"></canvas>
-        <div style="flex:1;min-width:180px">
-          <div class="card-claim" style="margin-top:0">What is this sprite?</div>
-          <div class="menu-grid" style="grid-template-columns:1fr 1fr">
-            ${card.options.map((o) => `<button class="small zoom-opt" data-opt="${o.replace(/"/g, "&quot;")}">${o}</button>`).join("")}
-          </div>
+      <div class="zoom-wrap">
+        <div class="zoom-window" aria-label="Zooming mystery picture"><span class="zoom-emoji" id="zoom-emoji">${esc(card.emoji)}</span></div>
+        <div class="choice-row four">
+          ${card.options.map((o, i) => `<button class="choice small" data-pick="${esc(o)}"><kbd>${i + 1}</kbd> ${esc(o)}</button>`).join("")}
         </div>
       </div>`;
-    ui.querySelectorAll(".zoom-opt").forEach((b) =>
-      b.addEventListener("click", () =>
-        answerR2(() => match!.r2!.answerZoom((b as HTMLElement).dataset.opt ?? "")),
-      ),
-    );
-    drawZoom();
+    const emoji = $("zoom-emoji");
+    emoji.style.transformOrigin = `${card.focusX * 100}% ${card.focusY * 100}%`;
+    updateZoom(performance.now());
   }
+  ui.querySelectorAll<HTMLButtonElement>("[data-pick]").forEach((b) =>
+    b.addEventListener("click", () => answerR2(b.dataset.pick ?? "")),
+  );
 }
 
-function drawZoom(): void {
+function updateZoom(now: number): void {
   if (!match?.r2) return;
   const card = match.r2.current;
-  const zc = document.getElementById("zoomCanvas") as HTMLCanvasElement | null;
-  if (!card || card.type !== "ZOOM" || !zc) return;
-  const ctx = zc.getContext("2d");
-  if (!ctx) return;
-  const reveal = match.r2.zoomReveal; // 0..1 over the 7s window
-  const res = reveal < 0.25 ? 4 : reveal < 0.5 ? 6 : reveal < 0.7 ? 8 : reveal < 0.88 ? 12 : 16;
-  const cell = 160 / res;
-  ctx.fillStyle = "#110E1B";
-  ctx.fillRect(0, 0, 160, 160);
-  for (let by = 0; by < res; by++) {
-    for (let bx = 0; bx < res; bx++) {
-      const srcR = Math.min(15, Math.floor(((by + 0.5) / res) * 16));
-      const srcC = Math.min(15, Math.floor(((bx + 0.5) / res) * 16));
-      const ch = card.bitmap[srcR][srcC];
-      ctx.fillStyle = ZOOM_COLORS[ch] ?? "#110E1B";
-      ctx.fillRect(bx * cell, by * cell, cell, cell);
+  const el = document.getElementById("zoom-emoji");
+  if (!card || card.type !== "ZOOM" || !el) return;
+  let r = match.r2.zoomReveal(now);
+  if (renderer.reducedMotion) r = Math.floor(r * 4) / 4; // 4 calm steps instead of a continuous zoom
+  const inv = 1 - r;
+  const scale = 1 + 11 * Math.pow(inv, 1.7);
+  const blur = 16 * Math.pow(inv, 1.3);
+  el.style.transform = `scale(${scale.toFixed(3)})`;
+  el.style.filter = blur > 0.3 ? `blur(${blur.toFixed(1)}px) saturate(1.2)` : "none";
+}
+
+function answerR2(pick: string): void {
+  if (!match?.r2 || match.phase !== "r2") return;
+  const now = performance.now();
+  if (now < inputLockedUntil) return;
+  const r2 = match.r2;
+  const card = r2.current;
+  if (!card || r2.phase !== "ask") return;
+  let res: CardResult | null = null;
+  if (card.type === "CLAIM") res = r2.answerClaim(pick === "FACT", now);
+  else if (card.type === "CLASH") res = r2.answerClash(pick === "A" ? "A" : "B", now);
+  else res = r2.answerZoom(pick, now);
+  if (!res) return;
+  inputLockedUntil = now + REVEAL_MS;
+  showR2Reveal(res);
+}
+
+function valueText(v: number, unit: string): string {
+  if (unit.toLowerCase() === "year") return String(v);
+  return `${v.toLocaleString("en-US")} ${unit}`;
+}
+
+function showR2Reveal(res: CardResult): void {
+  const card = res.card;
+  const ui = $("round-ui");
+  const right = correctAnswerText(card);
+  ui.querySelectorAll<HTMLButtonElement>("[data-pick]").forEach((b) => {
+    const pick = b.dataset.pick ?? "";
+    const label = card.type === "CLASH" ? (pick === "A" ? card.a : card.b) : pick;
+    b.disabled = true;
+    if (label === right) b.classList.add("correct");
+    else if (label === res.picked) b.classList.add("wrong");
+    if (card.type === "CLASH") {
+      const v = b.querySelector(".val");
+      if (v) v.textContent = valueText(pick === "A" ? card.aValue : card.bValue, card.unit);
+    }
+  });
+  if (card.type === "ZOOM") {
+    const el = document.getElementById("zoom-emoji");
+    if (el) {
+      el.style.transform = "scale(1)";
+      el.style.filter = "none";
     }
   }
-}
-
-function answerR2(fn: () => { correct: boolean; points: number } | null): void {
-  if (!match?.r2) return;
-  const res = fn();
-  if (!res) return;
-  const card = match.r2.results[match.r2.results.length - 1]?.card;
   let truth = "";
-  if (card?.type === "CLAIM") truth = card.isFact ? "It was FACT." : "It was CAP.";
-  if (card?.type === "CLASH") truth = `More: ${card.aValue >= card.bValue ? card.a : card.b} (${Math.max(card.aValue, card.bValue)}${card.unit}).`;
-  if (card?.type === "ZOOM") truth = `It was ${card.answer}.`;
+  if (card.type === "CLAIM") truth = `It's ${card.isFact ? "FACT" : "CAP"}.`;
+  else if (card.type === "CLASH") {
+    const winner = clashWinner(card) === "A" ? card.a : card.b;
+    truth = `${winner}: ${valueText(clashWinner(card) === "A" ? card.aValue : card.bValue, card.unit)} vs ${valueText(clashWinner(card) === "A" ? card.bValue : card.aValue, card.unit)}.`;
+  } else truth = `It was ${card.answer}.`;
   if (res.correct) {
     synth.correct();
-    crowd.react("jump", 0.55);
-    volt.setState("VICTORY_SPIN");
-    renderer.floatText(240, 120, `+${res.points}`, "#A8FF35");
-    setFeedback(`✓ CORRECT +${res.points} — ${truth}`, "var(--lime)");
+    hype.add(10 + res.streakAfter * 3);
+    renderer.crowdReact("cheer");
+    renderer.sparks(0.5, 0.4, 24, 4);
+    if (res.streakAfter >= 3) {
+      renderer.shake(7, 0.25);
+      synth.crowd("cheer", 0.7);
+    }
+    renderer.volt.setState(res.streakAfter >= 3 ? "CONFETTI_DANCE" : "VICTORY_SPIN");
+    setFeedback(`✓ +${res.points}${res.streakAfter >= 2 ? ` (🔥×${res.streakAfter >= 3 ? 2 : 1.5})` : ""} — ${truth}`, "good");
   } else {
     synth.wrong();
-    crowd.react("tomato", 0.4);
-    volt.setState("WRONG_BUZZER");
-    renderer.shake(4, 0.18);
-    setFeedback(`✕ WRONG — ${truth}`, "var(--pink2)");
+    hype.add(res.timedOut ? -10 : -14);
+    renderer.crowdReact("boo");
+    renderer.tomatoes(res.timedOut ? 4 : 7);
+    synth.crowd("boo", 0.6);
+    renderer.volt.setState("WRONG_BUZZER");
+    setFeedback(`${res.timedOut ? "⏰ Time's up" : "✕ Nope"} — ${truth}`, "bad");
   }
-  if (match.r2.finished) advanceToR3();
-  else renderR2Card();
+  setText($("prompt-meta"), `Card ${match!.r2!.index + 1} / ${match!.r2!.cards.length} · ${res.correct ? "correct" : "streak reset"}`);
 }
 
-function advanceToR3(): void {
+// ----- Round 3 -----
+async function runRound3(token: number): Promise<void> {
   if (!match) return;
-  match.phase = "r3";
-  match.r3 = new Round3Pitch(match.pack.round3, match.seed);
-  $("found-list").innerHTML = "";
-  $("round-label").textContent = "ROUND 3 — THE ULTIMATE PITCH";
-  $("prompt-bar").innerHTML = match.r3.promptText;
-  $("round-ui").innerHTML = `
-    <textarea id="pitch-input" maxlength="${PITCH_MAX_CHARS}" placeholder="Your one-line pitch — name BOTH wildcards and an action verb!"></textarea>
-    <div class="char-count"><span id="pitch-count">0</span>/${PITCH_MAX_CHARS}</div>
-    <button class="primary" id="btn-pitch" style="width:100%">DROP THE PITCH</button>`;
-  const ta = $("pitch-input") as HTMLTextAreaElement;
-  ta.focus();
-  ta.addEventListener("input", () => {
-    $("pitch-count").textContent = String(ta.value.length);
-  });
-  $("btn-pitch").addEventListener("click", () => submitPitch(ta.value));
-  setFeedback("250 per wildcard named · +150 action verb · too short costs points!");
-}
-
-function submitPitch(text: string): void {
-  if (!match?.r3 || (match.r3.finished && match.r3.result)) return;
   const m = match;
-  const res = match.r3.submit(text);
-  synth.pitchReveal();
-  crowd.react(res.total >= 600 ? "sign" : "glowstick", res.total >= 600 ? 0.8 : 0.4);
-  volt.setState(res.total >= 600 ? "HYPER_MIC_DROP" : "LAUGHING_FIT");
-  setFeedback(
-    `PITCH SCORE ${res.total} — wildcards ${res.wildcard1 ? "✓" : "✕"}/${res.wildcard2 ? "✓" : "✕"}` +
-    ` · verb ${res.actionVerb ? `✓ (${res.actionVerbMatched})` : "✕"} · length ${res.lengthPenalty} · crowd +${res.crowdVariance}`,
-  );
-  setTimeout(() => { if (match === m) finishMatch(); }, 1600);
+  $("round-ui").innerHTML = "";
+  setFeedback("");
+  $("round-label").textContent = "ROUND 3 · THE PITCH";
+  renderer.volt.setState("IDLE_TALK");
+  const setup = m.pitch;
+  await splash({
+    kicker: "ROUND 3 · 30 SECONDS",
+    title: "THE ULTIMATE PITCH",
+    sub: `${setup.wildcardA} + ${setup.wildcardB}`,
+    ms: 2200,
+  });
+  if (!alive(token)) return;
+  m.phase = "r3";
+  m.r3 = new Round3Pitch(setup, m.seed, performance.now());
+  $("prompt-meta").textContent = "One line · name both wildcards · use an action verb";
+  $("prompt-text").textContent = m.r3.promptText;
+  $("prompt-sub").textContent = "";
+  $("round-ui").innerHTML = `
+    <div class="pitch-checks" id="pitch-checks">
+      <span data-check="a">${esc(setup.wildcardA)}</span>
+      <span data-check="b">${esc(setup.wildcardB)}</span>
+      <span data-check="verb">action verb</span>
+      <span data-check="len">30+ chars</span>
+    </div>
+    <form class="answer-form pitch-form" id="r3-form">
+      <textarea id="pitch-input" maxlength="${PITCH_MAX_CHARS}" rows="2" aria-label="Your pitch"
+        placeholder="e.g. ${esc(setup.wildcardA)} race through ${esc(setup.wildcardB)} to save the world"></textarea>
+      <div class="pitch-side"><span class="char-count"><b id="pitch-count">0</b>/${PITCH_MAX_CHARS}</span>
+      <button class="btn primary" type="submit">DROP IT 🎤</button></div>
+    </form>`;
+  const ta = $<HTMLTextAreaElement>("pitch-input");
+  ta.focus({ preventScroll: true });
+  const checks = () => {
+    const v = ta.value;
+    setText($("pitch-count"), String(v.length));
+    const box = $("pitch-checks");
+    box.querySelector('[data-check="a"]')!.classList.toggle("on", wildcardPresent(v, setup.wildcardA));
+    box.querySelector('[data-check="b"]')!.classList.toggle("on", wildcardPresent(v, setup.wildcardB));
+    box.querySelector('[data-check="verb"]')!.classList.toggle("on", findActionVerb(v, ACTION_VERBS) !== null);
+    box.querySelector('[data-check="len"]')!.classList.toggle("on", v.trim().length >= 30);
+  };
+  ta.addEventListener("input", checks);
+  ta.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      void submitPitch(token);
+    }
+  });
+  $<HTMLFormElement>("r3-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    void submitPitch(token);
+  });
+  setFeedback("+250 per wildcard · +150 action verb · short pitches lose points");
 }
 
-function finishMatch(): void {
-  if (!match) return;
-  match.phase = "summary";
-  const r1 = match.r1?.score ?? 0;
-  const r2 = match.r2?.score ?? 0;
-  const r3 = match.r3?.result?.total ?? 0;
-  const total = r1 + r2 + r3;
-  const save = db.get();
-  let streak = save.dailyStreak;
-  if (match.mode === "daily" && match.daily) {
-    streak = db.recordDaily(match.daily.date);
+async function submitPitch(token: number): Promise<void> {
+  if (!match?.r3 || match.phase !== "r3" || match.r3.result) return;
+  const m = match;
+  const ta = document.getElementById("pitch-input") as HTMLTextAreaElement | null;
+  const res = m.r3!.submit(ta?.value ?? "");
+  m.phase = "result";
+  updateTimerRing(0, ROUND3_SECONDS, 0);
+  synth.pitchReveal();
+  hype.add(res.crown ? 30 : res.total >= 400 ? 12 : -5);
+  if (res.crown) {
+    renderer.confetti(1);
+    renderer.crowdReact("cheer");
+    renderer.flash("#ffe066", 0.25);
+    synth.crowd("cheer", 1.2);
+    renderer.volt.setState("HYPER_MIC_DROP");
+  } else {
+    renderer.crowdReact(res.total >= 400 ? "cheer" : "gasp");
+    renderer.volt.setState(res.total >= 400 ? "LAUGHING_FIT" : "SIDE_EYE");
   }
+  const row = (ok: boolean, label: string, pts: string) =>
+    `<li class="${ok ? "ok" : "no"}"><span>${ok ? "✓" : "✕"} ${esc(label)}</span><b>${pts}</b></li>`;
+  $("round-ui").innerHTML = `
+    <div class="pitch-result">
+      <p class="pitch-quote">“${esc(m.r3!.pitchText || "…silence…")}”</p>
+      <ul>
+        ${row(res.wildcard1, m.r3!.setup.wildcardA, res.wildcard1 ? "+250" : "0")}
+        ${row(res.wildcard2, m.r3!.setup.wildcardB, res.wildcard2 ? "+250" : "0")}
+        ${row(res.actionVerb, res.actionVerbMatched ? `verb: ${res.actionVerbMatched}` : "action verb", res.actionVerb ? "+150" : "0")}
+        ${row(res.lengthPenalty === 0, "length", String(res.lengthPenalty))}
+        ${row(true, "crowd reaction", `+${res.crowdVariance}`)}
+      </ul>
+      <p class="pitch-total">${res.crown ? "👑 CROWD FAVORITE · " : ""}${fmt(res.total)} pts</p>
+      <button class="btn primary" id="btn-to-summary">Final results ▸</button>
+    </div>`;
+  setFeedback(res.crown ? "The arena is on its feet!" : "The crowd has spoken.", res.crown ? "gold" : "info");
+  const go = $("btn-to-summary");
+  go.focus({ preventScroll: true });
+  let moved = false;
+  const next = () => {
+    if (moved || !alive(token)) return;
+    moved = true;
+    void finishMatch(token);
+  };
+  go.addEventListener("click", next);
+  window.setTimeout(next, 6000);
+}
+
+// ----- results -----
+async function finishMatch(token: number): Promise<void> {
+  if (!alive(token)) return;
+  const m = match!;
+  m.phase = "summary";
+  const r1 = m.r1?.score ?? 0;
+  const r2 = m.r2?.score ?? 0;
+  const r3 = m.r3?.result?.total ?? 0;
+  const bonus = crowdBonus(hype.peak);
+  const total = r1 + r2 + r3 + bonus;
+  const save = db.get();
   const victory =
-    (match.mode === "quick" && total >= 3500) ||
-    (match.mode === "blitz" && match.blitzTop10 !== null && match.r1 !== null &&
-      [...match.blitzTop10].every((id) =>
-        match!.r1!.hits.some((h) => match!.pack.round1.answers.find((a) => a.name === h.name)?.entityId === id),
-      ));
-  const coins = hypeCoins(Math.max(0, total), streak, victory ? 25 : 0);
-  db.update({
-    xp: save.xp + Math.max(0, total),
-    coins: save.coins + coins,
-    bestScore: Math.max(save.bestScore, total),
-    gamesPlayed: save.gamesPlayed + 1,
-  });
+    (m.mode === "quick" && total >= QUICK_VICTORY_SCORE) ||
+    (m.mode === "blitz" && (m.r1?.topFound ?? 0) >= TOP_N);
+  let coins = 0;
+  let streakBonusDays = 0;
+  let note: string;
+  if (m.practice) {
+    note = `Practice run — today's scored show was ${fmt(save.dailyScores[m.daily.date] ?? 0)}. No coins or XP for replays.`;
+  } else {
+    if (m.mode === "daily") {
+      const streak = db.recordDaily(m.daily.date, total);
+      streakBonusDays = streak ?? 0;
+    }
+    coins = hypeCoins(total, streakBonusDays, victory ? VICTORY_BONUS : 0);
+    db.update({
+      xp: save.xp + total,
+      coins: save.coins + coins,
+      bestScore: Math.max(save.bestScore, total),
+      gamesPlayed: save.gamesPlayed + 1,
+    });
+    note =
+      total >= 6000 ? "STANDING OVATION — the arena is shaking!"
+        : total >= 3500 ? "The crowd is ELECTRIC!"
+          : total >= 1800 ? "A warm crowd — they want more."
+            : "Tough crowd tonight. Run it back!";
+    if (streakBonusDays > 0) note += ` 🔥 ${streakBonusDays}-day streak bonus: +${streakBonusDays * 15} coins.`;
+    if (victory) note += ` 🏆 Victory bonus +${VICTORY_BONUS}.`;
+  }
+  const mode: ShareMode = m.practice ? "practice" : m.mode;
+  const xpNow = db.get().xp;
   const data: ShareData = {
-    riotNumber: match.riotNumber,
+    mode,
+    riotNumber: m.daily.riotNumber,
+    promptText: m.pack.round1.text,
     totalScore: total,
     round1Score: r1,
-    round1Hits: match.r1?.hits.length ?? 0,
-    round1Slots: 5,
+    round1Hits: m.r1?.hits.length ?? 0,
+    round1Total: m.pack.round1.answers.length,
     round2Score: r2,
-    round2Correct: match.r2?.results.filter((x) => x.correct).length ?? 0,
+    round2Marks: m.r2?.results.map((x) => x.correct) ?? [],
     round3Score: r3,
-    round3Crown: r3 >= 600,
-    rankTitle: tierForXp(db.get().xp),
+    round3Crown: m.r3?.result?.crown ?? false,
+    blitzTopFound: m.r1?.topFound ?? 0,
+    crowdBonus: bonus,
+    hypePeak: hype.peak,
+    rankTitle: tierForXp(xpNow),
   };
   lastSummary = data;
-  $("summary-grid").innerHTML = `
-    <div class="summary-cell"><div class="pxfont" style="font-size:9px">TOTAL HYPE</div><div class="v pxfont">${total.toLocaleString()}</div></div>
-    <div class="summary-cell"><div class="pxfont" style="font-size:9px">ROUND 1</div><div class="v pxfont">${r1.toLocaleString()}</div></div>
-    <div class="summary-cell"><div class="pxfont" style="font-size:9px">ROUND 2</div><div class="v pxfont">${r2.toLocaleString()}</div></div>
-    <div class="summary-cell"><div class="pxfont" style="font-size:9px">ROUND 3</div><div class="v pxfont">${r3.toLocaleString()}</div></div>
-    <div class="summary-cell"><div class="pxfont" style="font-size:9px">HYPE COINS</div><div class="v pxfont">+${coins} HC</div></div>
-    <div class="summary-cell"><div class="pxfont" style="font-size:9px">RANK</div><div class="v pxfont" style="font-size:13px">${data.rankTitle}</div></div>`;
-  $("summary-note").textContent =
-    match.mode === "blitz"
-      ? "Brainstorm Blitz complete — one prompt, top-10 hunt."
-      : `Crowd reaction: ${total >= 5000 ? "STANDING OVATION — the arena is shaking!" : total >= 3000 ? "The crowd is ELECTRIC!" : total >= 1500 ? "A warm crowd — they want more." : "Tough crowd tonight. Run it back!"}`;
-  $("share-text").textContent = shareText(data);
-  showPanel("panel-summary");
-  volt.setState("VICTORY_SPIN");
-  crowd.react("jump", 0.9);
-  synth.fanfare();
-  refreshChips();
   match = null;
+
+  const cell = (label: string, value: string, cls = "") => `<div class="summary-cell ${cls}"><span>${esc(label)}</span><b>${esc(value)}</b></div>`;
+  $("summary-kicker").textContent =
+    mode === "daily" ? `DAILY RIOT #${String(data.riotNumber).padStart(3, "0")}` : mode === "practice" ? "PRACTICE RUN" : mode === "quick" ? "QUICK ARCADE" : "BRAINSTORM BLITZ";
+  $("summary-grid").innerHTML =
+    (m.mode === "blitz"
+      ? cell("Top-10 found", `${data.blitzTopFound}/10`) + cell("Answers", `${data.round1Hits} · +${fmt(r1)}`)
+      : cell("Top 5 Riot", `${data.round1Hits} · +${fmt(r1)}`) +
+        cell("Fact or Cap", `${data.round2Marks.filter(Boolean).length}/${data.round2Marks.length} · +${fmt(r2)}`) +
+        cell("The Pitch", `${data.round3Crown ? "👑 " : ""}+${fmt(r3)}`)) +
+    cell("Crowd bonus", `+${fmt(bonus)}`, "accent") +
+    cell("Hype Coins", `+${coins}`, "gold");
+  $("summary-note").textContent = note;
+  const prog = tierProgress(xpNow);
+  $("rank-label").textContent = prog.next ? `${data.rankTitle} → ${prog.next}` : `${data.rankTitle} · max rank`;
+  $<HTMLElement>("rank-fill").style.width = `${Math.round(prog.progress * 100)}%`;
+  $("share-text").textContent = shareText(data);
+  $("btn-again").textContent = m.mode === "daily" ? "Replay (practice)" : "Play again";
+  showScreen("screen-summary");
+  countUp($("summary-total"), total, 1200, renderer.reducedMotion);
+  celebrateUntil = performance.now() + 6000;
+  renderer.volt.setState("VICTORY_SPIN");
+  renderer.crowdReact("cheer");
+  renderer.confetti(total >= 3500 ? 1.4 : 0.7);
+  synth.fanfare();
+  synth.crowd("cheer", 1);
+  refreshMenu();
+  refreshChips();
 }
 
-// ---------- avatar / settings / party panels ----------
+function quitMatch(): void {
+  match = null;
+  matchToken++;
+  closeSplash();
+  showScreen("screen-menu");
+  renderer.volt.setState("IDLE_TALK");
+  refreshMenu();
+}
 
+// ---------- avatar studio ----------
 function renderAvatarPanel(): void {
   const save = db.get();
-  $("avatar-coins").textContent = String(save.coins);
-  const owned = (id: string, cost: number) => cost === 0 || save.unlocked.includes(id);
-  const slots: Array<["hoodie" | "visor" | "sneakers" | "pet" | "dance", string]> = [
-    ["hoodie", "HOODIES"], ["visor", "VISORS"], ["sneakers", "SNEAKERS"], ["pet", "PIXEL PETS"], ["dance", "VICTORY DANCES"],
+  $("avatar-coins").textContent = fmt(save.coins);
+  const owned = (slot: CosmeticSlot, id: string, cost: number) => cost === 0 || db.isUnlocked(slot, id);
+  const slots: Array<[CosmeticSlot, string]> = [
+    ["hoodie", "Hoodies"], ["visor", "Visors"], ["sneakers", "Sneakers"], ["pet", "Holo pets"], ["dance", "Victory dances"],
   ];
-  $("avatar-slots").innerHTML = slots.map(([slot, label]) => `
-    <h3 class="pxfont" style="font-size:10px;color:var(--lav)">${label}</h3>
-    <div class="cosmetic-grid">
-      ${COSMETICS.filter((c) => c.slot === slot).map((c) => {
-        const isOwned = owned(c.id, c.cost);
-        const isEquipped = save.equipped[slot] === c.id;
-        return `<div class="cosmetic ${isEquipped ? "equipped" : ""}">
-          ${c.color ? `<div class="swatch" style="background:${c.color}"></div>` : ""}
-          <div>${c.name}</div>
-          <div style="color:var(--lav)">${isOwned ? "OWNED" : `${c.cost} HC`}</div>
-          <button class="small" data-slot="${slot}" data-id="${c.id}" ${isEquipped ? "disabled" : ""}>
-            ${isEquipped ? "EQUIPPED" : isOwned ? "EQUIP" : "BUY"}</button>
-        </div>`;
-      }).join("")}
-    </div>`).join("");
-  $("avatar-slots").querySelectorAll("button[data-slot]").forEach((b) => {
+  $("avatar-slots").innerHTML = slots
+    .map(([slot, label]) => `
+      <h3>${esc(label)}</h3>
+      <div class="cosmetic-grid">
+        ${COSMETICS.filter((c) => c.slot === slot)
+          .map((c) => {
+            const isOwned = owned(slot, c.id, c.cost);
+            const isEquipped = save.equipped[slot] === c.id;
+            return `<button class="cosmetic ${isEquipped ? "equipped" : ""}" data-slot="${slot}" data-id="${esc(c.id)}" ${isEquipped ? 'aria-pressed="true"' : ""}>
+              ${c.color ? `<i class="swatch" style="background:${esc(c.color)}"></i>` : `<i class="swatch none"></i>`}
+              <span>${esc(c.name)}</span>
+              <small>${isEquipped ? "Equipped" : isOwned ? "Equip" : `${c.cost} 🪙`}</small>
+            </button>`;
+          })
+          .join("")}
+      </div>`)
+    .join("");
+  $("avatar-slots").querySelectorAll<HTMLButtonElement>("button[data-slot]").forEach((b) => {
     b.addEventListener("click", () => {
-      const el = b as HTMLElement;
-      const slot = el.dataset.slot as keyof SaveData["equipped"];
-      const id = el.dataset.id ?? "";
+      const slot = b.dataset.slot as CosmeticSlot;
+      const id = b.dataset.id ?? "";
       const item = COSMETICS.find((c) => c.slot === slot && c.id === id);
       if (!item) return;
       const s = db.get();
-      if (!owned(id, item.cost)) {
-        if (s.coins < item.cost) { setFeedback("Not enough Hype Coins!"); return; }
-        db.update({
-          coins: s.coins - item.cost,
-          unlocked: [...s.unlocked, id],
-          equipped: { ...s.equipped, [slot]: id },
-        });
+      const equipped: Equipped = { ...s.equipped, [slot]: id };
+      if (!owned(slot, id, item.cost)) {
+        if (s.coins < item.cost) {
+          $("avatar-msg").textContent = `Not enough Hype Coins — ${item.name} costs ${item.cost}, you have ${s.coins}.`;
+          return;
+        }
+        db.update({ coins: s.coins - item.cost, unlocked: [...s.unlocked, `${slot}:${id}`], equipped });
+        $("avatar-msg").textContent = `Unlocked ${item.name}!`;
+        synth.combo();
+        celebrateUntil = performance.now() + 2500;
       } else {
-        db.update({ equipped: { ...s.equipped, [slot]: id } });
+        db.update({ equipped });
+        $("avatar-msg").textContent = `${item.name} equipped.`;
       }
       refreshChips();
       renderAvatarPanel();
@@ -567,178 +776,298 @@ function renderAvatarPanel(): void {
   });
 }
 
-type SaveData = ReturnType<LocalSaveDB["get"]>;
+// ---------- party room (only when a relay URL is configured) ----------
+let partySocket: WebSocket | null = null;
+const ROOM_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 
-// ---------- render loop ----------
+function partyConnect(code: string): void {
+  const name = ($<HTMLInputElement>("party-name").value.trim() || "Player").slice(0, 12);
+  const clean = code.toUpperCase();
+  if (!/^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{4}$/.test(clean)) {
+    $("party-status").textContent = "Room codes are 4 letters/numbers (no I, L, O, 0 or 1).";
+    return;
+  }
+  partySocket?.close();
+  const url = `${PARTY_WS_URL.replace(/\/$/, "")}/${clean}`;
+  $("party-status").textContent = `Connecting to room ${clean}…`;
+  try {
+    const ws = new WebSocket(url);
+    partySocket = ws;
+    ws.addEventListener("open", () => {
+      ws.send(JSON.stringify({ t: "JOIN", name, avatar: 0 }));
+      $("party-status").textContent = `In room ${clean}. Share the code with friends! (Synced party matches are coming next — the lobby is live now.)`;
+    });
+    ws.addEventListener("message", (ev) => {
+      try {
+        const msg = JSON.parse(String(ev.data)) as { t?: string; players?: Array<{ name: string }> };
+        if (msg.t === "LOBBY" && Array.isArray(msg.players)) {
+          $("party-lobby").innerHTML = msg.players.map((p) => `<li>${esc(p.name)}</li>`).join("");
+        }
+      } catch {
+        /* ignore malformed relay messages */
+      }
+    });
+    ws.addEventListener("close", () => {
+      if (partySocket === ws) $("party-status").textContent = "Disconnected from the room.";
+    });
+    ws.addEventListener("error", () => {
+      $("party-status").textContent = "Couldn't reach the party relay. Try again later.";
+    });
+  } catch {
+    $("party-status").textContent = "Couldn't open a connection to the party relay.";
+  }
+}
 
+// ---------- frame loop ----------
+let rafId = 0;
 let lastTs = 0;
-let secondAcc = 0;
+const ringFg = () => document.getElementById("ring-fg") as SVGCircleElement | null;
+const RING_LEN = 2 * Math.PI * 27;
 
-function drawScene(dt: number): void {
-  const theme = ARENA_THEMES[themeIndex];
-  renderer.gradient(theme.skyTop, theme.skyBottom);
-  if (themeIndex === 4) {
-    // Orbital Space Lounge stars (deterministic)
-    for (let i = 0; i < 40; i++) {
-      const x = (i * 67) % 480;
-      const y = (i * 37) % 110;
-      renderer.rect(x, y, 2, 2, "#FFF8E7");
+function updateTimerRing(remaining: number, total: number, lowAt: number): void {
+  const fg = ringFg();
+  if (fg) {
+    fg.style.strokeDasharray = `${RING_LEN}`;
+    fg.style.strokeDashoffset = `${RING_LEN * (1 - Math.max(0, Math.min(1, remaining / total)))}`;
+  }
+  const ring = $("timer-ring");
+  ring.classList.toggle("low", remaining <= lowAt && remaining > 0);
+  setText($("timer-num"), String(Math.ceil(remaining)));
+}
+
+function gameTick(now: number): void {
+  if (!match) return;
+  const m = match;
+  if (m.phase === "r1" && m.r1) {
+    const rem = m.r1.remaining(now);
+    updateTimerRing(rem, m.r1.seconds, 5);
+    const sec = Math.ceil(rem);
+    if (rem <= 5 && rem > 0 && sec !== lastTickSecond) {
+      lastTickSecond = sec;
+      synth.tick();
+      if (renderer.volt.state === "IDLE_TALK") renderer.volt.setState("PANIC_COUNTDOWN");
     }
+    if (m.r1.isOver(now)) {
+      lastTickSecond = -1;
+      void endRound1(m.token);
+    }
+  } else if (m.phase === "r2" && m.r2) {
+    const r2 = m.r2;
+    for (const ev of r2.update(now)) {
+      if (ev.kind === "timeout") showR2Reveal(ev.result);
+      else if (r2.finished) {
+        void runRound3(m.token);
+        m.phase = "splash";
+        return;
+      } else renderR2Card();
+    }
+    updateTimerRing(r2.cardRemaining(now), SECONDS_PER_CARD, 2);
+    if (r2.current?.type === "ZOOM" && r2.phase === "ask") updateZoom(now);
+  } else if (m.phase === "r3" && m.r3) {
+    const rem = m.r3.remaining(now);
+    updateTimerRing(rem, ROUND3_SECONDS, 5);
+    if (m.r3.isOver(now) && !m.r3.result) void submitPitch(m.token);
   }
-  // jumbotron
-  renderer.rect(88, 14, 304, 62, "#110E1B");
-  renderer.rect(88, 14, 304, 3, theme.accent);
-  renderer.rect(88, 73, 304, 3, theme.accent);
-  const title = match
-    ? match.phase === "r1" ? (match.mode === "blitz" ? "BRAINSTORM BLITZ" : "ROUND 1: TOP 5 RIOT")
-      : match.phase === "r2" ? "ROUND 2: FACT OR CAP?!" : "ROUND 3: THE PITCH"
-    : "HYPE RIOT";
-  renderer.text(title, 240, 24, theme.accent, 10, "center");
-  renderer.text(
-    match ? `SCORE ${totalScore().toLocaleString()}` : theme.name.toUpperCase().slice(0, 34),
-    240, 44, "#FFF8E7", 8, "center",
-  );
+  setText($("score-now"), fmt(totalScore()));
+}
+
+let lastHypeShown = -1;
+
+function jumbo(): { title: string; sub: string } {
   if (match) {
-    const tl = match.phase === "r1" ? (match.r1?.timeLeft ?? 0)
-      : match.phase === "r2" ? (match.r2 ? (match.r2.cards.length - match.r2.index - 1) * 7 + match.r2.cardTimeLeft : 0)
-      : (match.r3?.timeLeft ?? 0);
-    const max = match.phase === "r1" ? (match.mode === "blitz" ? 45 : 25) : match.phase === "r2" ? 28 : 30;
-    renderer.rect(98, 62, 284, 5, "#3A2F5B");
-    renderer.rect(98, 62, Math.max(0, (tl / max) * 284), 5, tl <= 5 ? "#E63946" : "#00F5D4");
+    const label =
+      match.phase === "r1" || (match.phase === "splash" && !match.r2 && !match.r3)
+        ? match.mode === "blitz" ? "BRAINSTORM BLITZ" : "TOP 5 RIOT"
+        : match.r3 ? "THE PITCH" : "FACT OR CAP?!";
+    return { title: label, sub: `SCORE ${fmt(totalScore())} · HYPE ${Math.round(hype.value)}%` };
   }
-  // stage floor + crowd pit
-  renderer.rect(0, 188, 480, 82, theme.stage);
-  renderer.rect(0, 188, 480, 3, theme.accent);
-  crowd.update(dt);
-  crowd.draw(renderer);
-  volt.update(dt);
-  volt.draw(renderer, 26, 118);
-  avatar.draw(renderer, 408, 120, db.get().equipped, performance.now() / 1000);
-  renderer.postFrame(dt);
+  const d = today();
+  return { title: "HYPE RIOT", sub: d ? `SHOW #${String(d.riotNumber).padStart(3, "0")} · ${ARENA_THEMES[d.arenaTheme].name.toUpperCase()}` : "LOADING THE SHOW" };
+}
+
+let lastLayout = 0;
+
+/** Tells the renderer where the HUD leaves space for the jumbotron (game screen only). */
+function layoutArena(): void {
+  if (document.body.dataset.screen !== "screen-game") {
+    renderer.jumboBox = null;
+    return;
+  }
+  const meter = document.querySelector<HTMLElement>(".hype-meter");
+  const top = $("btn-quit").getBoundingClientRect().bottom;
+  const meterBottom = meter && meter.offsetParent ? meter.getBoundingClientRect().bottom : top;
+  const spacer = document.querySelector<HTMLElement>(".stage-spacer")!.getBoundingClientRect();
+  const start = Math.max(top, meterBottom);
+  renderer.jumboBox = { top: start, maxH: (spacer.bottom - start) * 0.62 };
 }
 
 function loop(ts: number): void {
-  const dt = Math.min(0.05, lastTs ? (ts - lastTs) / 1000 : 0.016);
+  const frameMs = lastTs ? ts - lastTs : 16;
+  const dt = Math.min(0.1, frameMs / 1000);
   lastTs = ts;
-  if (match && !renderer.frozen) {
-    if (match.phase === "r1" && match.r1) {
-      match.r1.tick(dt);
-      $("score-now").textContent = String(totalScore());
-      const tl = match.r1.timeLeft;
-      const fill = $("timer-fill");
-      fill.style.width = `${(tl / (match.mode === "blitz" ? 45 : 25)) * 100}%`;
-      fill.classList.toggle("low", tl <= 5);
-      secondAcc += dt;
-      if (tl <= 5.05 && secondAcc >= 1) { secondAcc = 0; synth.tick(); }
-      if (match.r1.finished) {
-        if (match.mode === "blitz") finishMatch();
-        else advanceToR2();
-      }
-    } else if (match.phase === "r2" && match.r2) {
-      const timeoutRes = match.r2.tick(dt);
-      $("score-now").textContent = String(totalScore());
-      const fill = $("timer-fill");
-      fill.style.width = `${(match.r2.cardTimeLeft / 7) * 100}%`;
-      fill.classList.toggle("low", match.r2.cardTimeLeft <= 2);
-      if (timeoutRes) {
-        synth.wrong();
-        crowd.react("tomato", 0.35);
-        setFeedback("⏰ TIME UP — streak gone!", "var(--pink2)");
-        if (match.r2.finished) advanceToR3();
-        else renderR2Card();
-      } else if (match.r2.current?.type === "ZOOM") {
-        drawZoom();
-      }
-    } else if (match.phase === "r3" && match.r3) {
-      match.r3.tick(dt);
-      $("score-now").textContent = String(totalScore());
-      const fill = $("timer-fill");
-      fill.style.width = `${(match.r3.timeLeft / 30) * 100}%`;
-      fill.classList.toggle("low", match.r3.timeLeft <= 5);
-      if (match.r3.finished && !match.r3.result) {
-        const ta = $("pitch-input") as HTMLTextAreaElement | null;
-        submitPitch(ta?.value ?? "");
-      }
-    }
+  const now = performance.now();
+  if (now - lastLayout > 300) {
+    lastLayout = now;
+    layoutArena();
   }
-  drawScene(dt);
-  requestAnimationFrame(loop);
+  gameTick(now);
+  hype.update(dt);
+  const hv = Math.round(hype.value);
+  if (hv !== lastHypeShown) {
+    lastHypeShown = hv;
+    $<HTMLElement>("hype-fill").style.transform = `scaleX(${hv / 100})`;
+    setText($("hype-value"), `${hv}%`);
+    document.body.classList.toggle("hype-max", hv >= 80);
+  }
+  const j = jumbo();
+  renderer.frame(dt, frameMs, {
+    energy: match ? hype.energy : 0.35,
+    jumboTitle: j.title,
+    jumboSub: j.sub,
+    equipped: db.get().equipped,
+    celebrate: Math.max(0, (celebrateUntil - now) / 1000),
+  });
+  rafId = requestAnimationFrame(loop);
 }
 
-// ---------- wiring + boot ----------
+function startLoop(): void {
+  if (rafId) return;
+  lastTs = 0;
+  rafId = requestAnimationFrame(loop);
+}
 
-$("btn-daily").addEventListener("click", () => startMatch("daily"));
-$("btn-quick").addEventListener("click", () => startMatch("quick"));
-$("btn-blitz").addEventListener("click", () => startMatch("blitz"));
-$("btn-party").addEventListener("click", () => {
-  const status = $("party-status");
-  if (PARTY_WS_URL) {
-    status.textContent = `Relay configured: ${PARTY_WS_URL}`;
+function stopLoop(): void {
+  cancelAnimationFrame(rafId);
+  rafId = 0;
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    // Rendering pauses; round timers are wall-clock and keep running,
+    // so switching tabs can't freeze the clock to look up answers.
+    stopLoop();
+    synth.suspend();
   } else {
-    status.textContent =
-      "⚠ Party relay NOT deployed yet — this mode needs the Cloudflare Durable Objects backend (packages/party-worker) on the owner's Cloudflare account. Create/Join stay disabled until a relay URL is configured (VITE_PARTY_WS_URL). Solo modes are fully playable.";
-    ($("btn-create-room") as HTMLButtonElement).disabled = true;
-    ($("btn-join-room") as HTMLButtonElement).disabled = true;
+    startLoop();
   }
-  showPanel("panel-party");
 });
-$("btn-avatar").addEventListener("click", () => { renderAvatarPanel(); showPanel("panel-avatar"); });
-$("btn-settings").addEventListener("click", () => showPanel("panel-settings"));
-for (const id of ["btn-menu2", "btn-menu3", "btn-menu4", "btn-menu5"]) {
-  $(id).addEventListener("click", () => showPanel("panel-menu"));
-}
+
+// ---------- keyboard ----------
+document.addEventListener("keydown", (e) => {
+  if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+  if (!$("splash").classList.contains("hidden")) {
+    if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
+      e.preventDefault();
+      closeSplash();
+    }
+    return;
+  }
+  const typing = e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement;
+  if (e.key === "Escape") {
+    if (document.body.dataset.screen === "screen-game") {
+      if (window.confirm("Quit this show? Progress in this match will be lost.")) quitMatch();
+    } else if (document.body.dataset.screen !== "screen-menu") showScreen("screen-menu");
+    return;
+  }
+  if (typing || !match?.r2 || match.phase !== "r2") return;
+  const card = match.r2.current;
+  if (!card) return;
+  const k = e.key.toLowerCase();
+  if (card.type === "CLAIM" && (k === "f" || k === "c")) answerR2(k === "f" ? "FACT" : "CAP");
+  else if (card.type === "CLASH" && ["a", "b", "1", "2", "arrowleft", "arrowright"].includes(k))
+    answerR2(k === "a" || k === "1" || k === "arrowleft" ? "A" : "B");
+  else if (card.type === "ZOOM" && ["1", "2", "3", "4"].includes(k)) answerR2(card.options[Number(k) - 1] ?? "");
+  else return;
+  e.preventDefault();
+});
+
+// ---------- wiring ----------
+$("btn-daily").addEventListener("click", () => void startMatch("daily"));
+$("btn-quick").addEventListener("click", () => void startMatch("quick"));
+$("btn-blitz").addEventListener("click", () => void startMatch("blitz"));
+$("btn-home").addEventListener("click", () => {
+  if (match) {
+    if (window.confirm("Quit this show? Progress in this match will be lost.")) quitMatch();
+  } else showScreen("screen-menu");
+});
 $("btn-quit").addEventListener("click", () => {
-  match = null;
-  showPanel("panel-menu");
-  volt.setState("IDLE_TALK");
+  if (window.confirm("Quit this show? Progress in this match will be lost.")) quitMatch();
 });
-$("btn-again").addEventListener("click", () => startMatch(lastMode));
-$("btn-copy-share").addEventListener("click", () => {
-  if (lastSummary) void navigator.clipboard?.writeText(shareText(lastSummary));
+$("btn-help").addEventListener("click", () => showScreen("screen-help"));
+$("btn-avatar").addEventListener("click", () => {
+  $("avatar-msg").textContent = "";
+  renderAvatarPanel();
+  showScreen("screen-avatar");
+});
+$("btn-settings").addEventListener("click", () => showScreen("screen-settings"));
+document.querySelectorAll<HTMLButtonElement>("[data-back]").forEach((b) => b.addEventListener("click", () => showScreen("screen-menu")));
+$("btn-menu-summary").addEventListener("click", () => showScreen("screen-menu"));
+$("btn-again").addEventListener("click", () => void startMatch(lastMode));
+$("btn-share").addEventListener("click", async () => {
+  if (!lastSummary) return;
+  const text = shareText(lastSummary);
+  try {
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+      await navigator.share({ text });
+      return;
+    }
+    await navigator.clipboard.writeText(text);
+    toast("Copied to clipboard — paste it anywhere!");
+  } catch (err) {
+    if ((err as DOMException)?.name !== "AbortError") toast("Couldn't copy automatically — select the text above.");
+  }
 });
 $("btn-png-share").addEventListener("click", () => {
   if (lastSummary) downloadShareCardPng(lastSummary);
 });
-($("set-crt") as HTMLSelectElement).addEventListener("change", (e) => {
-  const v = (e.target as HTMLSelectElement).value as "off" | "subtle" | "arcade";
-  db.update({ settings: { ...db.get().settings, crt: v } });
-  applySettings();
-});
-($("set-motion") as HTMLInputElement).addEventListener("change", (e) => {
-  db.update({ settings: { ...db.get().settings, reducedMotion: (e.target as HTMLInputElement).checked } });
-  applySettings();
-});
-($("set-font") as HTMLInputElement).addEventListener("change", (e) => {
-  db.update({ settings: { ...db.get().settings, legibleFont: (e.target as HTMLInputElement).checked } });
-  applySettings();
-});
-($("set-sound") as HTMLInputElement).addEventListener("change", (e) => {
+$<HTMLInputElement>("set-sound").addEventListener("change", (e) => {
   db.update({ settings: { ...db.get().settings, sound: (e.target as HTMLInputElement).checked } });
   applySettings();
 });
+$<HTMLInputElement>("set-motion").addEventListener("change", (e) => {
+  db.update({ settings: { ...db.get().settings, reducedMotion: (e.target as HTMLInputElement).checked } });
+  applySettings();
+});
+$<HTMLSelectElement>("set-quality").addEventListener("change", (e) => {
+  db.update({ settings: { ...db.get().settings, quality: (e.target as HTMLSelectElement).value as QualitySetting } });
+  applySettings();
+});
+if (PARTY_WS_URL) {
+  $("btn-party").classList.remove("hidden");
+  $("btn-party").addEventListener("click", () => showScreen("screen-party"));
+  $("btn-create-room").addEventListener("click", () => {
+    let code = "";
+    const rnd = new Uint32Array(4);
+    crypto.getRandomValues(rnd);
+    for (const r of rnd) code += ROOM_ALPHABET[r % ROOM_ALPHABET.length];
+    $<HTMLInputElement>("party-code").value = code;
+    partyConnect(code);
+  });
+  $("btn-join-room").addEventListener("click", () => partyConnect($<HTMLInputElement>("party-code").value.trim()));
+}
+
+trackViewport(() => renderer.resize());
 
 async function boot(): Promise<void> {
   applySettings();
   refreshChips();
+  startLoop();
   try {
-    const manifest = await loadManifest();
-    manifestPacks = manifest.packs;
-    const entities = await loadEntities(manifest);
-    entityCount = entities.length;
-    const today = dailyFor(new Date(), manifestPacks);
-    themeIndex = today.arenaTheme;
-    $("dataset-line").textContent =
-      `DATASET v${manifest.version}: ${entityCount.toLocaleString()} entities · ${manifest.shards} trie shards · ${manifestPacks} packs loaded. Today's arena: ${ARENA_THEMES[today.arenaTheme].name}.`;
-    $("daily-desc").textContent =
-      `HYPE RIOT #${String(today.riotNumber).padStart(3, "0")} — today's global show, same pack for everyone. 3 rounds, ~90 seconds.`;
+    manifest = await loadManifest();
+    const d = dailyFor(new Date(), manifest);
+    db.refreshStreak(d.date);
+    renderer.setTheme(d.arenaTheme);
+    renderer.fadeIn("#000000");
+    const c = manifest.counts;
+    $("dataset-line").textContent = `${c.prompts} shows · ${fmt(c.answers)} answers · ${c.claims} facts & caps · ${c.zoom} mystery zooms · ${c.wildcards} pitch wildcards`;
+    setModeButtonsEnabled(true);
+    refreshMenu();
+    showScreen("screen-menu");
   } catch (err) {
-    $("dataset-line").innerHTML =
-      `<span class="error">Dataset failed to load (${err instanceof Error ? err.message : "unknown error"}). The data files must sit beside the app under data/v1/.</span>`;
-    for (const id of ["btn-daily", "btn-quick", "btn-blitz"]) {
-      ($(id) as HTMLButtonElement).disabled = true;
-    }
+    const line = $("dataset-line");
+    line.innerHTML = `<span class="error">Couldn't load the show (${esc(err instanceof Error ? err.message : "unknown error")}).</span> <button class="link-btn" id="btn-retry">Retry</button>`;
+    $("btn-retry").addEventListener("click", () => location.reload());
   }
-  requestAnimationFrame(loop);
 }
 
 void boot();

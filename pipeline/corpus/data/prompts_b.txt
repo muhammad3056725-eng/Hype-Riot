@@ -1,0 +1,1248 @@
+# HYPE RIOT prompt corpus - batch B (sports + food)
+# Format: "@ slug | categoryId | Prompt text", then one answer per line: "Canonical | alias | alias"
+# Answers ordered most famous -> least famous; first 10 are the top-10 targets.
+
+@ sports | 4 | Sports
+
+Soccer | football | futbol | association football
+Basketball | hoops
+American Football | gridiron
+Baseball
+Tennis
+Golf
+Ice Hockey | hockey
+Volleyball
+Swimming
+Boxing
+Cricket
+Rugby | rugby union | rugby league
+Track and Field | athletics | running | sprinting
+Gymnastics
+Table Tennis | ping pong
+Badminton
+Wrestling
+Cycling | biking
+Skiing
+Snowboarding
+Surfing
+Skateboarding
+Mixed Martial Arts | mma | ufc
+Auto Racing | motor racing | car racing | formula 1 | f1 | nascar
+Lacrosse
+Softball
+Bowling | ten-pin bowling | tenpin bowling
+Figure Skating | ice skating
+Karate
+Judo
+Taekwondo
+Fencing
+Archery
+Rowing
+Handball
+Water Polo
+Diving
+Field Hockey
+Darts
+Snooker
+Pool | billiards
+Curling
+Pickleball
+Squash
+Weightlifting
+Rock Climbing | climbing | bouldering
+Triathlon
+Netball
+Sailing
+Equestrian | horse riding | show jumping | dressage
+Dodgeball
+Polo
+Bobsled | bobsleigh
+Kayaking | canoeing
+
+@ soccer-players | 4 | Soccer (football) players, past or present
+
+Lionel Messi | messi | leo messi
+Cristiano Ronaldo | ronaldo | cristiano | cr7
+Neymar | neymar jr
+Kylian Mbappé | mbappe
+Pelé
+Diego Maradona | maradona
+Erling Haaland | haaland
+Zinedine Zidane | zidane | zizou
+David Beckham | beckham
+Mohamed Salah | salah | mo salah
+Ronaldinho
+Ronaldo Nazário | r9 | brazilian ronaldo
+Wayne Rooney | rooney
+Kevin De Bruyne | de bruyne | kdb
+Harry Kane | kane
+Jude Bellingham | bellingham
+Thierry Henry | henry
+Luka Modrić | modric
+Robert Lewandowski | lewandowski | lewy
+Zlatan Ibrahimović | zlatan | ibrahimovic
+Vinícius Júnior | vinicius | vini jr | vini
+Lamine Yamal | yamal
+Karim Benzema | benzema
+Johan Cruyff | cruyff
+Andrés Iniesta | iniesta
+Xavi | xavi hernandez
+Sergio Ramos | ramos
+Gianluigi Buffon | buffon
+Kaká
+Steven Gerrard | gerrard
+Frank Lampard | lampard
+Paolo Maldini | maldini
+Franz Beckenbauer | beckenbauer
+Bukayo Saka | saka
+Son Heung-min | heung-min son | sonny
+Virgil van Dijk | van dijk | vvd
+Manuel Neuer | neuer
+Luis Suárez | suarez
+Gareth Bale | bale
+Eden Hazard | hazard
+Sergio Agüero | aguero | kun aguero
+Didier Drogba | drogba
+Andrea Pirlo | pirlo
+Cole Palmer
+Phil Foden | foden
+Marcus Rashford | rashford
+Antoine Griezmann | griezmann
+Christian Pulisic | pulisic
+Sadio Mané | mane
+Ferenc Puskás | puskas
+Mia Hamm
+Megan Rapinoe | rapinoe
+Alex Morgan
+Marta | marta vieira da silva
+George Best
+Eusébio
+
+@ basketball-players | 4 | Basketball players, past or present
+
+LeBron James | lebron | king james
+Michael Jordan | jordan | mj
+Kobe Bryant | kobe
+Stephen Curry | steph curry | steph | curry
+Shaquille O'Neal | shaq
+Kevin Durant | durant | kd
+Magic Johnson | magic
+Larry Bird
+Giannis Antetokounmpo | giannis | greek freak
+Kareem Abdul-Jabbar | kareem
+Tim Duncan | duncan
+Wilt Chamberlain | wilt | chamberlain
+Luka Dončić | luka | doncic
+Nikola Jokić | jokic | joker
+Bill Russell
+Dirk Nowitzki | dirk | nowitzki
+Kawhi Leonard | kawhi
+Allen Iverson | iverson
+Dwyane Wade | wade | d-wade
+Victor Wembanyama | wemby | wembanyama
+Shai Gilgeous-Alexander | sga | shai
+Kyrie Irving | kyrie
+James Harden | harden
+Russell Westbrook | westbrook
+Joel Embiid | embiid
+Jayson Tatum | tatum
+Anthony Edwards | ant edwards | ant-man
+Hakeem Olajuwon | hakeem | olajuwon
+Charles Barkley | barkley
+Scottie Pippen | pippen
+Dennis Rodman | rodman
+Yao Ming | yao
+Chris Paul | cp3
+Anthony Davis | the brow
+Damian Lillard | lillard | dame
+Klay Thompson | klay
+Draymond Green | draymond
+Kevin Garnett | garnett | kg
+Carmelo Anthony | carmelo | melo
+Dwight Howard
+Paul Pierce | pierce
+Jimmy Butler | jimmy buckets
+Steve Nash | nash
+Tracy McGrady | t-mac | mcgrady
+Vince Carter
+Karl Malone
+John Stockton | stockton
+Patrick Ewing | ewing
+Reggie Miller
+Ray Allen
+Jerry West
+Devin Booker | booker
+Caitlin Clark
+A'ja Wilson
+Sue Bird
+Lisa Leslie
+
+@ athletes-other | 4 | Famous athletes outside soccer and basketball
+
+Usain Bolt | bolt
+Serena Williams | serena
+Roger Federer | federer
+Tom Brady | brady
+Muhammad Ali | ali
+Michael Phelps | phelps
+Tiger Woods | tiger
+Simone Biles | biles
+Rafael Nadal | nadal | rafa
+Novak Djokovic | djokovic | nole
+Lewis Hamilton | hamilton
+Patrick Mahomes | mahomes
+Shohei Ohtani | ohtani
+Wayne Gretzky | gretzky | the great one
+Babe Ruth
+Venus Williams | venus
+Max Verstappen | verstappen
+Michael Schumacher | schumacher
+Ayrton Senna | senna
+Travis Kelce | kelce
+Peyton Manning | peyton
+Aaron Judge
+Derek Jeter | jeter
+Jackie Robinson
+Sidney Crosby | crosby
+Alex Ovechkin | ovechkin | ovi
+Carlos Alcaraz | alcaraz
+Jannik Sinner | sinner
+Coco Gauff | coco
+Naomi Osaka | osaka
+Andy Murray
+Katie Ledecky | ledecky
+Jesse Owens
+Carl Lewis
+Eliud Kipchoge | kipchoge
+Mo Farah
+Sachin Tendulkar | sachin | tendulkar
+Virat Kohli | kohli
+Tony Hawk
+Shaun White
+Nadia Comăneci | comaneci
+Rory McIlroy | mcilroy | rory
+Jack Nicklaus | nicklaus
+Arnold Palmer
+Joe Montana
+Jerry Rice
+Aaron Rodgers
+Manny Pacquiao | pacquiao
+Ronda Rousey | rousey
+Sugar Ray Leonard
+Lindsey Vonn | vonn
+Mikaela Shiffrin | shiffrin
+Kelly Slater
+Valentino Rossi | rossi
+Dale Earnhardt
+Mike Trout
+
+@ soccer-clubs | 4 | Soccer clubs around the world
+
+Real Madrid | real
+Barcelona | barca | fc barcelona
+Manchester United | man united | man utd | man u
+Liverpool
+Manchester City | man city
+Bayern Munich | bayern | fc bayern | bayern munchen
+Chelsea
+Arsenal | gunners
+Juventus | juve
+Paris Saint-Germain | psg
+AC Milan
+Inter Milan | inter | internazionale
+Tottenham Hotspur | tottenham | spurs
+Borussia Dortmund | dortmund | bvb
+Atlético Madrid | atletico | atleti
+Ajax
+Inter Miami
+LA Galaxy | galaxy
+Celtic
+Rangers
+Benfica
+Porto | fc porto
+Napoli
+AS Roma | roma
+Newcastle United | newcastle
+Aston Villa | villa
+Boca Juniors | boca
+River Plate
+Flamengo
+Santos
+Al Nassr
+Al Hilal
+Galatasaray
+Fenerbahçe
+Sporting CP | sporting lisbon
+Lazio
+Bayer Leverkusen | leverkusen
+RB Leipzig | leipzig
+PSV Eindhoven | psv
+Feyenoord
+Marseille | olympique de marseille
+Lyon | olympique lyonnais
+Monaco | as monaco
+Sevilla
+Valencia
+Everton
+West Ham United | west ham
+Leicester City | leicester
+Leeds United | leeds
+Nottingham Forest | forest
+Club América
+Corinthians
+Palmeiras
+Schalke 04 | schalke
+
+@ nfl-teams | 4 | NFL teams
+
+Dallas Cowboys | cowboys | dallas
+New England Patriots | patriots | pats | new england
+Kansas City Chiefs | chiefs | kansas city
+Green Bay Packers | packers | green bay
+Pittsburgh Steelers | steelers | pittsburgh
+San Francisco 49ers | 49ers | niners | san francisco
+Philadelphia Eagles | eagles | philadelphia | philly
+New York Giants | giants
+Chicago Bears | bears | chicago
+Las Vegas Raiders | raiders | las vegas
+Miami Dolphins | dolphins | miami
+Buffalo Bills | bills | buffalo
+Baltimore Ravens | ravens | baltimore
+Denver Broncos | broncos | denver
+Seattle Seahawks | seahawks | seattle
+New York Jets | jets
+Detroit Lions | lions | detroit
+Minnesota Vikings | vikings | minnesota
+New Orleans Saints | saints | new orleans
+Los Angeles Rams | rams
+Tampa Bay Buccaneers | buccaneers | bucs | tampa bay
+Cincinnati Bengals | bengals | cincinnati
+Cleveland Browns | browns | cleveland
+Indianapolis Colts | colts | indianapolis
+Atlanta Falcons | falcons | atlanta
+Los Angeles Chargers | chargers
+Arizona Cardinals | cardinals | arizona
+Carolina Panthers | panthers | carolina
+Houston Texans | texans | houston
+Jacksonville Jaguars | jaguars | jags | jacksonville
+Tennessee Titans | titans | tennessee
+Washington Commanders | commanders | washington
+
+@ nba-teams | 4 | NBA teams
+
+Los Angeles Lakers | lakers
+Boston Celtics | celtics | boston
+Chicago Bulls | bulls | chicago
+Golden State Warriors | warriors | gsw | golden state
+Miami Heat | heat | miami
+New York Knicks | knicks
+San Antonio Spurs | spurs | san antonio
+Philadelphia 76ers | 76ers | sixers | philadelphia
+Brooklyn Nets | nets | brooklyn
+Dallas Mavericks | mavericks | mavs | dallas
+Cleveland Cavaliers | cavaliers | cavs | cleveland
+Milwaukee Bucks | bucks | milwaukee
+Denver Nuggets | nuggets | denver
+Oklahoma City Thunder | thunder | okc | oklahoma city
+Phoenix Suns | suns | phoenix
+Houston Rockets | rockets | houston
+Toronto Raptors | raptors | toronto
+LA Clippers | clippers | los angeles clippers
+Detroit Pistons | pistons | detroit
+Orlando Magic | magic | orlando
+Atlanta Hawks | hawks | atlanta
+Utah Jazz | jazz | utah
+Portland Trail Blazers | trail blazers | blazers | portland
+Sacramento Kings | kings | sacramento
+Memphis Grizzlies | grizzlies | grizz | memphis
+Minnesota Timberwolves | timberwolves | wolves | t-wolves | minnesota
+Indiana Pacers | pacers | indiana
+New Orleans Pelicans | pelicans | new orleans
+Charlotte Hornets | hornets | charlotte
+Washington Wizards | wizards | washington
+
+@ sports-equipment | 4 | Sports equipment
+
+Soccer Ball | football
+Basketball
+Racket | racquet | tennis racket | tennis racquet | badminton racket
+Golf Club | golf clubs
+Baseball Bat
+Helmet
+Hockey Stick
+Skateboard
+Baseball Glove | baseball mitt | mitt
+Boxing Gloves
+Dumbbell | dumbbells
+Barbell
+Tennis Ball
+Golf Ball
+Baseball
+Volleyball
+American Football | pigskin | gridiron football
+Puck | hockey puck
+Skis
+Snowboard
+Surfboard
+Ice Skates
+Roller Skates | rollerblades | inline skates
+Shin Guards | shin pads
+Cleats | football boots | studs
+Net
+Goal | goalpost | goal posts
+Jump Rope | skipping rope
+Kettlebell
+Yoga Mat
+Treadmill
+Bicycle | bike
+Cricket Bat
+Cricket Ball
+Shuttlecock | birdie | shuttle
+Table Tennis Paddle | ping pong paddle | ping pong bat
+Goggles | swim goggles
+Mouthguard | gum shield
+Whistle
+Stopwatch
+Shoulder Pads
+Knee Pads
+Punching Bag | punch bag | heavy bag
+Bow and Arrow | bow | arrow
+Javelin
+Discus
+Hurdles | hurdle
+Frisbee | flying disc
+Cones | training cones
+Golf Tee | tee
+Pool Cue | cue
+Dartboard | darts
+Lacrosse Stick
+Medicine Ball
+Resistance Bands
+Oar
+
+@ gym-exercises | 4 | Gym exercises and workout moves
+
+Push-Up | press-up
+Squat
+Sit-Up
+Pull-Up
+Plank
+Deadlift
+Bench Press | bench
+Lunge
+Burpee
+Jumping Jacks | star jumps
+Bicep Curl | curls | dumbbell curl | biceps curl
+Crunch
+Mountain Climbers
+Chin-Up
+Shoulder Press | overhead press | military press
+Lat Pulldown | pulldown
+Leg Press
+Tricep Dips | dips | triceps dips
+Box Jumps
+Kettlebell Swing
+Russian Twist
+Leg Raises
+Calf Raises
+Bent-Over Row | barbell row | dumbbell row
+Rowing Machine | rowing | erg
+Jump Rope | skipping | skipping rope
+Treadmill | running | jogging
+Spin Bike | spinning | exercise bike | cycling
+Wall Sit
+Glute Bridge | hip bridge
+Hip Thrust
+Lateral Raise | side raise
+Tricep Extension | skull crushers | triceps extension
+Leg Curl | hamstring curl
+Leg Extension
+Clean and Jerk
+Snatch
+Battle Ropes
+Bear Crawl
+High Knees
+Butt Kicks
+Flutter Kicks
+Bicycle Crunches
+Superman
+Farmer's Walk | farmers carry
+Sled Push
+Chest Fly | pec fly | flyes | dumbbell fly
+Face Pull
+Step-Ups
+Thrusters
+Shrugs
+
+@ fast-food | 6 | Fast food chains and restaurant brands
+
+McDonald's | maccas | mickey d's | mcdees
+Burger King | bk
+KFC | kentucky fried chicken
+Subway
+Taco Bell
+Wendy's
+Pizza Hut
+Domino's
+Chick-fil-A
+Starbucks
+Five Guys
+In-N-Out | in n out
+Popeyes
+Chipotle
+Dunkin' | dunkin donuts
+Arby's
+Sonic | sonic drive-in
+Jack in the Box
+Panda Express
+Papa John's
+Little Caesars
+Dairy Queen | dq
+Wingstop
+Raising Cane's | canes
+Shake Shack
+Whataburger
+White Castle
+Carl's Jr.
+Hardee's
+Culver's
+Jollibee
+Nando's
+Greggs
+Tim Hortons | timmies
+Krispy Kreme
+Panera Bread | panera
+Jimmy John's
+Jersey Mike's
+Firehouse Subs
+Long John Silver's
+Del Taco
+Bojangles
+Church's Chicken
+Zaxby's
+Steak 'n Shake
+Qdoba
+Dutch Bros
+Pret A Manger | pret
+Wimpy
+
+@ fruits | 6 | Fruits
+
+Apple
+Banana
+Orange
+Strawberry
+Grape
+Watermelon
+Pineapple
+Mango
+Blueberry
+Peach
+Pear
+Cherry
+Lemon
+Kiwi | kiwifruit
+Raspberry
+Lime
+Coconut
+Plum
+Grapefruit
+Pomegranate
+Papaya | pawpaw
+Cantaloupe | rockmelon
+Honeydew | honeydew melon
+Apricot
+Blackberry
+Avocado
+Fig
+Dragon Fruit | pitaya
+Passion Fruit
+Nectarine
+Mandarin | tangerine | clementine | satsuma
+Cranberry
+Lychee | litchi
+Guava
+Date
+Persimmon
+Starfruit | carambola
+Durian
+Jackfruit
+Gooseberry
+Kumquat
+Blackcurrant
+Mulberry
+Boysenberry
+Quince
+Plantain
+
+@ vegetables | 6 | Vegetables
+
+Carrot
+Broccoli
+Potato
+Lettuce
+Tomato
+Cucumber
+Onion
+Spinach
+Corn | sweetcorn | maize | corn on the cob
+Peas
+Celery
+Cabbage
+Bell Pepper | pepper | capsicum
+Cauliflower
+Green Beans | string beans
+Zucchini | courgette
+Eggplant | aubergine
+Asparagus
+Sweet Potato | yam
+Kale
+Mushroom
+Garlic
+Brussels Sprouts | sprouts
+Pumpkin
+Beetroot | beet
+Radish
+Artichoke
+Squash | butternut squash
+Turnip
+Leek
+Okra
+Bok Choy | pak choi
+Parsnip
+Arugula | rocket
+Chili Pepper | chilli
+Spring Onion | scallion | green onion
+Collard Greens | collards
+Swiss Chard | chard
+Shallot
+Rutabaga | swede
+Watercress
+Fennel
+Bean Sprouts
+Kohlrabi
+
+@ pizza-toppings | 6 | Pizza toppings
+
+Pepperoni
+Cheese | mozzarella | extra cheese
+Mushrooms
+Sausage | italian sausage
+Pineapple
+Ham
+Onions
+Olives | black olives
+Bacon
+Green Peppers | peppers | bell peppers
+Chicken
+Jalapeños
+Spinach
+Tomatoes
+Ground Beef | beef | mince
+Anchovies
+Basil
+Garlic
+Salami
+Meatballs
+Canadian Bacon
+BBQ Sauce | barbecue sauce
+Feta
+Parmesan
+Ricotta
+Goat Cheese
+Artichokes
+Pesto
+Arugula | rocket
+Prosciutto | parma ham
+Chorizo
+Sweetcorn | corn
+Tuna
+Shrimp | prawns
+Chili Flakes | red pepper flakes | chilli flakes
+Oregano
+Eggplant | aubergine
+Zucchini | courgette
+Broccoli
+Banana Peppers
+Pulled Pork
+Egg
+Hot Honey
+
+@ candy | 6 | Candy and chocolate bars
+
+Snickers
+Kit Kat
+M&M's | m and ms
+Reese's | reese's cups | peanut butter cups
+Skittles
+Twix
+Hershey's | hershey bar
+Milky Way
+Starburst
+Sour Patch Kids
+Twizzlers
+Butterfinger
+3 Musketeers | three musketeers
+Nerds
+Jolly Rancher
+Gummy Bears
+Haribo
+Toblerone
+Mars Bar | mars
+Cadbury Dairy Milk | dairy milk | cadbury
+Ferrero Rocher | ferrero
+Lindt
+Kinder Bueno | bueno
+Kinder Surprise | kinder egg
+Hershey's Kisses | kisses
+Maltesers
+Smarties
+Rolo
+Lollipop | lolly | sucker
+Candy Corn
+Tootsie Roll
+Airheads
+Laffy Taffy
+Warheads
+Swedish Fish
+Almond Joy
+Mounds
+Baby Ruth
+PayDay
+Whoppers
+Junior Mints
+Milk Duds
+Peeps
+Life Savers
+Mentos
+Tic Tac
+Pez
+Ring Pop
+Cotton Candy | candy floss
+Jelly Beans
+Gummy Worms
+Nestlé Crunch | crunch bar
+Galaxy | dove chocolate
+Aero
+Crunchie
+Twirl
+Flake
+Bounty
+Heath
+Werther's Original | werthers
+
+@ salty-snacks | 6 | Chips, crisps and salty snacks
+
+Doritos
+Lay's
+Pringles
+Cheetos
+Pretzels
+Popcorn
+Potato Chips | crisps | chips
+Fritos
+Ruffles
+Tostitos
+Takis
+Goldfish
+Cheez-It
+Sun Chips
+Funyuns
+Tortilla Chips
+Kettle Chips | kettle brand
+Pork Rinds | pork scratchings | chicharrones
+Peanuts
+Cashews
+Almonds
+Pistachios
+Trail Mix
+Chex Mix
+Beef Jerky | jerky
+Crackers
+Ritz | ritz crackers
+Wheat Thins
+Triscuit
+Rice Cakes
+Walkers
+Hula Hoops
+Monster Munch
+Quavers
+Wotsits
+Skips
+Twiglets
+Cheese Puffs | cheese balls
+Bugles
+Pita Chips
+Veggie Straws
+Plantain Chips
+Corn Nuts
+Popchips
+Sunflower Seeds
+Bagel Chips
+Combos
+Mixed Nuts | nuts
+
+@ breakfast | 6 | Breakfast foods
+
+Pancakes | hotcakes
+Eggs | scrambled eggs | fried eggs
+Bacon
+Waffles
+Toast
+Cereal
+French Toast
+Oatmeal | porridge | oats
+Sausage | sausages
+Bagel
+Hash Browns
+Omelette | omelet
+Yogurt | yoghurt
+Muffin
+Croissant
+Granola
+Smoothie
+Breakfast Burrito
+Biscuits and Gravy
+Grits
+Crêpes
+Donut | doughnut
+Cinnamon Roll | cinnamon bun
+Avocado Toast
+Eggs Benedict
+Breakfast Sandwich
+English Muffin
+Full English | full breakfast | fry-up
+Baked Beans | beans
+Bacon Sandwich | bacon butty | bacon roll
+Fruit Salad
+Smoked Salmon | lox
+Quiche
+Frittata
+Shakshuka
+Huevos Rancheros
+Chilaquiles
+Black Pudding
+Danish | danish pastry
+Scone
+Crumpet
+Pop-Tarts | toaster pastry
+Açaí Bowl
+Chia Pudding
+Muesli
+Home Fries | breakfast potatoes
+Steak and Eggs
+Chicken and Waffles
+Congee
+Corned Beef Hash
+
+@ desserts | 6 | Desserts and sweet treats
+
+Ice Cream
+Cake
+Cookies
+Brownies
+Cheesecake
+Apple Pie
+Cupcakes
+Donuts | doughnuts
+Tiramisu
+Milkshake
+Sundae | ice cream sundae
+Churros
+Macarons
+Crème Brûlée
+Banana Split
+Pumpkin Pie
+Key Lime Pie
+Pecan Pie
+Carrot Cake
+Red Velvet Cake | red velvet
+Chocolate Mousse | mousse
+Fudge
+Jell-O | jelly | gelatin
+Popsicle | ice lolly | ice pop
+Frozen Yogurt | froyo
+Gelato
+Sorbet
+Crêpes
+Éclairs
+Cannoli
+Baklava
+Trifle
+Sticky Toffee Pudding
+Bread Pudding | bread and butter pudding
+Rice Pudding
+Pavlova
+Panna Cotta
+Flan | creme caramel
+Cobbler | peach cobbler
+Apple Crumble | crumble | apple crisp
+S'mores
+Rice Krispie Treats
+Cotton Candy | candy floss
+Funnel Cake
+Mochi
+Strawberry Shortcake
+Black Forest Cake | black forest gateau
+Angel Food Cake
+Profiteroles | cream puffs
+Cinnamon Roll | cinnamon bun
+
+@ drinks | 6 | Drinks (non-alcoholic)
+
+Water
+Coca-Cola | coke
+Orange Juice | oj
+Milk
+Lemonade
+Coffee
+Tea
+Pepsi
+Hot Chocolate | hot cocoa | cocoa
+Sprite
+Apple Juice
+Iced Tea
+Smoothie
+Milkshake
+Dr Pepper
+Fanta
+Gatorade
+Red Bull
+Monster Energy | monster
+Mountain Dew | mtn dew
+7 Up | seven up
+Root Beer
+Ginger Ale
+Sparkling Water | soda water | seltzer | fizzy water
+Bubble Tea | boba
+Latte
+Cappuccino
+Espresso
+Chocolate Milk
+Coconut Water
+Cranberry Juice
+Grape Juice
+Pineapple Juice
+Green Tea
+Chai | chai latte
+Matcha | matcha latte
+Slushie | slurpee | slush | icee
+Powerade
+Lucozade
+Ribena
+Capri Sun
+Kool-Aid
+Snapple
+Prime | prime hydration
+Irn-Bru
+Vimto
+Lassi | mango lassi
+Horchata
+Yakult
+
+@ world-dishes | 6 | Famous dishes from around the world
+
+Pizza
+Sushi
+Tacos
+Hamburger | burger
+Spaghetti Bolognese | spag bol | bolognese
+Fish and Chips
+Paella
+Ramen
+Chicken Tikka Masala | tikka masala
+Pad Thai
+Lasagna | lasagne
+Burrito
+Pho
+Kebab | doner kebab
+Butter Chicken
+Dim Sum
+Peking Duck
+Kimchi
+Biryani
+Falafel
+Dumplings
+Hot Dog
+Curry
+Fried Rice
+Hummus
+Moussaka
+Gyros | gyro
+Shawarma
+Goulash
+Borscht
+Pierogi
+Schnitzel | wiener schnitzel
+Poutine
+Ratatouille
+Risotto
+Pasta Carbonara | carbonara
+Ceviche
+Feijoada
+Jollof Rice
+Samosas
+Spring Rolls
+Bibimbap
+Bulgogi
+Tempura
+Katsu Curry
+Kung Pao Chicken
+Satay
+Tom Yum
+Laksa
+Shepherd's Pie | cottage pie
+Haggis
+Bangers and Mash
+Enchiladas
+Empanadas
+Fajitas
+Nachos
+Tagine
+Jambalaya
+Gumbo
+Clam Chowder
+
+@ ice-cream-flavors | 6 | Ice cream flavors
+
+Chocolate
+Vanilla
+Strawberry
+Cookies and Cream | cookies n cream | oreo
+Mint Chocolate Chip | mint chip | mint choc chip | mint
+Cookie Dough | chocolate chip cookie dough
+Rocky Road
+Neapolitan
+Butter Pecan
+Caramel | salted caramel
+Pistachio
+Coffee
+Chocolate Chip
+Birthday Cake | cake batter
+Cotton Candy | candy floss
+Bubblegum
+Coconut
+Mango
+Lemon
+Raspberry | raspberry ripple
+Cherry | black cherry
+Banana
+Peanut Butter
+Moose Tracks
+Butterscotch
+Honeycomb | hokey pokey
+Matcha | green tea
+Dulce de Leche
+Pralines and Cream | praline
+Peach
+Blueberry
+Chocolate Fudge Brownie | brownie | fudge brownie
+Rainbow Sherbet | sherbet
+Tutti Frutti
+Stracciatella
+Hazelnut
+Cinnamon
+Pumpkin
+Maple Walnut
+Cheesecake | strawberry cheesecake
+Red Velvet
+Ube
+Almond
+Spumoni
+
+@ cereals | 6 | Breakfast cereals (brands/types)
+
+Cheerios
+Frosted Flakes | frosties
+Froot Loops | fruit loops
+Lucky Charms
+Cinnamon Toast Crunch | ctc
+Corn Flakes | cornflakes
+Rice Krispies | rice bubbles
+Cap'n Crunch | captain crunch
+Cocoa Puffs
+Special K
+Honey Nut Cheerios
+Raisin Bran
+Coco Pops | cocoa krispies
+Trix
+Apple Jacks
+Fruity Pebbles
+Cocoa Pebbles
+Golden Grahams
+Reese's Puffs
+Honey Bunches of Oats
+Weetabix
+Shreddies
+Shredded Wheat
+Frosted Mini-Wheats | mini wheats
+Crunchy Nut | crunchy nut cornflakes
+Granola
+Muesli
+Oatmeal | porridge
+Grape-Nuts
+Kix
+Life
+Chex | rice chex
+Honey Smacks | sugar smacks
+Corn Pops
+Cookie Crisp
+Count Chocula
+Wheaties
+Bran Flakes
+Alpha-Bits
+Honeycomb
+Krave
+Weetos
+Oreo O's
+
+@ condiments | 6 | Sauces, dips and condiments
+
+Ketchup | tomato ketchup | catsup
+Mustard | dijon | yellow mustard
+Mayonnaise | mayo
+Barbecue Sauce | bbq sauce
+Ranch | ranch dressing
+Hot Sauce
+Soy Sauce
+Relish
+Salsa
+Guacamole | guac
+Sriracha
+Hummus
+Honey Mustard
+Buffalo Sauce | wing sauce
+Sweet Chili Sauce | sweet chilli sauce
+Tabasco
+Teriyaki Sauce | teriyaki
+Blue Cheese Dressing | blue cheese
+Thousand Island
+Tartar Sauce
+Gravy
+Brown Sauce | hp sauce
+Worcestershire Sauce
+Cocktail Sauce
+Cranberry Sauce
+Mint Sauce
+Pesto
+Aioli | garlic mayo
+Tzatziki
+Sour Cream
+Queso | cheese dip | nacho cheese
+Marinara
+Alfredo Sauce | alfredo
+Hollandaise
+Tahini
+Chutney | mango chutney
+Salad Cream
+Horseradish
+Wasabi
+Hoisin Sauce | hoisin
+Oyster Sauce
+Fish Sauce
+Chimichurri
+Gochujang
+Vinegar | malt vinegar
+Peri-Peri Sauce | piri piri | peri peri
+Steak Sauce | a1
+Caesar Dressing
+Italian Dressing
+French Dressing
+Balsamic Glaze | balsamic
+
+@ pasta-noodles | 6 | Pasta and noodle types
+
+Spaghetti
+Penne
+Macaroni | elbow macaroni
+Fettuccine
+Lasagna | lasagne
+Ravioli
+Linguine
+Ramen
+Rigatoni
+Fusilli | rotini
+Farfalle | bow tie pasta | bowtie
+Tortellini
+Udon
+Rice Noodles
+Egg Noodles
+Soba
+Orzo
+Gnocchi
+Angel Hair | capellini
+Tagliatelle
+Pappardelle
+Ziti
+Cannelloni
+Conchiglie | shells | pasta shells
+Orecchiette
+Bucatini
+Vermicelli
+Instant Noodles | cup noodles | pot noodle
+Lo Mein
+Chow Mein
+Glass Noodles | cellophane noodles
+Manicotti
+Cavatappi
+Ditalini
+Gemelli
+Radiatori
+Paccheri
+Somen
+Hokkien Noodles
+Campanelle
+Spätzle
+Pastina
+
+@ breads | 6 | Breads and baked goods
+
+White Bread
+Sourdough
+Baguette | french bread
+Croissant
+Bagel
+Pita | pitta
+Naan
+Brioche
+Muffin
+Donut | doughnut
+Rye Bread | rye
+Ciabatta
+Focaccia
+Whole Wheat Bread | wholemeal | brown bread | whole grain bread
+Tortilla
+Cornbread
+English Muffin
+Pretzel | soft pretzel
+Dinner Roll | bread roll
+Hamburger Bun | burger bun
+Biscuits
+Scone
+Crumpet
+Challah
+Pumpernickel
+Soda Bread | irish soda bread
+Banana Bread
+Garlic Bread
+Flatbread
+Multigrain Bread | seeded bread
+Cinnamon Roll | cinnamon bun
+Danish | danish pastry
+Pain au Chocolat | chocolate croissant
+Hot Cross Bun
+Chapati | roti
+Paratha
+Matzo | matzah
+Arepa
+Breadsticks | grissini
+Cookies
+Cupcake
+Brownies
+Pie
+Cake
+Monkey Bread
+Panettone
+Stollen
+Bao | steamed bun | baozi
+Lavash

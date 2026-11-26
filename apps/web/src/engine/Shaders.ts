@@ -1,67 +1,95 @@
-// HYPE RIOT GLSL (Blueprint §3): Bayer 4x4 dither transition + CRT
-// overlay shaders for the WebGL2 path. The Renderer ships a canvas
-// fallback implementing the identical Bayer math when WebGL2 is
-// unavailable (low-end devices, test environments).
+// HYPE RIOT "shaders" for the Canvas2D arena: cached, pre-rendered
+// light sprites (radial glows, beam gradients, LED panels, vignette) so
+// the per-frame work is cheap drawImage/fill calls instead of rebuilding
+// gradients or using shadowBlur every frame.
 
-export const DITHER_TRANSITION_FS = `#version 300 es
-precision highp float;
-uniform sampler2D uOld;
-uniform sampler2D uNew;
-uniform float uProgress;
-in vec2 vUv;
-out vec4 fragColor;
-float bayer4(vec2 p) {
-  int x = int(mod(p.x, 4.0));
-  int y = int(mod(p.y, 4.0));
-  int idx = x + y * 4;
-  float m[16];
-  m[0]=0.0; m[1]=8.0; m[2]=2.0; m[3]=10.0;
-  m[4]=12.0; m[5]=4.0; m[6]=14.0; m[7]=6.0;
-  m[8]=3.0; m[9]=11.0; m[10]=1.0; m[11]=9.0;
-  m[12]=15.0; m[13]=7.0; m[14]=13.0; m[15]=5.0;
-  for (int i = 0; i < 16; i++) { if (i == idx) return m[i] / 16.0; }
-  return 0.0;
-}
-void main() {
-  vec4 a = texture(uOld, vUv);
-  vec4 b = texture(uNew, vUv);
-  float t = bayer4(gl_FragCoord.xy);
-  fragColor = (t < uProgress) ? b : a;
-}
-`;
+const cache = new Map<string, HTMLCanvasElement>();
 
-export const CRT_FS = `#version 300 es
-precision highp float;
-uniform sampler2D uScene;
-uniform float uScanline; // 0 off, 0.15 subtle, 0.35 arcade
-uniform float uTime;
-in vec2 vUv;
-out vec4 fragColor;
-void main() {
-  vec2 uv = vUv;
-  // gentle barrel curvature
-  vec2 d = uv - 0.5;
-  uv = uv + d * dot(d, d) * 0.08;
-  vec4 c = texture(uScene, uv);
-  float scan = 1.0 - uScanline * (0.5 + 0.5 * sin(uv.y * 540.0 * 3.14159));
-  float vig = 1.0 - 0.25 * dot(d, d) * 2.0;
-  fragColor = vec4(c.rgb * scan * vig, c.a);
+function makeCanvas(w: number, h: number): HTMLCanvasElement {
+  const c = document.createElement("canvas");
+  c.width = Math.max(1, Math.ceil(w));
+  c.height = Math.max(1, Math.ceil(h));
+  return c;
 }
-`;
 
-export const QUAD_VS = `#version 300 es
-layout(location=0) in vec2 aPos;
-out vec2 vUv;
-void main() {
-  vUv = aPos * 0.5 + 0.5;
-  gl_Position = vec4(aPos, 0.0, 1.0);
+/** Soft radial glow (white core -> color -> transparent), size x size px. */
+export function glowSprite(color: string, size = 128, core = 0.15): HTMLCanvasElement {
+  const key = `glow:${color}:${size}:${core}`;
+  const hit = cache.get(key);
+  if (hit) return hit;
+  const c = makeCanvas(size, size);
+  const g = c.getContext("2d")!;
+  const r = size / 2;
+  const grad = g.createRadialGradient(r, r, 0, r, r, r);
+  grad.addColorStop(0, "rgba(255,255,255,0.95)");
+  grad.addColorStop(core, color);
+  grad.addColorStop(0.45, withAlpha(color, 0.35));
+  grad.addColorStop(1, withAlpha(color, 0));
+  g.fillStyle = grad;
+  g.fillRect(0, 0, size, size);
+  cache.set(key, c);
+  return c;
 }
-`;
 
-export function webgl2Available(canvas: HTMLCanvasElement): boolean {
-  try {
-    return !!canvas.getContext("webgl2");
-  } catch {
-    return false;
+/** LED matrix texture for the jumbotron (dots on dark glass). */
+export function ledPanel(w: number, h: number, pitch: number, tint: string): HTMLCanvasElement {
+  const key = `led:${w}:${h}:${pitch}:${tint}`;
+  const hit = cache.get(key);
+  if (hit) return hit;
+  const c = makeCanvas(w, h);
+  const g = c.getContext("2d")!;
+  const bg = g.createLinearGradient(0, 0, 0, h);
+  bg.addColorStop(0, "#0d0a24");
+  bg.addColorStop(1, "#05040f");
+  g.fillStyle = bg;
+  g.fillRect(0, 0, w, h);
+  g.fillStyle = withAlpha(tint, 0.13);
+  const r = Math.max(0.6, pitch * 0.28);
+  for (let y = pitch / 2; y < h; y += pitch) {
+    for (let x = pitch / 2; x < w; x += pitch) {
+      g.beginPath();
+      g.arc(x, y, r, 0, Math.PI * 2);
+      g.fill();
+    }
   }
+  cache.set(key, c);
+  return c;
+}
+
+/** Dark edge vignette over the whole arena. */
+export function vignette(w: number, h: number): HTMLCanvasElement {
+  const key = `vig:${w}:${h}`;
+  const hit = cache.get(key);
+  if (hit) return hit;
+  const c = makeCanvas(w, h);
+  const g = c.getContext("2d")!;
+  const grad = g.createRadialGradient(w / 2, h * 0.45, Math.min(w, h) * 0.25, w / 2, h * 0.5, Math.max(w, h) * 0.75);
+  grad.addColorStop(0, "rgba(0,0,0,0)");
+  grad.addColorStop(1, "rgba(0,0,0,0.65)");
+  g.fillStyle = grad;
+  g.fillRect(0, 0, w, h);
+  cache.set(key, c);
+  return c;
+}
+
+/** Drops cached sprites that depend on the viewport size. */
+export function clearSizedCaches(): void {
+  for (const k of [...cache.keys()]) {
+    if (k.startsWith("led:") || k.startsWith("vig:")) cache.delete(k);
+  }
+}
+
+/** "#rrggbb" + alpha -> "rgba(...)". */
+export function withAlpha(hex: string, a: number): string {
+  const h = hex.replace("#", "");
+  const n = parseInt(h.length === 3 ? h.split("").map((x) => x + x).join("") : h, 16);
+  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+}
+
+/** Linear mix of two "#rrggbb" colors. */
+export function mix(a: string, b: string, t: number): string {
+  const pa = parseInt(a.slice(1), 16);
+  const pb = parseInt(b.slice(1), 16);
+  const ch = (s: number) => Math.round(((pa >> s) & 255) * (1 - t) + ((pb >> s) & 255) * t);
+  return `#${((1 << 24) | (ch(16) << 16) | (ch(8) << 8) | ch(0)).toString(16).slice(1)}`;
 }

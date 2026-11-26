@@ -1,0 +1,331 @@
+# Round 3 "Ultimate Pitch" wildcards - one per line, Title Case
+Sharks
+Penguins
+Raccoons
+Llamas
+Pigeons
+Goldfish
+Hamsters
+Squirrels
+Octopuses
+Flamingos
+Sloths
+Kangaroos
+Gorillas
+Corgis
+Cats
+Puppies
+Goats
+Bees
+Ants
+Crabs
+Giraffes
+Owls
+Bats
+Snails
+Jellyfish
+Dolphins
+Ostriches
+Chickens
+Cows
+Pandas
+Koalas
+Seagulls
+Alligators
+Hedgehogs
+Moose
+Lobsters
+Turtles
+Frogs
+Hippos
+Parrots
+Pickles
+Pizza
+Tacos
+Spaghetti
+Meatballs
+Pancakes
+Waffles
+Donuts
+Cupcakes
+Ice Cream
+Popcorn
+Cheese
+Broccoli
+Bananas
+Hot Sauce
+Marshmallows
+Burritos
+Sushi
+Nachos
+Chicken Nuggets
+Jelly Beans
+Cotton Candy
+Bubble Gum
+Mashed Potatoes
+Garlic
+Onions
+Watermelons
+Pineapple
+Peanut Butter
+Hot Dogs
+French Fries
+Cereal
+Toast
+Lasagna
+Pudding
+Brussels Sprouts
+Gummy Bears
+Birthday Cake
+Lemonade
+Mystery Meat
+Haunted Elevator
+Moon Base
+Library
+Haunted House
+Water Park
+Shopping Mall
+Bowling Alley
+Laundromat
+Dentist Office
+Airport
+Desert Island
+Igloo
+Treehouse
+Castle
+Space Station
+Underwater City
+Zoo
+Aquarium
+Hospital
+Gas Station
+Car Wash
+Ice Rink
+Movie Theater
+Pirate Ship
+Graveyard
+Parking Lot
+Fire Station
+Lighthouse
+Jungle
+Bakery
+Museum
+Farm
+Swamp
+Subway
+Basement
+Arcade
+Candy Factory
+Drive-Thru
+Lunch Lady
+Homework
+Pop Quiz
+Detention
+Recess
+Science Fair
+Field Trip
+School Bus
+Hall Monitor
+Gym Class
+Cafeteria
+Report Card
+Principal
+Substitute Teacher
+Spelling Bee
+Yearbook
+Lockers
+Fire Drill
+Glue Sticks
+Hall Pass
+Group Project
+Talent Show
+Prom
+Snow Day
+Class Pet
+Wi-Fi
+Robots
+Drones
+Smartphones
+Video Games
+Selfies
+Emojis
+Holograms
+Virtual Reality
+Robot Butler
+Spam Email
+Group Chat
+Livestreams
+Autocorrect
+Passwords
+Low Battery
+Smartwatch
+Pop-Up Ads
+Podcasts
+Memes
+Buffering
+Self-Driving Car
+Vending Machine
+Printer
+Karaoke Machine
+Grandma
+Grandpa
+Toddlers
+Twins
+Babies
+Weird Uncle
+Nosy Neighbor
+Best Friend
+Influencers
+Teenagers
+Plumber
+Mail Carrier
+Lifeguard
+Astronauts
+Dentist
+Chef
+Firefighters
+Pirates
+Ninjas
+Clowns
+Magician
+Mimes
+Cowboys
+Zookeeper
+Librarian
+Crossing Guard
+Weather Reporter
+Lumberjack
+Babysitter
+Personal Trainer
+Detective
+Mad Scientist
+Pizza Delivery
+Wedding Planner
+Mall Cop
+Janitor
+Referee
+DJ
+Ballerina
+Vikings
+Bubble Wrap
+Rubber Ducks
+Socks
+Toilet Paper
+Spoons
+Trampoline
+Shopping Cart
+Umbrella
+Duct Tape
+Glitter
+Slime
+Rubber Chicken
+Whoopee Cushion
+Lawn Gnome
+Disco Ball
+Lava Lamp
+Bean Bag Chair
+Pogo Stick
+Toothbrush
+Pillow Fort
+Leaf Blower
+Hot Tub
+Treasure Chest
+Hula Hoop
+Kazoo
+Bagpipes
+Air Horn
+Confetti
+Water Balloons
+Fanny Pack
+Sunglasses
+Mustache
+Pajamas
+Flip-Flops
+Snow Globe
+Pinata
+Traffic Cone
+Pool Noodle
+Vacuum Cleaner
+Microwave
+Megaphone
+Walkie-Talkies
+Bunk Beds
+Wheelbarrow
+Ice Cream Truck
+Time Travel
+Birthday Party
+Wedding
+Family Reunion
+Sleepover
+Road Trip
+Zombie Apocalypse
+Alien Invasion
+Dance Battle
+Food Fight
+Pillow Fight
+Snowball Fight
+Garage Sale
+Camping Trip
+Halloween
+Thanksgiving Dinner
+Fireworks
+Parade
+Flash Mob
+Game Show
+Job Interview
+First Date
+Bake Sale
+Car Chase
+Treasure Hunt
+Power Outage
+Traffic Jam
+Escape Room
+Dragons
+Wizards
+Unicorns
+Mermaids
+Vampires
+Zombies
+Werewolves
+Ghosts
+Aliens
+Superheroes
+Fairies
+Trolls
+Goblins
+Bigfoot
+Sea Monster
+Genie
+Leprechaun
+Tooth Fairy
+Yeti
+Mummies
+Witches
+Invisibility Cloak
+Magic Carpet
+Shrink Ray
+Clones
+Volcanoes
+Tornadoes
+Thunderstorms
+Blizzard
+Heat Wave
+Rainbows
+Hailstorm
+Fog
+Earthquakes
+Meteor Shower
+Black Hole
+Quicksand
+Avalanche
+Lava
+Dodgeball
+Sumo Wrestling
+Figure Skating
+Synchronized Swimming
+Tug of War
+Roller Skates
+Surfing
+Karate
+Monster Trucks
+Bumper Cars

@@ -1,0 +1,1908 @@
+# HYPE RIOT prompt corpus - part A (games, music, movies & TV)
+# Format: "@ slug | categoryId | Prompt text", then one answer per line: "Canonical | alias | alias"
+# Answers ordered most famous first; the first 10 are the top-10 targets.
+
+@ video-game-franchises | 1 | Video game franchises everyone knows
+Super Mario | mario | super mario bros
+Pokémon
+Call of Duty | cod
+Minecraft
+Grand Theft Auto | gta
+Fortnite
+The Legend of Zelda | zelda | loz
+Sonic the Hedgehog | sonic
+Halo
+FIFA | ea sports fc | ea fc
+Mario Kart
+Super Smash Bros. | smash | smash bros
+Street Fighter
+Mortal Kombat | mk
+Tetris
+Pac-Man
+Roblox
+The Sims
+Assassin's Creed
+Final Fantasy | ff
+Resident Evil | biohazard
+Donkey Kong | dk
+Animal Crossing
+Kirby
+Crash Bandicoot | crash
+Tomb Raider
+God of War | gow
+The Last of Us | tlou
+Uncharted
+Red Dead Redemption | red dead | rdr
+Need for Speed | nfs
+Madden NFL | madden
+Battlefield
+Fallout
+The Elder Scrolls | skyrim
+Overwatch
+League of Legends | lol
+Metroid
+Spyro the Dragon | spyro
+Gears of War
+Far Cry
+Kingdom Hearts
+Metal Gear | metal gear solid | mgs
+Warcraft | world of warcraft | wow
+Diablo
+Angry Birds
+Candy Crush
+Tekken
+Dark Souls
+Splatoon
+Pikmin
+Guitar Hero
+Just Dance
+Borderlands
+Portal
+Half-Life
+Rayman
+Ratchet & Clank | ratchet and clank
+
+@ nintendo-characters | 1 | Nintendo characters
+Mario | super mario
+Luigi
+Princess Peach | peach
+Bowser | king koopa
+Link
+Yoshi
+Donkey Kong | dk
+Princess Zelda | zelda
+Kirby
+Pikachu
+Toad
+Wario
+Waluigi
+Samus Aran | samus
+Ganondorf | ganon
+Princess Daisy | daisy
+Diddy Kong | diddy
+Fox McCloud | fox
+Rosalina
+Bowser Jr.
+Isabelle
+Tom Nook
+Meta Knight
+King Dedede | dedede
+Captain Falcon
+Ness
+Toadette
+Boo
+Goomba
+Shy Guy
+Koopa Troopa
+Birdo
+Ridley
+Olimar | captain olimar
+Pit
+Marth
+Inkling
+Villager
+King K. Rool | k rool
+Navi
+Epona
+Falco | falco lombardi
+Lakitu
+Kamek
+Dry Bones
+Chain Chomp
+Piranha Plant
+Funky Kong
+Cranky Kong
+K.K. Slider
+Captain Toad
+Pauline
+Midna
+Tingle
+Ike
+King Boo
+Petey Piranha
+Professor E. Gadd | e gadd
+
+@ pokemon | 1 | Pokémon
+Pikachu
+Charizard
+Bulbasaur
+Charmander
+Squirtle
+Mewtwo
+Eevee
+Jigglypuff
+Snorlax
+Mew
+Gengar
+Lucario
+Psyduck
+Meowth
+Magikarp
+Gyarados
+Greninja
+Blastoise
+Venusaur
+Dragonite
+Lugia
+Rayquaza
+Togepi
+Onix
+Raichu
+Ditto
+Lapras
+Charmeleon
+Ivysaur
+Wartortle
+Machamp
+Geodude
+Vaporeon
+Jolteon
+Flareon
+Umbreon
+Espeon
+Sylveon
+Arcanine
+Vulpix
+Ninetales
+Alakazam
+Gardevoir
+Garchomp
+Cubone
+Butterfree
+Caterpie
+Pidgey
+Rattata
+Zubat
+Slowpoke
+Mudkip
+Piplup
+Cyndaquil
+Totodile
+Mimikyu
+Ho-Oh
+Pichu
+Mr. Mime
+Rowlet
+
+@ minecraft-things | 1 | Things you'll find in Minecraft (mobs, blocks, items)
+Creeper
+Zombie
+Skeleton
+Enderman
+Diamond
+Steve
+Ender Dragon
+Pig
+Cow
+Villager
+Sheep
+Chicken
+Spider
+Wither
+TNT
+Dirt
+Cobblestone | cobble
+Grass Block | grass
+Crafting Table | workbench
+Furnace
+Chest
+Redstone
+Iron Ingot | iron
+Gold Ingot | gold
+Netherite
+Emerald
+Coal
+Obsidian
+Bedrock
+Torch
+Bed
+Diamond Sword
+Pickaxe
+Ghast
+Blaze
+Slime
+Witch
+Iron Golem
+Wolf | dog
+Cat
+Horse
+Axolotl
+Warden
+Piglin
+Phantom
+Bee
+Llama
+Pillager
+Elytra
+Totem of Undying | totem
+Ender Pearl
+Golden Apple
+Shulker
+Drowned
+Lapis Lazuli | lapis
+Anvil
+Enchanting Table | enchantment table
+Oak Log | log | wood
+Lava
+Alex
+
+@ game-villains | 1 | Video game villains and bosses
+Bowser | king koopa
+Ganondorf | ganon | calamity ganon
+Dr. Eggman | eggman | robotnik | dr robotnik
+Sephiroth
+King K. Rool | k rool
+GLaDOS
+Albert Wesker | wesker
+Ridley
+Shao Kahn
+M. Bison | bison
+Handsome Jack
+Dr. Wily | wily
+Mother Brain
+Ender Dragon
+Freddy Fazbear | freddy
+Pyramid Head
+Nemesis
+King Boo
+Bowser Jr.
+Dr. Neo Cortex | neo cortex | cortex
+Vaas | vaas montenegro
+The Lich King | arthas
+Diablo
+Andrew Ryan
+Kefka
+Giovanni
+Lady Dimitrescu | dimitrescu
+Mr. X
+Flowey
+Psycho Mantis
+Revolver Ocelot | ocelot
+Liquid Snake
+Metal Sonic
+Master Hand
+Shang Tsung
+Quan Chi
+Illidan
+Deathwing
+Malenia
+Ansem
+Dr. Nefarious | nefarious
+Ripto
+King Dice
+Kamek
+SHODAN
+Moon Lord
+Skull Kid
+Dark Samus
+
+@ fighting-game-characters | 1 | Fighting game characters
+Ryu
+Ken | ken masters
+Chun-Li
+Scorpion
+Sub-Zero
+Raiden
+Liu Kang
+Guile
+Akuma
+M. Bison | bison
+Blanka
+Zangief
+Dhalsim
+E. Honda | honda
+Cammy | cammy white
+Johnny Cage
+Sonya Blade | sonya
+Kitana
+Mileena
+Shao Kahn
+Goro
+Kano
+Jax
+Kung Lao
+Jin Kazama | jin
+Kazuya Mishima | kazuya
+Heihachi Mishima | heihachi
+Nina Williams | nina
+Paul Phoenix
+King
+Yoshimitsu
+Eddy Gordo | eddy
+Hwoarang
+Marshall Law | law
+Terry Bogard | terry
+Mai Shiranui | mai
+Kyo Kusanagi | kyo
+Iori Yagami | iori
+Sagat
+Vega
+Juri
+Dan Hibiki
+Reptile
+Ermac
+Noob Saibot
+Baraka
+Smoke
+Sindel
+Sol Badguy
+Mitsurugi
+Kuma
+Bryan Fury
+Fei Long
+Balrog
+
+@ game-heroes | 1 | Video game heroes (not Nintendo)
+Sonic | sonic the hedgehog
+Master Chief | chief | john-117
+Kratos
+Lara Croft | lara
+Crash Bandicoot | crash
+Spyro
+Pac-Man
+Mega Man | rockman
+Nathan Drake | nate | drake
+Solid Snake | snake
+Joel | joel miller
+Ellie
+Arthur Morgan
+Geralt of Rivia | geralt
+Cloud Strife | cloud
+Ezio Auditore | ezio
+Gordon Freeman
+Doomguy | doom slayer | doom marine
+Tails
+Knuckles
+Shadow the Hedgehog | shadow
+Leon S. Kennedy | leon kennedy | leon
+Jill Valentine | jill
+Chris Redfield
+Sora
+Ratchet
+Clank
+Rayman
+Aloy
+John Marston | marston
+Marcus Fenix
+Commander Shepard | shepard
+Dante
+Sackboy
+Cuphead
+Banjo
+Jak
+Daxter
+Sly Cooper
+Altaïr
+Agent 47
+Sam Fisher
+Max Payne
+Tifa Lockhart | tifa
+Captain Price | price
+Soap MacTavish | soap
+Atreus
+Amy Rose | amy
+Noctis
+Jin Sakai
+Isaac Clarke
+Chell
+Kazuma Kiryu | kiryu
+Hollow Knight | the knight
+Madeline
+
+@ consoles | 1 | Game consoles and handhelds
+PlayStation 5 | ps5
+Nintendo Switch | switch
+Xbox Series X | series x
+PlayStation 4 | ps4
+Wii | nintendo wii
+Xbox 360 | 360
+PlayStation 2 | ps2
+Game Boy
+Nintendo DS | ds
+Xbox One
+PlayStation 3 | ps3
+PlayStation | ps1 | psx | ps one
+Nintendo 64 | n64
+Super Nintendo | snes | super nes
+NES | nintendo entertainment system
+GameCube | nintendo gamecube
+Nintendo 3DS | 3ds
+Game Boy Advance | gba
+Wii U
+Nintendo Switch 2 | switch 2
+Xbox Series S | series s
+Xbox | original xbox
+Steam Deck
+PSP | playstation portable
+PS Vita | playstation vita | vita
+Game Boy Color | gbc
+Sega Genesis | genesis | mega drive
+Sega Dreamcast | dreamcast
+Nintendo Switch Lite | switch lite
+Atari 2600
+Sega Saturn | saturn
+Game Gear | sega game gear
+Sega Master System | master system
+Nintendo 2DS | 2ds
+Nintendo DSi | dsi
+Virtual Boy
+Game & Watch | game and watch
+Neo Geo
+Atari Jaguar
+TurboGrafx-16 | pc engine
+ROG Ally | asus rog ally
+Ouya
+Magnavox Odyssey
+ColecoVision
+Intellivision
+
+@ mobile-games | 1 | Mobile games
+Candy Crush Saga | candy crush
+Subway Surfers
+Angry Birds
+Clash of Clans | coc
+Temple Run
+Pokémon GO
+Among Us
+Clash Royale
+Fruit Ninja
+Flappy Bird
+Roblox
+Brawl Stars
+Plants vs. Zombies | pvz
+Doodle Jump
+Cut the Rope
+Geometry Dash
+Crossy Road
+Jetpack Joyride
+Hay Day
+Minecraft | minecraft pocket edition | minecraft pe
+PUBG Mobile | pubg
+Call of Duty: Mobile | cod mobile
+Free Fire | garena free fire
+Genshin Impact | genshin
+Hill Climb Racing
+My Talking Tom | talking tom
+Piano Tiles
+Agar.io
+Slither.io | slither
+Helix Jump
+2048
+Words With Friends
+Wordscapes
+Homescapes
+Gardenscapes
+Township
+Royal Match
+Mobile Legends: Bang Bang | mobile legends | mlbb
+Honkai: Star Rail | star rail
+Stumble Guys
+Asphalt 9 | asphalt
+Bloons TD 6 | btd6 | bloons
+Pou
+Shadow Fight 2 | shadow fight
+Bad Piggies
+Monument Valley
+Archero
+Marvel Snap
+Pokémon TCG Pocket | tcg pocket
+Where's My Water?
+Squad Busters
+
+@ horror-games | 1 | Horror video games
+Five Nights at Freddy's | fnaf
+Resident Evil | biohazard
+Silent Hill
+Outlast
+Poppy Playtime
+Phasmophobia | phasmo
+Dead Space
+Amnesia: The Dark Descent | amnesia
+Slender: The Eight Pages | slender | slenderman
+Bendy and the Ink Machine | bendy
+Little Nightmares
+Alien: Isolation
+Until Dawn
+Lethal Company
+Granny
+Hello Neighbor
+Dead by Daylight | dbd
+The Evil Within
+Doors
+Layers of Fear
+Alan Wake
+P.T.
+Fatal Frame | project zero
+Baldi's Basics | baldi
+Left 4 Dead | l4d
+Dying Light
+Doki Doki Literature Club! | ddlc | doki doki
+Garten of Banban | banban
+SOMA
+Content Warning
+The Mortuary Assistant
+Identity V
+The Quarry
+The Dark Pictures Anthology | man of medan
+F.E.A.R.
+Clock Tower
+Signalis
+Darkwood
+The Forest
+Sons of the Forest
+Piggy
+The Exit 8 | exit 8
+Condemned: Criminal Origins | condemned
+Friday the 13th: The Game
+Dead Island
+
+@ board-card-games | 1 | Board games and card games
+Monopoly
+Chess
+Uno
+Scrabble
+Clue | cluedo
+Checkers | draughts
+Jenga
+Connect Four
+Battleship
+Snakes and Ladders | chutes and ladders
+Sorry!
+Candy Land
+Trivial Pursuit
+Risk
+Guess Who?
+Operation
+Twister
+Yahtzee
+Pictionary
+Catan | settlers of catan
+Game of Life | life
+Solitaire | patience
+Go Fish
+Ticket to Ride
+Exploding Kittens
+Old Maid
+Crazy Eights
+War
+Rummy
+Hearts
+Spades
+Bridge
+Snap
+Backgammon
+Dominoes
+Mahjong | mah jong
+Mancala
+Mouse Trap
+Hungry Hungry Hippos
+Boggle
+Taboo
+Codenames
+Pandemic
+Carcassonne
+Magic: The Gathering | mtg | magic
+Pokémon Trading Card Game | pokemon cards | pokemon tcg
+Yu-Gi-Oh!
+Othello | reversi
+Stratego
+Mastermind
+Chinese Checkers
+Go | baduk | weiqi
+Apples to Apples
+Phase 10
+Skip-Bo
+Spot It! | dobble
+Cheat | i doubt it
+KerPlunk
+
+@ pop-stars | 2 | Pop stars of the 2000s to today (solo singers)
+Taylor Swift | taylor
+Beyoncé | queen bey | bey
+Rihanna | riri
+Ariana Grande | ariana
+Lady Gaga | gaga
+Justin Bieber | bieber
+Billie Eilish | billie
+Ed Sheeran | sheeran
+Katy Perry
+Bruno Mars | bruno
+Adele
+Dua Lipa
+Harry Styles
+The Weeknd | abel tesfaye
+Olivia Rodrigo
+Sabrina Carpenter
+Selena Gomez
+Miley Cyrus | miley
+Shakira
+Britney Spears | britney
+Shawn Mendes
+Doja Cat
+Charli XCX
+Chappell Roan
+Sia
+Camila Cabello
+Demi Lovato
+Kesha
+Pink
+Christina Aguilera
+Kelly Clarkson
+Avril Lavigne
+Halsey
+Lorde
+SZA
+Post Malone
+Usher
+Lana Del Rey
+Ellie Goulding
+Jessie J
+Sam Smith
+Lewis Capaldi
+Benson Boone
+Tate McRae
+Meghan Trainor
+Charlie Puth
+Troye Sivan
+Bad Bunny
+Gracie Abrams
+Rita Ora
+Zara Larsson
+Nelly Furtado
+Fergie
+Leona Lewis
+Hozier
+Michael Bublé
+
+@ rappers | 2 | Rappers
+Eminem | slim shady | marshall mathers
+Drake
+Kendrick Lamar | kendrick
+Snoop Dogg | snoop
+Jay-Z | hov
+Nicki Minaj | nicki
+Tupac | 2pac | tupac shakur
+The Notorious B.I.G. | biggie | biggie smalls | notorious big
+50 Cent | fiddy
+Lil Wayne | weezy
+Cardi B
+Post Malone | posty
+J. Cole
+Doja Cat
+Megan Thee Stallion
+Dr. Dre | dre
+Ice Cube
+Nas
+Missy Elliott | missy
+Lil Nas X
+Pitbull | mr worldwide
+Tyler, the Creator
+Childish Gambino | donald glover | gambino
+Kid Cudi | cudi
+Future
+Lil Uzi Vert | uzi
+21 Savage
+Lil Baby
+Ice Spice
+Jack Harlow
+Macklemore
+Logic
+LL Cool J
+Queen Latifah
+Busta Rhymes
+Ludacris
+Nelly
+T-Pain
+Flo Rida
+MC Hammer | hammer
+Vanilla Ice
+Stormzy
+Central Cee
+Dave
+Skepta
+Chance the Rapper
+Big Sean
+André 3000 | andre
+Lauryn Hill
+Doechii
+GloRilla
+Latto
+NF
+Lil Yachty
+
+@ rock-bands | 2 | Rock bands
+The Beatles
+Queen
+Led Zeppelin | zeppelin
+The Rolling Stones | the stones
+AC/DC
+Nirvana
+Pink Floyd
+Guns N' Roses | gnr | guns and roses
+Metallica
+Linkin Park
+Green Day
+Foo Fighters
+Red Hot Chili Peppers | rhcp | chili peppers
+Coldplay
+Imagine Dragons
+Bon Jovi
+Aerosmith
+U2
+Arctic Monkeys
+The Who
+Kiss
+Fleetwood Mac
+Oasis
+Radiohead
+The Killers
+Journey
+Black Sabbath | sabbath
+Iron Maiden
+Van Halen
+Def Leppard
+Pearl Jam
+Blink-182 | blink
+My Chemical Romance | mcr
+Fall Out Boy | fob
+Paramore
+Muse
+The Doors
+Eagles
+Twenty One Pilots | 21 pilots
+Nickelback
+The Strokes
+Panic! at the Disco | patd
+Evanescence
+System of a Down | soad
+Rage Against the Machine | ratm
+Lynyrd Skynyrd
+Creedence Clearwater Revival | ccr
+The Clash
+Ramones
+Weezer
+Måneskin
+Kings of Leon
+The White Stripes
+Bring Me the Horizon | bmth
+Slipknot
+Deep Purple
+The Police
+Blur
+Queens of the Stone Age | qotsa
+Scorpions
+
+@ music-legends | 2 | Solo music legends who were famous before 2000
+Michael Jackson | mj | king of pop
+Elvis Presley | elvis
+Madonna
+Prince
+David Bowie | bowie
+Elton John | elton
+Whitney Houston | whitney
+Frank Sinatra | sinatra
+Bob Marley | marley
+Stevie Wonder
+Aretha Franklin | aretha
+Johnny Cash
+Dolly Parton | dolly
+Celine Dion | celine
+Mariah Carey | mariah
+Bob Dylan | dylan
+Bruce Springsteen | springsteen | the boss
+Tina Turner
+Billy Joel
+Cher
+Ray Charles
+Marvin Gaye
+Little Richard
+Buddy Holly
+Janet Jackson | janet
+Phil Collins
+George Michael
+Lionel Richie
+Rod Stewart
+Paul McCartney | mccartney
+John Lennon | lennon
+Ozzy Osbourne | ozzy
+Cyndi Lauper
+Barbra Streisand
+Diana Ross
+Louis Armstrong | satchmo
+Jimi Hendrix | hendrix
+Eric Clapton | clapton
+Kylie Minogue | kylie
+Shania Twain | shania
+Garth Brooks
+Tom Jones
+Neil Diamond
+Ella Fitzgerald
+Nat King Cole
+Bing Crosby
+Billy Idol
+Bryan Adams
+Stevie Nicks
+Gloria Estefan
+Otis Redding
+Barry White
+Joni Mitchell
+Smokey Robinson
+Luther Vandross
+Meat Loaf
+
+@ kpop | 2 | K-pop groups
+BTS | bangtan | bangtan boys
+Blackpink
+Twice
+Stray Kids | skz
+EXO
+Seventeen | svt
+NewJeans
+Red Velvet
+Big Bang
+Girls' Generation | snsd
+Aespa
+TXT | tomorrow x together
+Enhypen
+ITZY
+Le Sserafim
+IVE
+(G)I-DLE | gidle | idle
+NCT | nct 127 | nct dream
+Ateez
+Super Junior | suju
+Shinee
+2NE1
+Mamamoo
+Monsta X
+GOT7
+Babymonster
+Illit
+Treasure
+Wonder Girls
+TVXQ | dbsk | tohoshinki
+iKON
+Winner
+Zerobaseone | zb1
+Riize
+Boynextdoor
+Kep1er
+Oh My Girl
+Apink
+Sistar
+f(x)
+Infinite
+Kara
+STAYC
+NMIXX
+Everglow
+Wanna One
+The Boyz
+P1Harmony
+Momoland
+Fromis 9
+Loona
+Kiss of Life
+
+@ instruments | 2 | Musical instruments
+Guitar
+Piano
+Drums | drum kit
+Violin | fiddle
+Trumpet
+Flute
+Saxophone | sax
+Bass | bass guitar | electric bass
+Cello
+Clarinet
+Harp
+Ukulele | uke
+Trombone
+Tuba
+Keyboard
+Harmonica
+Banjo
+Accordion
+Xylophone
+Tambourine
+Triangle
+Viola
+Double Bass | upright bass | contrabass
+Oboe
+Bassoon
+French Horn
+Bagpipes
+Organ
+Synthesizer | synth
+Recorder
+Mandolin
+Sitar
+Bongos
+Maracas
+Cymbals
+Glockenspiel
+Timpani | kettle drum
+Piccolo
+Snare Drum | snare
+Didgeridoo
+Kazoo
+Steel Drum | steel pan
+Castanets
+Cowbell
+Harpsichord
+Marimba
+Bugle
+Lute
+Ocarina
+Gong
+Djembe
+Tabla
+Theremin
+Keytar
+Euphonium
+Pan Flute | panpipes
+Lyre
+Cajón
+
+@ genres | 2 | Music genres
+Pop
+Rock
+Hip Hop | rap
+Country
+Jazz
+R&B | rnb | rhythm and blues
+EDM | electronic | electronic dance music
+Classical
+Reggae
+Metal | heavy metal
+Blues
+Punk | punk rock
+K-pop
+Disco
+Folk
+Soul
+Funk
+Gospel
+Techno
+House
+Dubstep
+Indie | indie rock
+Alternative | alternative rock | alt rock
+Grunge
+Emo
+Reggaeton
+Latin
+Salsa
+Opera
+Trap
+Drill
+Grime
+Lo-fi
+Ska
+Bluegrass
+Rockabilly
+Synthwave
+Ambient
+Trance
+Drum and Bass | dnb | drum n bass
+Afrobeats
+J-pop
+Motown
+Swing
+Hyperpop
+Phonk
+Progressive Rock | prog rock | prog
+New Wave
+Hard Rock
+Death Metal
+Doo-wop
+Big Band
+Bossa Nova
+Flamenco
+Dancehall
+Psychedelic Rock | psych rock
+Glam Rock
+
+@ singalong-songs | 2 | Songs everyone can sing along to
+Bohemian Rhapsody
+Don't Stop Believin' | don't stop believing
+Sweet Caroline
+Wonderwall
+Mr. Brightside
+Livin' on a Prayer | living on a prayer
+Dancing Queen
+I Will Survive
+Hey Jude
+Shake It Off
+Let It Go
+Uptown Funk
+Africa
+Take On Me
+Billie Jean
+Never Gonna Give You Up
+We Will Rock You
+Don't Stop Me Now
+I Wanna Dance with Somebody
+Total Eclipse of the Heart
+My Heart Will Go On
+Mamma Mia | mama mia
+Call Me Maybe
+Party in the U.S.A.
+I Want It That Way
+Wannabe
+...Baby One More Time | baby one more time | hit me baby one more time
+Single Ladies
+Umbrella
+Rolling in the Deep
+Someone Like You
+Happy
+Shape of You
+Blinding Lights
+Can't Stop the Feeling!
+All Star
+YMCA
+Hips Don't Lie
+Hotel California
+Piano Man
+Take Me Home, Country Roads | country roads
+Sweet Home Alabama
+Valerie
+Hallelujah
+Imagine
+Stand by Me
+Twist and Shout
+Girls Just Want to Have Fun | girls just wanna have fun
+Toxic
+Bye Bye Bye
+Despacito
+Old Town Road
+Jolene
+9 to 5 | nine to five
+Mr. Blue Sky
+Teenage Dirtbag
+All I Want for Christmas Is You
+Since U Been Gone
+Love Story
+Respect
+
+@ disney-songs | 2 | Disney and Pixar songs
+Let It Go
+Hakuna Matata
+Circle of Life
+A Whole New World | whole new world
+Under the Sea
+We Don't Talk About Bruno | bruno
+You've Got a Friend in Me
+How Far I'll Go
+Part of Your World
+Be Our Guest
+Beauty and the Beast | tale as old as time
+Can You Feel the Love Tonight
+I Just Can't Wait to Be King
+Friend Like Me
+Colors of the Wind
+Do You Want to Build a Snowman? | build a snowman
+I'll Make a Man Out of You | make a man out of you
+Reflection
+Go the Distance
+Kiss the Girl
+Into the Unknown
+You're Welcome
+Remember Me
+The Bare Necessities
+Supercalifragilisticexpialidocious | supercali
+A Spoonful of Sugar | spoonful of sugar
+When You Wish Upon a Star
+Heigh-Ho | hi ho
+Whistle While You Work
+Bibbidi-Bobbidi-Boo
+A Dream Is a Wish Your Heart Makes
+Once Upon a Dream
+I See the Light
+When Will My Life Begin
+Poor Unfortunate Souls
+Gaston
+Belle
+Prince Ali
+Be Prepared
+Surface Pressure
+Almost There
+Friends on the Other Side
+Try Everything
+Shiny
+I Wan'na Be Like You | i wanna be like you
+Let's Go Fly a Kite
+Chim Chim Cher-ee
+For the First Time in Forever
+Love Is an Open Door
+Show Yourself
+You'll Be in My Heart
+Strangers Like Me
+Life Is a Highway
+Real Gone
+Un Poco Loco
+We Belong Together
+Someday My Prince Will Come
+Mother Knows Best
+Dos Oruguitas
+Waiting on a Miracle
+
+@ marvel | 3 | Marvel heroes and villains
+Spider-Man | spidey | peter parker
+Iron Man | tony stark
+Captain America | steve rogers
+Thor
+Hulk | bruce banner
+Thanos
+Black Widow | natasha romanoff
+Wolverine | logan
+Deadpool | wade wilson
+Black Panther | t'challa
+Doctor Strange | dr strange
+Loki
+Hawkeye | clint barton
+Groot
+Venom
+Scarlet Witch | wanda | wanda maximoff
+Star-Lord | peter quill
+Rocket | rocket raccoon
+Gamora
+Captain Marvel | carol danvers
+Ant-Man | scott lang
+Green Goblin | norman osborn
+Doctor Octopus | doc ock | dr octopus
+Magneto
+Professor X | charles xavier
+Vision
+Winter Soldier | bucky barnes | bucky
+Falcon | sam wilson
+Nick Fury
+Ultron
+Storm
+Jean Grey
+Cyclops
+Red Skull
+Galactus
+Silver Surfer
+Doctor Doom | dr doom
+Daredevil
+Ghost Rider
+Mysterio
+Carnage
+Kang the Conqueror | kang
+Hela
+Miles Morales
+Shang-Chi
+Moon Knight
+Ms. Marvel | kamala khan
+She-Hulk
+Mystique
+Rogue
+Gambit
+The Punisher
+Wasp
+Drax
+Nebula
+Electro
+Vulture
+Mr. Fantastic | reed richards
+Human Torch
+The Thing
+
+@ dc | 3 | DC heroes and villains
+Batman | bruce wayne
+Superman | clark kent | kal-el
+Wonder Woman | diana prince
+The Joker
+The Flash | barry allen
+Aquaman
+Harley Quinn | harley
+Green Lantern | hal jordan
+Catwoman | selina kyle
+Robin
+Lex Luthor | luthor
+Cyborg
+Supergirl
+Poison Ivy
+The Riddler | edward nygma
+The Penguin | oswald cobblepot
+Two-Face | harvey dent
+Bane
+Scarecrow
+Mr. Freeze
+Darkseid
+Shazam
+Green Arrow | oliver queen
+Batgirl
+Nightwing | dick grayson
+Deathstroke
+Black Adam
+Brainiac
+Doomsday
+Martian Manhunter
+Raven
+Starfire
+Beast Boy
+Ra's al Ghul
+Sinestro
+Reverse-Flash
+Black Canary
+Zatanna
+Blue Beetle
+Hawkman
+Hawkgirl
+Killer Croc
+Peacemaker
+Bizarro
+General Zod | zod
+Steppenwolf
+Constantine
+Swamp Thing
+Red Hood
+Deadshot
+Captain Cold
+Black Manta
+Gorilla Grodd | grodd
+Mad Hatter
+Clayface
+Cheetah
+Mera
+Plastic Man
+
+@ disney-pixar-movies | 3 | Disney and Pixar animated movies
+Frozen
+The Lion King
+Toy Story
+Finding Nemo
+Moana
+Aladdin
+Beauty and the Beast
+The Little Mermaid
+Encanto
+Coco
+Up
+Inside Out
+Cars
+The Incredibles
+Monsters, Inc.
+Tangled
+Zootopia | zootropolis
+Snow White and the Seven Dwarfs | snow white
+Cinderella
+Mulan
+Lilo & Stitch | lilo and stitch
+Ratatouille
+WALL-E
+Sleeping Beauty
+Pocahontas
+Hercules
+Tarzan
+Bambi
+Dumbo
+Pinocchio
+Peter Pan
+Big Hero 6
+Wreck-It Ralph
+Brave
+Finding Dory
+The Jungle Book
+101 Dalmatians | one hundred and one dalmatians
+Lady and the Tramp
+The Princess and the Frog
+Luca
+Soul
+Turning Red
+Elemental
+Onward
+A Bug's Life
+Raya and the Last Dragon | raya
+Bolt
+Wish
+Alice in Wonderland
+The Aristocats
+Robin Hood
+The Emperor's New Groove
+Treasure Planet
+Atlantis: The Lost Empire | atlantis
+Meet the Robinsons
+Fantasia
+The Hunchback of Notre Dame | hunchback
+Brother Bear
+The Fox and the Hound
+Chicken Little
+
+@ cartoon-characters | 3 | Cartoon characters
+SpongeBob SquarePants | spongebob
+Mickey Mouse | mickey
+Bugs Bunny | bugs
+Homer Simpson | homer
+Scooby-Doo | scooby
+Bart Simpson | bart
+Patrick Star | patrick
+Tom | tom cat
+Jerry | jerry mouse
+Donald Duck | donald
+Goofy
+Peppa Pig | peppa
+Daffy Duck | daffy
+Squidward | squidward tentacles
+Mr. Krabs | eugene krabs
+Shaggy
+Garfield
+Snoopy
+Charlie Brown
+Popeye
+Pink Panther
+Tweety
+Sylvester
+Road Runner
+Wile E. Coyote
+Porky Pig
+Elmer Fudd
+Fred Flintstone
+Barney Rubble
+Marge Simpson | marge
+Lisa Simpson | lisa
+Maggie Simpson | maggie
+Stewie Griffin | stewie
+Peter Griffin
+Rick Sanchez | rick
+Morty Smith | morty
+Finn the Human | finn
+Jake the Dog | jake
+Dora | dora the explorer
+Bluey
+Ben Tennyson | ben 10
+Phineas
+Ferb
+Perry the Platypus | perry | agent p
+Dexter
+Johnny Bravo
+Courage | courage the cowardly dog
+Plankton
+Sandy Cheeks | sandy
+Minnie Mouse | minnie
+Pluto
+Woody Woodpecker
+Yogi Bear
+Velma
+Timmy Turner
+Gumball | gumball watterson
+Ned Flanders | flanders
+Mr. Burns
+Arthur
+Steven Universe
+
+@ animated-series | 3 | Animated TV series
+The Simpsons
+SpongeBob SquarePants | spongebob
+Family Guy
+Avatar: The Last Airbender | atla | avatar
+Adventure Time
+Phineas and Ferb
+Tom and Jerry
+Scooby-Doo, Where Are You! | scooby-doo | scooby
+Rick and Morty
+South Park
+Looney Tunes
+Gravity Falls
+Futurama
+Bluey
+Peppa Pig
+Paw Patrol
+The Flintstones
+The Jetsons
+Bob's Burgers
+Rugrats
+Hey Arnold!
+Dexter's Laboratory | dexter's lab
+The Powerpuff Girls
+Courage the Cowardly Dog
+Johnny Bravo
+Ed, Edd n Eddy
+Regular Show
+Steven Universe
+The Amazing World of Gumball | gumball
+Teen Titans Go!
+Teen Titans
+Ben 10
+Arthur
+Dora the Explorer | dora
+The Fairly OddParents | fairly odd parents
+Kim Possible
+Danny Phantom
+The Adventures of Jimmy Neutron: Boy Genius | jimmy neutron
+Batman: The Animated Series | btas
+X-Men: The Animated Series
+Star Wars: The Clone Wars | clone wars
+Arcane
+BoJack Horseman
+King of the Hill
+The Owl House
+Amphibia
+Miraculous: Tales of Ladybug & Cat Noir | miraculous | miraculous ladybug
+The Legend of Korra | korra
+Animaniacs
+Pinky and the Brain
+Rocko's Modern Life
+Total Drama
+Thomas & Friends | thomas the tank engine
+Bob the Builder
+Postman Pat
+Fireman Sam
+The Magic School Bus
+Doug
+
+@ star-wars | 3 | Star Wars characters
+Darth Vader | vader
+Luke Skywalker | luke
+Yoda
+Han Solo | han
+Princess Leia | leia | leia organa
+Obi-Wan Kenobi | obi-wan | kenobi | ben kenobi
+Chewbacca | chewie
+R2-D2 | r2 | artoo
+C-3PO | threepio
+Anakin Skywalker | anakin
+Grogu | baby yoda
+Emperor Palpatine | palpatine | darth sidious | sidious | the emperor
+Boba Fett | boba
+The Mandalorian | mando | din djarin
+Kylo Ren | kylo | ben solo
+Rey
+Darth Maul | maul
+Padmé Amidala | padme | amidala
+Jabba the Hutt | jabba
+Lando Calrissian | lando
+Mace Windu
+Qui-Gon Jinn
+Count Dooku | dooku
+General Grievous | grievous
+Jar Jar Binks | jar jar
+Ahsoka Tano | ahsoka
+BB-8
+Finn
+Poe Dameron
+Stormtrooper
+Admiral Ackbar
+Grand Moff Tarkin | tarkin
+Jango Fett
+Cassian Andor | andor
+Jyn Erso
+K-2SO
+Captain Phasma
+Snoke
+Captain Rex
+Greedo
+Cad Bane
+Ezra Bridger
+Thrawn
+Moff Gideon
+Bo-Katan Kryze | bo-katan
+Cal Kestis
+Wicket
+Rose Tico
+Watto
+
+@ harry-potter | 3 | Harry Potter characters
+Harry Potter | harry
+Hermione Granger | hermione
+Ron Weasley | ron
+Albus Dumbledore | dumbledore
+Lord Voldemort | voldemort | tom riddle | you-know-who | he who must not be named
+Severus Snape | snape
+Draco Malfoy | draco
+Rubeus Hagrid | hagrid
+Sirius Black | sirius
+Dobby
+Neville Longbottom | neville
+Luna Lovegood | luna
+Ginny Weasley | ginny
+Fred Weasley | fred
+George Weasley | george
+Minerva McGonagall | mcgonagall
+Bellatrix Lestrange | bellatrix
+Dolores Umbridge | umbridge
+Lucius Malfoy | lucius
+Remus Lupin | lupin
+Cedric Diggory | cedric
+Hedwig
+Peter Pettigrew | wormtail | scabbers
+Cho Chang
+Argus Filch | filch
+Moaning Myrtle | myrtle
+Molly Weasley
+Arthur Weasley
+Percy Weasley
+Gilderoy Lockhart | lockhart
+Vernon Dursley | uncle vernon
+Petunia Dursley | aunt petunia
+Dudley Dursley | dudley
+Mad-Eye Moody | alastor moody | moody
+Nymphadora Tonks | tonks
+Nearly Headless Nick
+Horace Slughorn | slughorn
+Sybill Trelawney | trelawney
+Filius Flitwick | flitwick
+Quirinus Quirrell | quirrell
+Gellert Grindelwald | grindelwald
+Viktor Krum | krum
+Fleur Delacour | fleur
+Kreacher
+Buckbeak
+Fawkes
+Crookshanks
+Nagini
+Aragog
+Lily Potter
+James Potter
+Kingsley Shacklebolt | kingsley
+Seamus Finnigan | seamus
+Oliver Wood
+Rita Skeeter
+Cornelius Fudge
+Peeves
+Griphook
+Pomona Sprout
+Lavender Brown
+
+@ anime | 3 | Anime series
+Naruto
+One Piece
+Dragon Ball Z | dbz | dragon ball
+Attack on Titan | aot | shingeki no kyojin
+Death Note
+Pokémon
+Demon Slayer | kimetsu no yaiba
+My Hero Academia | mha | boku no hero academia
+Jujutsu Kaisen | jjk
+Sailor Moon
+One Punch Man | opm
+Fullmetal Alchemist | fma | fullmetal alchemist brotherhood
+Hunter x Hunter | hxh
+Bleach
+Spy x Family
+Chainsaw Man
+Neon Genesis Evangelion | evangelion
+Cowboy Bebop
+Yu-Gi-Oh!
+Digimon
+Tokyo Ghoul
+Haikyu!! | haikyuu
+JoJo's Bizarre Adventure | jojo
+Fairy Tail
+Black Clover
+Sword Art Online | sao
+Mob Psycho 100
+Code Geass
+Solo Leveling
+Frieren: Beyond Journey's End | frieren
+Blue Lock
+Dandadan | dan da dan
+Oshi no Ko
+Steins;Gate
+Gintama
+Your Lie in April
+Violet Evergarden
+Kaguya-sama: Love Is War | kaguya-sama
+Inuyasha
+Fruits Basket
+Cardcaptor Sakura
+Doraemon
+Detective Conan | case closed
+Beyblade
+The Promised Neverland
+Vinland Saga
+Dr. Stone
+Assassination Classroom
+Re:Zero
+Slam Dunk
+Gundam | mobile suit gundam
+Astro Boy
+Fire Force
+Toradora!
+Ouran High School Host Club | ouran
+
+@ sitcoms | 3 | Sitcoms and comedy series
+Friends
+The Office
+Brooklyn Nine-Nine | b99 | brooklyn 99
+The Big Bang Theory | tbbt
+How I Met Your Mother | himym
+Seinfeld
+Modern Family
+Parks and Recreation | parks and rec
+The Fresh Prince of Bel-Air | fresh prince
+Two and a Half Men
+Young Sheldon
+Abbott Elementary
+Scrubs
+Community
+New Girl
+Arrested Development
+Ted Lasso
+The Good Place
+Malcolm in the Middle
+Everybody Loves Raymond
+Frasier
+Cheers
+Full House
+Mr. Bean
+Fawlty Towers
+Only Fools and Horses
+Gavin & Stacey | gavin and stacey
+Derry Girls
+Blackadder
+The IT Crowd
+I Love Lucy
+Happy Days
+The Middle
+30 Rock
+Superstore
+iCarly
+Hannah Montana
+Wizards of Waverly Place
+That's So Raven
+Victorious
+Good Luck Charlie
+Everybody Hates Chris
+Family Matters
+The Goldbergs
+Black-ish
+Curb Your Enthusiasm
+What We Do in the Shadows
+Ghosts
+Veep
+Saved by the Bell
+Kim's Convenience
+The King of Queens
+Will & Grace
+Outnumbered
+Miranda
+
+@ drama-series | 3 | Binge-worthy drama, fantasy and sci-fi TV series
+Game of Thrones | got
+Stranger Things
+The Walking Dead | twd
+Squid Game
+Wednesday
+The Last of Us | tlou
+House of the Dragon | hotd
+The Crown
+Grey's Anatomy | greys
+Lost
+Doctor Who
+The Witcher
+Black Mirror
+The Mandalorian
+Westworld
+Sherlock
+Supernatural
+The Vampire Diaries | tvd
+Downton Abbey
+Succession
+Yellowstone
+This Is Us
+Severance
+The Lord of the Rings: The Rings of Power | rings of power
+Outlander
+The Handmaid's Tale
+Vikings
+Gossip Girl
+Gilmore Girls
+Riverdale
+Outer Banks
+The 100
+Star Trek
+Battlestar Galactica
+The X-Files
+Heroes
+The Umbrella Academy
+The Expanse
+Fallout
+Andor
+The Wheel of Time
+His Dark Materials
+Shadow and Bone
+Dark
+House | house md
+Suits
+The West Wing
+The Good Doctor
+Twin Peaks
+Firefly
+3 Body Problem
+Silo
+Foundation
+One Tree Hill
+ER
+Shōgun
+
+@ movie-franchises | 3 | Blockbuster movie franchises
+Star Wars
+Harry Potter | wizarding world
+Marvel Cinematic Universe | mcu | avengers
+The Lord of the Rings | lotr | the hobbit
+Fast & Furious | fast and furious | fast and the furious
+Jurassic Park | jurassic world
+James Bond | 007 | bond
+Mission: Impossible
+Toy Story
+Transformers
+Pirates of the Caribbean | potc
+The Hunger Games
+Indiana Jones | indy
+Spider-Man
+Batman
+Shrek
+Despicable Me | minions
+Star Trek
+The Matrix
+Terminator
+Twilight
+Back to the Future | bttf
+X-Men
+Ice Age
+Rocky | creed
+John Wick
+Jaws
+Ghostbusters
+Men in Black | mib
+Home Alone
+Planet of the Apes
+Alien
+Predator
+Godzilla | monsterverse
+Kung Fu Panda
+Madagascar
+How to Train Your Dragon | httyd
+The Chronicles of Narnia | narnia
+Frozen
+Cars
+Night at the Museum
+Jumanji
+The Karate Kid
+Mad Max
+Die Hard
+Rush Hour
+Spy Kids
+Paddington
+Superman
+Avatar
+Dune
+Top Gun
+Bourne | jason bourne
+Kingsman
+Pitch Perfect
+High School Musical
+Hotel Transylvania
+Trolls
+The Conjuring
+Scream
+
+@ horror-villains | 3 | Horror movie villains and monsters
+Freddy Krueger | freddy | krueger
+Michael Myers | myers | the shape
+Jason Voorhees | jason | voorhees
+Chucky | charles lee ray
+Pennywise
+Ghostface | scream
+Leatherface
+Dracula | count dracula
+Annabelle
+Frankenstein's Monster | frankenstein | frankenstein's creature
+Pinhead
+Hannibal Lecter | hannibal
+Jigsaw | john kramer
+Norman Bates
+Samara Morgan | samara | sadako
+Regan MacNeil | regan | pazuzu | the exorcist
+Valak | the nun
+Candyman
+Slender Man | slender
+The Babadook
+M3GAN | megan
+Xenomorph | alien
+The Predator
+The Wolf Man | wolfman | werewolf
+The Mummy | imhotep
+The Thing
+The Creature from the Black Lagoon | gill-man
+The Invisible Man
+Count Orlok | nosferatu
+Damien Thorn | damien | the omen
+Leprechaun
+Kayako | the grudge
+Jack Torrance | here's johnny
+Carrie White | carrie
+Annie Wilkes
+Esther
+The Tall Man
+Pumpkinhead
+The Creeper
+Tiffany | bride of chucky
+The Blob
+Gremlins
+Krampus
+
+@ actors | 3 | Famous movie actors and actresses
+Tom Hanks | hanks
+Leonardo DiCaprio | leo | dicaprio
+Dwayne Johnson | the rock
+Tom Cruise | cruise
+Morgan Freeman
+Denzel Washington | denzel
+Robert Downey Jr. | rdj | downey
+Scarlett Johansson | scarjo
+Meryl Streep
+Julia Roberts
+Jennifer Lawrence | j-law
+Zendaya
+Tom Holland
+Margot Robbie
+Keanu Reeves | keanu
+Ryan Reynolds | reynolds
+Ryan Gosling | gosling
+Chris Hemsworth | hemsworth
+Chris Evans
+Chris Pratt
+Angelina Jolie | jolie
+Jennifer Aniston | aniston
+Emma Watson
+Emma Stone
+Anne Hathaway
+Sandra Bullock
+Nicole Kidman
+Natalie Portman
+Samuel L. Jackson
+Harrison Ford
+Jim Carrey
+Adam Sandler
+Will Ferrell
+Matt Damon
+George Clooney
+Al Pacino
+Robert De Niro | de niro
+Jack Black
+Timothée Chalamet | chalamet
+Florence Pugh
+Pedro Pascal
+Cillian Murphy
+Daniel Radcliffe
+Hugh Jackman
+Viola Davis
+Halle Berry
+Audrey Hepburn
+Marilyn Monroe
+Charlie Chaplin
+Jackie Chan
+Arnold Schwarzenegger | arnold | schwarzenegger
+Sylvester Stallone | stallone
+Jason Statham | statham
+Vin Diesel
+Kate Winslet
+Benedict Cumberbatch | cumberbatch
+Christian Bale
+Cate Blanchett
+Sydney Sweeney
+Keira Knightley

@@ -1,0 +1,118 @@
+# ZOOM-IN MYSTERY
+# Format: <emoji> | <Answer> | <Distractor 1> | <Distractor 2> | <Distractor 3>
+# Single emoji, Unicode 12 or earlier, no flags / skin tones / ZWJ / keycaps.
+🦒 | Giraffe | Cheetah | Leopard | Camel
+🐘 | Elephant | Rhino | Hippo | Mammoth
+🦓 | Zebra | Horse | Tiger | Panda
+🐼 | Panda | Koala | Polar Bear | Raccoon
+🦁 | Lion | Tiger | Bear | Sunflower
+🐯 | Tiger | Fox | Lion | Leopard
+🐸 | Frog | Turtle | Lizard | Crocodile
+🐙 | Octopus | Squid | Jellyfish | Crab
+🦀 | Crab | Lobster | Shrimp | Scorpion
+🐢 | Turtle | Frog | Snail | Lizard
+🦋 | Butterfly | Bee | Dragonfly | Ladybug
+🐝 | Bee | Ladybug | Fly | Butterfly
+🐞 | Ladybug | Strawberry | Cherry | Bee
+🐧 | Penguin | Puffin | Owl | Seal
+🦉 | Owl | Eagle | Parrot | Penguin
+🦜 | Parrot | Toucan | Flamingo | Peacock
+🦩 | Flamingo | Swan | Parrot | Peacock
+🦚 | Peacock | Parrot | Turkey | Flamingo
+🐳 | Whale | Dolphin | Shark | Seal
+🦈 | Shark | Dolphin | Whale | Swordfish
+🐊 | Crocodile | Lizard | Snake | Frog
+🐍 | Snake | Worm | Lizard | Eel
+🦔 | Hedgehog | Squirrel | Mouse | Pinecone
+🦘 | Kangaroo | Rabbit | Deer | Squirrel
+🦊 | Fox | Tiger | Cat | Dog
+🐷 | Pig | Rabbit | Hamster | Bear
+🐮 | Cow | Pig | Horse | Goat
+🐔 | Chicken | Turkey | Duck | Owl
+🦄 | Unicorn | Horse | Zebra | Dragon
+🐉 | Dragon | Dinosaur | Snake | Lizard
+🦖 | T-Rex | Dragon | Crocodile | Lizard
+🐌 | Snail | Turtle | Seashell | Caterpillar
+🐡 | Pufferfish | Hedgehog | Sea Urchin | Balloon
+🦥 | Sloth | Monkey | Koala | Otter
+🦇 | Bat | Crow | Owl | Butterfly
+🐠 | Tropical Fish | Parrot | Butterfly | Shark
+🍕 | Pizza | Taco | Cheese | Pie
+🍔 | Burger | Cupcake | Taco | Bagel
+🌮 | Taco | Burrito | Sandwich | Pizza
+🍩 | Donut | Bagel | Cookie | Tire
+🍦 | Ice Cream | Cupcake | Popcorn | Milkshake
+🍉 | Watermelon | Pizza | Strawberry | Kiwi
+🍓 | Strawberry | Cherry | Raspberry | Tomato
+🍌 | Banana | Corn | Lemon | Bell Pepper
+🍍 | Pineapple | Coconut | Pinecone | Mango
+🥑 | Avocado | Pear | Kiwi | Lime
+🥥 | Coconut | Kiwi | Potato | Acorn
+🥕 | Carrot | Chili Pepper | Sweet Potato | Pencil
+🌽 | Corn | Banana | Pineapple | Carrot
+🍄 | Mushroom | Umbrella | Strawberry | Acorn
+🥦 | Broccoli | Tree | Cactus | Lettuce
+🧁 | Cupcake | Ice Cream | Pudding | Candle
+🥐 | Croissant | Pretzel | Banana | Shrimp
+🍿 | Popcorn | Ice Cream | French Fries | Cotton Candy
+🍟 | French Fries | Popcorn | Crayons | Cheese
+🍣 | Sushi | Cake | Bacon | Cheese
+🍇 | Grapes | Blueberries | Plum | Olives
+🍫 | Chocolate Bar | Brownie | Waffle | Wallet
+🍭 | Lollipop | Pinwheel | Snail | Cupcake
+💩 | Poop | Ice Cream | Cupcake | Cinnamon Roll
+🎸 | Guitar | Violin | Banjo | Cello
+🎺 | Trumpet | Saxophone | Flute | Tuba
+🥁 | Drum | Tambourine | Bucket | Cake
+🎹 | Piano | Xylophone | Accordion | Barcode
+🔭 | Telescope | Microscope | Cannon | Flashlight
+💡 | Light Bulb | Balloon | Lemon | Pear
+🔑 | Key | Spoon | Paperclip | Wrench
+⏰ | Alarm Clock | Bell | Stopwatch | Compass
+🎈 | Balloon | Cherry | Apple | Lollipop
+🎁 | Gift | Suitcase | Cake | Shopping Bag
+🧲 | Magnet | Horseshoe | Tuning Fork | Headphones
+🪁 | Kite | Umbrella | Sailboat | Butterfly
+🎮 | Game Controller | TV Remote | Calculator | Headphones
+⚓ | Anchor | Fish Hook | Pickaxe | Umbrella
+🧸 | Teddy Bear | Hamster | Dog | Monkey
+🎲 | Dice | Sugar Cube | Ice Cube | Gift Box
+🪂 | Parachute | Umbrella | Jellyfish | Hot Air Balloon
+🧯 | Fire Extinguisher | Ketchup Bottle | Fire Hydrant | Thermos
+⚽ | Soccer Ball | Volleyball | Baseball | Golf Ball
+🏀 | Basketball | Orange | Pumpkin | Beach Ball
+🏈 | American Football | Potato | Coconut | Basketball
+🏓 | Ping Pong | Tennis | Badminton | Frying Pan
+🥊 | Boxing Glove | Oven Mitt | Baseball Glove | Tomato
+🛹 | Skateboard | Surfboard | Snowboard | Scooter
+🏆 | Trophy | Crown | Medal | Bell
+🎯 | Dartboard | Life Ring | Pizza | Eyeball
+🚀 | Rocket | Airplane | Submarine | Pencil
+🚁 | Helicopter | Airplane | Drone | Dragonfly
+🚒 | Fire Truck | Ambulance | Bus | Tractor
+🛸 | UFO | Hat | Frisbee | Satellite
+🚲 | Bicycle | Motorcycle | Scooter | Glasses
+⛵ | Sailboat | Kite | Tent | Windmill
+🌋 | Volcano | Mountain | Pyramid | Campfire
+🌈 | Rainbow | Bridge | Horseshoe | Candy Cane
+🌵 | Cactus | Pickle | Tree | Cucumber
+🌻 | Sunflower | Sun | Lion | Pancake
+🌹 | Rose | Tulip | Cherry | Strawberry
+⛄ | Snowman | Ghost | Penguin | Igloo
+🌙 | Moon | Banana | Croissant | Lemon
+⭐ | Star | Starfish | Maple Leaf | Sun
+🌊 | Ocean Wave | Cloud | Whale | Seashell
+⚡ | Lightning Bolt | Zigzag Arrow | Star | Banana
+🔥 | Fire | Tulip | Carrot | Leaf
+🐚 | Seashell | Snail | Croissant | Pinecone
+🪐 | Ringed Planet | Frisbee | Spinning Top | Beach Ball
+💀 | Skull | Ghost | Alien | Egg
+👻 | Ghost | Cloud | Marshmallow | Snowman
+👽 | Alien | Skull | Frog | Ghost
+🤖 | Robot | Alien | Microwave | Toaster
+🎃 | Pumpkin | Orange | Basketball | Tomato
+🤡 | Clown | Santa | Strawberry | Doll
+🤯 | Exploding Head | Volcano | Angry Face | Firework
+🥳 | Party Face | Clown | Cool Face | Birthday Cake
+🧠 | Brain | Cauliflower | Walnut | Coral
+🦷 | Tooth | Popcorn | Marshmallow | Ghost

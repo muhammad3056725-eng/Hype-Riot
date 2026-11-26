@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Also deploys after the dataset check workflow succeeds on main.
+  workflow_run:
+    workflows: ["Dataset check"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -16,6 +21,7 @@ concurrency:
 
 jobs:
   build-and-deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -26,16 +32,25 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - run: npm ci
+      - name: Rebuild dataset from the corpus (deterministic)
+        run: python3 pipeline/run_pipeline.py
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
       - name: Stage dataset beside the app
-        run: cp -r public/data apps/web/dist/data
+        # Vite already copies public/ (incl. data/) into dist; this keeps the
+        # copy step explicit and idempotent.
+        run: |
+          mkdir -p apps/web/dist/data
+          cp -r public/data/. apps/web/dist/data/
+          test -f apps/web/dist/data/v1/manifest.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/dist
       - id: deployment
         uses: actions/deploy-pages@v4
-        

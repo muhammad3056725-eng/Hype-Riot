@@ -1,49 +1,33 @@
-name: Wikidata data build
+name: Dataset check
 
-# Grows the HYPE RIOT dataset from Wikidata (owner addition, Nov 26 2026):
-# pulls entities + aliases per category, rebuilds pools/packs/entities.bin/
-# trie shards through the full pipeline (coverage + safety gates included),
-# and commits the enlarged dataset back to main, which redeploys Pages.
+# Rebuilds the HYPE RIOT dataset from pipeline/corpus/data/*.txt and fails
+# if the committed public/data/v1 is out of date or any validation/safety
+# gate fails. It never pushes commits (pushes made with GITHUB_TOKEN would
+# not trigger Pages anyway); when it succeeds on main, pages.yml redeploys
+# via its workflow_run trigger. To change content, edit the corpus text
+# files, run `npm run data` locally and commit the result.
 on:
+  pull_request:
+    paths: ["pipeline/**", "public/data/**"]
+  push:
+    branches: [main]
+    paths: ["pipeline/**"]
   workflow_dispatch:
-    inputs:
-      per_category:
-        description: "Max entities pulled per category this run"
-        required: true
-        default: "250"
-      categories:
-        description: "Comma-separated category ids (blank = all 10)"
-        required: false
-        default: ""
-  schedule:
-    # Weekly growth run, Mondays 04:00 UTC, at the default cap.
-    - cron: "0 4 * * 1"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  grow-dataset:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Pull from Wikidata
-        run: |
-          ARGS="--per-category ${{ inputs.per_category || '250' }}"
-          if [ -n "${{ inputs.categories }}" ]; then
-            ARGS="$ARGS --categories ${{ inputs.categories }}"
-          fi
-          python3 pipeline/wikidata_ingest.py $ARGS
-      - name: Rebuild + validate the dataset
-        run: python3 pipeline/run_pipeline.py
-      - name: Commit the enlarged dataset
-        run: |
-          git config user.name "hype-riot-bot"
-          git config user.email "actions@github.com"
-          git add public/data pipeline/output
-          git diff --cached --quiet || git commit -m "data: wikidata growth run"
-          git push
-          
+      - name: Rebuild + validate (coverage, combo, safety gates)
+        run: python3 pipeline/run_pipeline.py --no-daily
+      - name: Committed dataset is up to date
+        run: git diff --exit-code -- public/data/v1 packages/riot-engine/src/action-verbs.ts packages/riot-engine/src/action-verbs-lz.ts
+      - name: Pipeline tests
+        run: python3 -m unittest discover -s pipeline/tests -v

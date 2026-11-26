@@ -1,159 +1,129 @@
 /**
- * HYPE RIOT — AnswerMatcher (Blueprint §1, §4, §6).
- * Typo-tolerant prefix-trie matcher over a prompt's valid answer pool.
+ * HYPE RIOT — AnswerMatcher: forgiving matching of typed answers against
+ * a prompt's answer pool.
  *
- * Matching order (fast -> fuzzy):
- *  1. Exact normalized alias hit ("spidey" -> Spider-Man, "mc" -> Minecraft)
- *  2. Unique prefix hit on the trie (input len >= 4, prefix of aliases
- *     belonging to exactly ONE answer)
- *  3. Typo tolerance: Damerau-Levenshtein <= 1 (len 4..7) or <= 2 (len >= 8)
- *     against aliases of unfound answers; accepted only when unambiguous.
- * Already-found answers report "duplicate" so the UI can buzz them.
+ * Order (strict -> forgiving), never prefix-guessing into another word:
+ *  1. exact: the spacing/plural-insensitive key of the input equals a
+ *     name or alias key ("spiderman" = "Spider-Man", "berries" = "Berry",
+ *     "mcdonalds" = "McDonald's", "the weekend"... see typo).
+ *  2. word: a single typed word equals a significant word (4+ letters,
+ *     not generic) of an answer's name ("messi" -> Lionel Messi, "whale"
+ *     -> Blue Whale when "Whale" is not itself an answer). When several
+ *     answers share the word, the best-known one not yet found wins.
+ *  3. typo: inputs of 5+ letters within edit distance 1 (2 for 9+) of a
+ *     name, alias or significant word, accepted only when unambiguous.
+ * Already-found answers report "duplicate".
  */
 import type { BrainstormAnswer } from "@hype-riot/shared-types";
+import { compactKey, displayName, editDistance, normalize, wordKey } from "./text";
 
-export function normalize(input: string): string {
-  let s = input
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "") // strip diacritics
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9 ]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  if (s.startsWith("the ")) s = s.slice(4);
-  return s;
-}
-
-/** Damerau-Levenshtein distance (optimal string alignment variant). */
-export function editDistance(a: string, b: string): number {
-  const m = a.length;
-  const n = b.length;
-  if (Math.abs(m - n) > 2) return 99;
-  const d: number[][] = Array.from({ length: m + 1 }, (_, i) => {
-    const row = new Array<number>(n + 1).fill(0);
-    row[0] = i;
-    return row;
-  });
-  for (let j = 0; j <= n; j++) d[0][j] = j;
-  for (let i = 1; i <= m; i++) {
-    for (let j = 1; j <= n; j++) {
-      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      d[i][j] = Math.min(
-        d[i - 1][j] + 1,
-        d[i][j - 1] + 1,
-        d[i - 1][j - 1] + cost
-      );
-      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
-        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1); // transposition
-      }
-    }
-  }
-  return d[m][n];
-}
-
-class TrieNode {
-  children = new Map<string, TrieNode>();
-  answerIds = new Set<number>();
-}
+export type MatchVia = "exact" | "word" | "typo";
 
 export type MatchResult =
-  | { status: "hit"; answer: BrainstormAnswer; via: "exact" | "prefix" | "typo" }
+  | { status: "hit"; answer: BrainstormAnswer; via: MatchVia }
   | { status: "duplicate"; answer: BrainstormAnswer }
   | { status: "miss" };
 
+/** Words too generic to identify an answer on their own. */
+const GENERIC = new Set([
+  "with", "from", "into", "over", "your", "little", "great", "super", "mount",
+  "lake", "river", "island", "city", "state", "united", "republic", "north",
+  "south", "east", "west", "central", "saint", "world", "grand", "high", "game",
+  "show", "series", "movie", "film", "club", "team", "park", "house", "kingdom",
+  "empire", "national", "royal", "golden", "black", "white", "green", "blue",
+  "brown", "pink", "yellow", "orange", "purple", "red", "new", "old", "big",
+  "small", "year", "day", "night", "time", "part", "edition", "original",
+  "classic", "real", "true", "best", "first", "last", "mini", "baby", "king",
+  "queen", "lord", "lady", "prince", "princess", "doctor", "mister",
+].map(wordKey));
+
 export class AnswerMatcher {
-  private byAlias = new Map<string, BrainstormAnswer>();
-  private trieRoot = new TrieNode();
-  private found = new Set<number>();
+  private readonly answers: BrainstormAnswer[];
+  private readonly exact = new Map<string, number[]>();
+  private readonly words = new Map<string, number[]>();
+  private readonly found = new Set<number>();
   readonly total: number;
 
   constructor(answers: BrainstormAnswer[]) {
+    this.answers = [...answers].sort((a, b) => a.rank - b.rank);
     this.total = answers.length;
-    for (const ans of answers) {
-      const forms = new Set<string>([normalize(ans.name)]);
-      for (const a of ans.aliases) forms.add(normalize(a));
-      for (const form of forms) {
-        if (!form) continue;
-        if (!this.byAlias.has(form)) this.byAlias.set(form, ans);
-        let node = this.trieRoot;
-        for (const ch of form) {
-          let next = node.children.get(ch);
-          if (!next) {
-            next = new TrieNode();
-            node.children.set(ch, next);
-          }
-          node = next;
-          node.answerIds.add(ans.entityId);
-        }
+    const add = (map: Map<string, number[]>, key: string, rank: number) => {
+      if (!key) return;
+      const list = map.get(key);
+      if (!list) map.set(key, [rank]);
+      else if (!list.includes(rank)) list.push(rank);
+    };
+    for (const a of this.answers) {
+      for (const form of [a.name, displayName(a.name), ...a.aliases]) {
+        add(this.exact, compactKey(form), a.rank);
+      }
+      for (const w of normalize(displayName(a.name)).split(" ")) {
+        if (w.length < 4) continue;
+        const k = wordKey(w);
+        if (!GENERIC.has(k)) add(this.words, k, a.rank);
       }
     }
+    for (const list of this.words.values()) list.sort((x, y) => x - y);
   }
 
   get foundCount(): number {
     return this.found.size;
   }
 
-  reset(): void {
-    this.found.clear();
+  isFound(rank: number): boolean {
+    return this.found.has(rank);
+  }
+
+  /** Answers not yet found, most famous first (end-of-round reveal). */
+  missed(): BrainstormAnswer[] {
+    return this.answers.filter((a) => !this.found.has(a.rank));
   }
 
   match(rawInput: string): MatchResult {
-    const input = normalize(rawInput);
-    if (input.length < 2) return { status: "miss" };
+    const norm = normalize(rawInput);
+    const key = compactKey(rawInput);
+    if (key.length < 2) return { status: "miss" };
 
-    // 1. Exact alias
-    const exact = this.byAlias.get(input);
+    const exact = this.exact.get(key);
     if (exact) return this.claim(exact, "exact");
 
-    // 2. Unique prefix via trie
-    if (input.length >= 4) {
-      let node: TrieNode | undefined = this.trieRoot;
-      for (const ch of input) {
-        node = node.children.get(ch);
-        if (!node) break;
-      }
-      if (node && node.answerIds.size === 1) {
-        const id = [...node.answerIds][0];
-        const ans = this.answerById(id);
-        if (ans) return this.claim(ans, "prefix");
-      }
+    const inputWords = norm.split(" ");
+    if (inputWords.length === 1) {
+      const byWord = this.words.get(key);
+      if (byWord) return this.claim(byWord, "word");
     }
 
-    // 3. Typo tolerance against unfound answers' aliases
-    const maxDist = input.length >= 8 ? 2 : input.length >= 4 ? 1 : 0;
-    if (maxDist > 0) {
-      let best: BrainstormAnswer | null = null;
+    if (key.length >= 5) {
+      const maxDist = key.length >= 9 ? 2 : 1;
       let bestDist = maxDist + 1;
+      let best: number[] | null = null;
       let ambiguous = false;
-      for (const [alias, ans] of this.byAlias) {
-        if (Math.abs(alias.length - input.length) > maxDist) continue;
-        const dist = editDistance(input, alias);
+      const consider = (k: string, ranks: number[]) => {
+        if (k.length < 4 || Math.abs(k.length - key.length) > maxDist) return;
+        const dist = editDistance(key, k);
         if (dist < bestDist) {
           bestDist = dist;
-          best = ans;
+          best = ranks;
           ambiguous = false;
-        } else if (dist === bestDist && best && ans.entityId !== best.entityId) {
+        } else if (dist === bestDist && best && !sameSet(best, ranks)) {
           ambiguous = true;
         }
-      }
-      if (best && !ambiguous && bestDist <= maxDist) {
-        return this.claim(best, "typo");
-      }
+      };
+      for (const [k, ranks] of this.exact) consider(k, ranks);
+      if (inputWords.length === 1) for (const [k, ranks] of this.words) consider(k, ranks);
+      if (best && !ambiguous && bestDist <= maxDist) return this.claim(best, "typo");
     }
     return { status: "miss" };
   }
 
-  private answerById(id: number): BrainstormAnswer | undefined {
-    for (const ans of this.byAlias.values()) {
-      if (ans.entityId === id) return ans;
-    }
-    return undefined;
+  private claim(ranks: number[], via: MatchVia): MatchResult {
+    const open = ranks.find((r) => !this.found.has(r));
+    if (open === undefined) return { status: "duplicate", answer: this.answers.find((a) => a.rank === ranks[0])! };
+    this.found.add(open);
+    return { status: "hit", answer: this.answers.find((a) => a.rank === open)!, via };
   }
+}
 
-  private claim(ans: BrainstormAnswer, via: "exact" | "prefix" | "typo"): MatchResult {
-    if (this.found.has(ans.entityId)) return { status: "duplicate", answer: ans };
-    this.found.add(ans.entityId);
-    return { status: "hit", answer: ans, via };
-  }
+function sameSet(a: number[], b: number[]): boolean {
+  return a.length === b.length && a.every((x) => b.includes(x));
 }

@@ -1,147 +1,125 @@
 # HYPE RIOT
 
-The 90-second retro pixel-art arcade game show for teenagers: electrify a
-64-character Pixel Crowd across 3 mini-rounds in a 480×270 Hi-Bit neon
-arena. Game #3 on the deepwell.games hub (after Deepwell/APOGEE and
-NEXUS RELAY), built exactly to its blueprint
-(`HYPE_RIOT___Teen_Retro_Pixel-Art_Trivia___Brainstorming_Game_Blueprint.docx`).
+The 90-second party game show: brainstorm answers, call FACT or CAP, and
+pitch the wildest idea in front of a roaring crowd. Plays in any modern
+browser on phones (portrait or landscape) and desktops.
 
-**Play:** https://muhammad3056725-eng.github.io/Hype-Riot/ (once the repo
-exists and Pages is enabled — see "Deploy" below).
+**Play:** https://muhammad3056725-eng.github.io/Hype-Riot/
 
-## The show (Blueprint §2)
+## The show
 
-| Round | Time | What happens |
+| Round | Time | How it works |
 |---|---|---|
-| 1 — TOP 5 RIOT | 25s | Rapid-fire brainstorming against a huge valid answer pool. Crowd Pleaser +150, Deep Cut +250, Wildcard Combo Tag = 2×. Slang/typo matching: `spidey` → Spider-Man, `mc` → Minecraft, `gta` → Grand Theft Auto. |
-| 2 — FACT OR CAP?! | 28s (4 × 7s) | Claim Smash (FACT/CAP), Stream/Stat Clash ("Which has MORE…?"), Pixel Zoom-Out (16×16 sprite de-pixelates). Streaks: 2 in a row = 1.5×, 3+ = 2.0×. |
-| 3 — THE ULTIMATE PITCH | 30s | Combine two wildcard items into one ≤80-char pitch. Solo/Daily judged by the blueprint formula: 250 per wildcard present + 150 action-verb bonus − 5/char under 30 chars + deterministic crowd variance 0–100. |
+| 1 — TOP 5 RIOT | 25s | Type answers to the prompt (30–60 valid answers each). Crowd Pleasers (the most famous 55%) +150, Deep Cuts +250. Each prompt has a **combo tag** (e.g. "Starts with S or T", "Two words or more") that 20–40% of answers satisfy: those score 2×. Matching forgives typos (5+ letters), plurals, punctuation, accents, spacing ("spiderman"), surnames ("messi") and any significant word of a name ("whale" → the best-known whale on the board). No prefix guessing. When time runs out the round shows the top answers you missed. |
+| 2 — FACT OR CAP?! | 4 × 7s | Two claims (FACT/CAP), one clash ("Which is TALLER?" / "Which came FIRST?" — winner side randomised) and one zoom-in mystery (an emoji starts extremely zoomed and blurred, then pulls back; pick 1 of 4). 400 each, streaks ×1.5 then ×2. After each card the right answer is revealed (input locked, so double-taps can't skip a card). Keys: F/C, A/B or ←/→, 1–4. |
+| 3 — THE ULTIMATE PITCH | 30s | One line (≤80 chars) combining two wildcards: +250 per wildcard named (whole words, plural/hyphen-insensitive), +150 for any action verb in any form (1,192-verb dictionary + inflections), −5 per character under 30 (trimmed), + a 0–100 crowd reaction seeded by the day and your pitch text. Never below 0. 600+ = 👑 crowd favorite. Live checklist shows what you've hit. |
 
-Modes: **Daily Riot** (global seed 00:00 UTC, identical worldwide, streak
-tracking, sharecard) · **Quick Arcade** (endless solo, beat 3,500 for the
-victory bonus) · **Brainstorm Blitz** (relaxed 45s, hunt one prompt's
-top 10) · **Party Room** (2–12 players — needs the relay backend, below).
+**Hype meter** (0–100%) rises with hits, combos and streaks, drops on
+misses, wrong calls and timeouts, and drives the crowd (glowsticks,
+cheer waves, boos, tomatoes). Peak hype pays a crowd bonus (5 pts per %).
 
-Progression: Hype Coins `floor(Hype/100) + streakDays × 15 + victoryBonus`,
-spent on 100% cosmetic avatar gear (hoodies, visors, neon sneakers, pixel
-pets, victory dances). Zero pay-to-win. XP tiers from Rookie Spectator
-(0) to Hype Legend (150,000).
+**Modes**
+- **Daily Riot** — one show per UTC day, the same for everyone. The schedule
+  walks through all 122 packs before repeating (stride coprime with the pack
+  count). One scored attempt per day; replays are practice (no coins/XP).
+  Streak bonus coins (+15 per streak day) are paid once per day.
+- **Quick Arcade** — random pack, random theme and a random pitch drawn from
+  the full template/wildcard pools. Beat 3,500 for a +25 coin victory bonus.
+- **Brainstorm Blitz** — 45 seconds on one prompt; find its 10 most famous
+  answers (★ marks them). Clearing all 10 ends early and pays +25.
+- **Party Room** — only shown when the build has `VITE_PARTY_WS_URL`. The
+  client joins a 4-letter room on the relay in `packages/party-worker`
+  (Cloudflare Durable Objects) and shows the lobby; synced party matches are
+  not implemented yet. The relay is not deployed by this repo.
 
-Sharecards: the blueprint's text format (🟩🟨⬜ squares, streak, crown)
-plus a downloadable 1200×630 PNG card.
+**Progression:** Hype Coins = floor(score/100) + victory bonus (+ streak
+bonus on the first Daily of a day), spent on cosmetics only (hoodies,
+visors, sneakers, holo pets, victory dances). Ranks from Rookie Spectator
+(0 XP) to Hype Legend (150,000 XP). Saved in `localStorage`.
 
-## Dataset (Blueprint §4, §5)
+## Graphics & UI
 
-Static, zero-backend: `entities.bin` (HRD1 header + packed records +
-string table), 2-letter prefix `trie_shards/*.json`, and
-`packs/pack_NNN.json`, all under `public/data/v1/` with a fingerprinted
-`manifest.json`. An `entities.json` text fallback ships alongside the
-binary (the GitHub connector push is text-only; the loader tries `.bin`
-first, then `.json`).
+- Full-screen hi-DPI Canvas2D arena behind a DOM HUD: themed sky and arena
+  bowl (cached), sweeping additive spotlights with floor light pools, LED
+  jumbotron with glow + equalizer, glossy perspective stage, a vector host
+  (MC VOLT, 11 moods), the player's podium avatar with cosmetics, a
+  perspective crowd of silhouettes with glowsticks/phone lights, pooled
+  confetti/spark/tomato particles, screen shake, flashes, vignette.
+- Performance: DPR capped at 2, adaptive quality (resolution, crowd rows,
+  particle budget) when frames run slow, batched paths per row/color, cached
+  glow sprites, render loop paused while the tab is hidden.
+- Round timers are wall-clock deadlines, so slow frames or a hidden tab never
+  stretch them.
+- HUD: timer ring, score, hype meter, prompt card, answer input or choice
+  buttons; fits one phone screen (portrait and landscape) and follows the
+  on-screen keyboard (`visualViewport`).
+- Accessibility: `aria-live` feedback, keyboard shortcuts, visible focus,
+  reduced-motion setting (defaults to the OS preference), system fonts (no
+  web-font CDN), graphics quality setting (Auto / High / Battery saver).
 
-Pipeline (`pipeline/`): Stage 1 ingest → Stage 2 relevance/alias filter →
-Stage 3 brainstorm expansion + coverage gate (every prompt ≥ 25 answers,
-both tiers) → Stage 4 safety/profanity gate (hard fail) → Stage 5 binary
-+ shard compiler. Run it with `python3 pipeline/run_pipeline.py`.
+## Dataset
 
-**Growth:** `pipeline/wikidata_ingest.py` pulls entities + aliases from
-Wikidata per category (sitelinks = popularity proxy), and the
-**Wikidata data build** GitHub Actions workflow (`.github/workflows/data-build.yml`)
-runs it on a schedule/dispatch, rebuilds through all five stages, and
-commits the enlarged dataset. Fact-or-Cap claims stay hand-authored —
-Wikidata grows entities/aliases/pools, not editorial trivia facts.
+Hand-authored, validated text in `pipeline/corpus/data/`:
 
-**Current shipped scale (honest numbers):** 2,267 entities · 3,413 alias
-forms · 324 trie shards · 30 packs · 60 claims · 20 clashes · 12 zoom
-sprites · 93 pitch wildcards · 1,019 verified action verbs. The
-blueprint's production targets (250,000 entities, 677 shards, 250 packs,
-1,200 verbs) are the growth roadmap the Wikidata workflow walks toward —
-the starter corpus is hand-authored seed data so the game is fully
-playable today.
+| File | Content |
+|---|---|
+| `prompts_a.txt` … `prompts_d.txt` | 122 Top-5 prompts, 6,414 answers (30–60 each, most famous first) with aliases |
+| `claims.txt` | 260 Fact-or-Cap claims (130 fact / 130 cap), non-time-sensitive |
+| `clashes.txt` | 106 clashes (stable numbers; `max` and `min` questions) |
+| `zoom.txt` | 115 zoom-in mysteries (emoji + 3 distractors) |
+| `templates.txt`, `wildcards.txt` | 34 pitch templates, 330 wildcards |
+| `verbs.txt` | 1,192 verbs for the pitch verb bonus |
 
-## Party rooms — backend requirement (NOT deployed)
+`npm run data` (or `python pipeline/run_pipeline.py`) rebuilds everything
+deterministically:
 
-Party mode needs a live backend; there is no honest static-only version.
-The blueprint's design ships in `packages/party-worker/`: a Cloudflare
-**Durable Objects** WebSocket relay (one object per 4-letter room code,
-dumb broadcast pipe, ≤12 players, host client owns room state).
+1. `stage1_ingest` parses and validates (formats, answer counts, duplicates,
+   alias collisions, clash gaps, zoom options, templates).
+2. `stage2_filter` assigns tiers and picks each prompt's combo tag (20–40% coverage).
+3. `stage3_expansion` assembles one pack per prompt (claims dealt without
+   repeats, clash sides and zoom options shuffled).
+4. `stage4_safety` runs the blocklist + denied-people gate (hard fail).
+5. `stage5_compile` writes `public/data/v1/packs/pack_NNN.json`,
+   `pitch.json`, `manifest.json` (counts, daily stride, hashes) and the
+   generated verb dictionary in `packages/riot-engine/src/action-verbs*.ts`.
 
-To enable it, the owner needs:
-1. A Cloudflare account with Workers enabled (Durable Objects are
-   included on the free tier in limited volume; the Workers Paid plan,
-   $5/mo, is the realistic tier for public use).
-2. `cd packages/party-worker && npx wrangler deploy` (wrangler.toml is
-   ready; migration v1 creates the PartyRoom class).
-3. A web build with `VITE_PARTY_WS_URL=wss://<deployed-worker>/room`.
+`make_daily.py` writes `public/data/daily/<date>.json` as a readable record;
+the client computes the Daily itself from the manifest.
 
-Until then the Party Room screen in-game explains this and stays gated;
-**all solo modes are complete without any backend.**
+## Develop
+
+```
+npm ci
+npm run dev        # http://localhost:5173 (serves public/ incl. data)
+npm run typecheck
+npm test           # engine + web (vitest) + pipeline (Python; skipped with a warning if no Python 3.9+)
+npm run build      # apps/web/dist (relative base, data copied from public/)
+```
 
 ## Deploy
 
-GitHub Pages from this repo (the Muse GitHub App cannot create
-repositories or push workflow files — both are owner steps):
+`.github/workflows/pages.yml` (push to `main`): npm ci → rebuild dataset →
+typecheck → test → build → stage data → deploy to GitHub Pages (Settings →
+Pages → Source: GitHub Actions). `data-build.yml` ("Dataset check")
+validates corpus changes on PRs/pushes, fails if the committed dataset is
+stale, and never pushes commits; a successful run on `main` triggers a
+redeploy.
 
-1. Create the repo (owner): github.com/new → `Hype-Riot`, public.
-2. Muse pushes all code + data.
-3. Owner pastes the workflow files from `.github/workflows/` (they are
-   in the local project; the app cannot push them) — `pages.yml` is the
-   critical one; `ci.yml`, `daily-riot.yml`, `data-build.yml` complete
-   the set.
-4. Repo Settings → Pages → Source: GitHub Actions. First push to `main`
-   with `pages.yml` present builds, tests, stages `public/data` beside
-   the app, and deploys.
-
-Local dev: `npm install && npm run build` (dataset staged by the
-workflow; locally: `cp -r public/data apps/web/dist/data`), or
-`npm run dev --workspace=@hype-riot/web` with `public/data` served
-alongside. Tests: `npm test` (engine + web + pipeline). Typecheck:
-`npm run typecheck`.
-
-Hosting note: the blueprint targets Cloudflare Pages + R2 at
-hyperiot.gg; this build deploys to GitHub Pages instead (same static
-shape, mount-agnostic relative base) because that is the owner's
-existing games infrastructure (deepwell.games hub). The `_headers`
-cache rules from the blueprint are documented in the workflow/README
-for a future Cloudflare move; GitHub Pages sets its own caching.
-
-## Deviations from the blueprint (flagged, never silent)
-
-1. **entities.bin record size is 17 bytes, not 18.** The blueprint text
-   says 18-byte records, but its own shipped Stage-5 compiler packs
-   struct `"<IBBBIIH"` = 17 bytes. The executable spec wins; the parser
-   and compiler agree and round-trip in tests.
-2. **Starter corpus scale** (see honest numbers above) vs the 250k
-   production corpus — the blueprint's own roadmap stages corpus
-   growth over weeks; the Wikidata workflow is the growth engine.
-3. **Action verbs: 1,019** verified-clean entries vs the 1,200 target.
-   The check is presence-only ({0,1}) so scoring is unaffected.
-4. **Tier assignment is relative per pool** (top 55% by popularity =
-   Crowd Pleaser). The blueprint names the tiers but fixes no global
-   threshold; relative assignment guarantees both tiers in every pool.
-5. **Hosting**: GitHub Pages instead of Cloudflare Pages/R2 (above).
-6. **Party relay not deployed** (above) — code complete, gated in UI.
-7. **No .aseprite masters** — Aseprite is unavailable in the build
-   environment; sprites are code-drawn and the palette ships as
-   `art-source/neon_32.gpl` (same approach as NEXUS RELAY).
-8. **Renderer**: Canvas2D with the blueprint's Bayer 4×4 dither math;
-   the WebGL2 GLSL versions ship in `src/engine/Shaders.ts`. The
-   480×270 logical canvas + integer upscale + `pixelated` rendering
-   follow the spec either way.
-9. **Persistence** uses localStorage behind the blueprint's
-   `LocalSaveDB` class (the blueprint names the class, not the store).
-
-## Repo layout (Blueprint §6)
+## Repo layout
 
 ```
-apps/web/            Vite + TS game (engine, rounds, audio, db)
-packages/riot-engine/  AnswerMatcher, ComboTagEvaluator, PitchScorer, ShareCardEncoder
-packages/shared-types/ binary/pack/party schemas + parser + palette
+apps/web/              Vite + TS game (engine/ renderer, game/ rounds, ui/, db/, audio/)
+packages/riot-engine/  text rules, AnswerMatcher, ComboTagEvaluator, PitchScorer, share text, verbs
+packages/shared-types/ pack + manifest schema, party protocol
 packages/party-worker/ Cloudflare Durable Object relay (not deployed)
-pipeline/            stages 1–5 + Wikidata ingest + tests
-public/data/         compiled dataset (v1 + daily)
-art-source/          neon_32.gpl palette
-.github/workflows/   pages, ci, daily-riot, data-build (owner-pasted)
+pipeline/              corpus data + parsers, stages 1–5, daily schedule, tests
+public/                favicon + compiled dataset (data/v1, data/daily)
 ```
 
-<!-- deploy trigger 2026-11-26 -->
+### Leftovers from v1 safe to delete
+
+These files are no longer read by anything: `pipeline/corpus/entities_cat01.py` …
+`entities_cat10.py`, `pipeline/wikidata_ingest.py`, `pipeline/output/*` from
+the old pipeline (`aliases.json`, `entities_*.json`, `wikidata_entities.json`),
+`public/data/v1/entities.json`, `public/data/v1/trie_shards/`, and
+`art-source/neon_32.gpl`.

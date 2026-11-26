@@ -1,2 +1,1 @@
-# HYPE RIOT pipeline: stdlib only (Python 3.11+).
-# CI additionally installs pytest to run pipeline/tests.
+# HYPE RIOT pipeline: Python standard library only (3.10+). No packages needed.

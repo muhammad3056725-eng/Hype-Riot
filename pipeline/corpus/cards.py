@@ -1,119 +1,86 @@
-# HYPE RIOT starter corpus — Round 2 cards + Round 3 wildcards.
-# CLAIMS: (claim, is_fact, category) — Claim Smash (Blueprint §2).
-CLAIMS = [
-    ("Minecraft was originally called 'Cave Game'", True, "Gaming"),
-    ("The first YouTube video was uploaded in 2005", True, "Internet"),
-    ("Nintendo was founded in the 1800s", True, "Gaming"),
-    ("The Great Wall of China is visible from space", False, "Space"),
-    ("Goldfish have a 3-second memory", False, "Animals"),
-    ("Octopuses have three hearts", True, "Animals"),
-    ("Bananas are berries, but strawberries are not", True, "Food"),
-    ("The unicorn is the national animal of Scotland", True, "Animals"),
-    ("Humans share about 60% of their DNA with bananas", True, "Science"),
-    ("Lightning never strikes the same place twice", False, "Science"),
-    ("The Eiffel Tower grows taller in summer", True, "Places"),
-    ("A day on Venus is longer than a year on Venus", True, "Space"),
-    ("Sharks existed before trees", True, "Animals"),
-    ("The first computer bug was a real moth", True, "Tech"),
-    ("Honey never spoils", True, "Food"),
-    ("The Sahara is the largest desert on Earth", False, "Places"),
-    ("Coca-Cola was originally green", False, "Food"),
-    ("A group of flamingos is called a flamboyance", True, "Animals"),
-    ("The Moon has quakes", True, "Space"),
-    ("Sound travels faster in air than in water", False, "Science"),
-    ("The first video game was Pong", False, "Gaming"),
-    ("Tetris was created in the Soviet Union", True, "Gaming"),
-    ("Pac-Man was inspired by a pizza with a slice missing", True, "Gaming"),
-    ("Mario was originally named Jumpman", True, "Gaming"),
-    ("The PlayStation was almost a Nintendo console", True, "Gaming"),
-    ("Sonic's full name includes 'Maurice'", True, "Gaming"),
-    ("The Xbox was named after DirectX", True, "Gaming"),
-    ("Pikachu was based on a squirrel, not a mouse", True, "Gaming"),
-    ("The Konami Code ends with Start", True, "Gaming"),
-    ("Creeper sounds were made from a broken firework recording", False, "Gaming"),
-    ("The first esports tournament prize was a magazine subscription", True, "Gaming"),
-    ("Speedrunning a game means playing it slowly", False, "Gaming"),
-    ("The 'new record' bell in Mario Kart is real in Japan", False, "Gaming"),
-    ("Taylor Swift started her career in country music", True, "Music"),
-    ("The Beatles have sold more records than any other artist", True, "Music"),
-    ("Beethoven composed music while deaf", True, "Music"),
-    ("The most-streamed song ever is a rock ballad from the 80s", False, "Music"),
-    ("K-pop group BTS has spoken at the United Nations", True, "Music"),
-    ("A violin has six strings", False, "Music"),
-    ("The harmonica is the world's best-selling instrument", True, "Music"),
-    ("Shakespeare invented the word 'eyeball'", True, "Books"),
-    ("The first Harry Potter book was rejected 12 times", True, "Books"),
-    ("There is a word for the smell of rain", True, "Science"),
-    ("Your nose can remember 50,000 different scents", True, "Science"),
-    ("Hot water can freeze faster than cold water", True, "Science"),
-    ("The inventor of the Pringles can is buried in one", True, "Food"),
-    ("Carrots were originally purple", True, "Food"),
-    ("Apples float because they are 25% air", True, "Food"),
-    ("Peanuts are an ingredient in dynamite", True, "Science"),
-    ("The dot over the letter 'i' is called a tittle", True, "Words"),
-    ("A jiffy is an actual unit of time", True, "Science"),
-    ("Scotland has 421 words for snow", True, "Words"),
-    ("The unicorn emoji was added before the taco emoji", False, "Internet"),
-    ("The first tweet was sent by a robot", False, "Internet"),
-    ("Wikipedia can be downloaded in full", True, "Internet"),
-    ("The inventor of the internet also invented email", False, "Internet"),
-    ("MrBeast's real first name is James", True, "Internet"),
-    ("The most-subscribed YouTube channel is a music label", True, "Internet"),
-    ("TikTok was originally called Musical.ly everywhere", False, "Internet"),
-    ("The 'Like' button was almost called 'Awesome'", True, "Internet"),
-]
+"""Round 2 / Round 3 corpus parsers.
 
-# CLASHES: (question, a, a_value, b, b_value, unit) — bigger value wins.
-CLASHES = [
-    ("Which has MORE monthly Spotify listeners?", "The Weeknd", 110, "Taylor Swift", 95, "million listeners"),
-    ("Which game has sold MORE copies?", "Minecraft", 300, "Grand Theft Auto V", 200, "million copies"),
-    ("Which movie made MORE money worldwide?", "Avatar", 2.9, "Avengers: Endgame", 2.8, "billion dollars"),
-    ("Which channel has MORE subscribers?", "MrBeast", 340, "T-Series", 280, "million subscribers"),
-    ("Which planet is BIGGER?", "Jupiter", 11.2, "Saturn", 9.5, "Earth diameters"),
-    ("Which animal is FASTER on land?", "Cheetah", 70, "Lion", 50, "mph top speed"),
-    ("Which building is TALLER?", "Burj Khalifa", 828, "Eiffel Tower", 330, "metres"),
-    ("Which social app has MORE monthly users?", "Instagram", 2.0, "TikTok", 1.5, "billion users"),
-    ("Which is LONGER?", "Great Wall of China", 21196, "Amazon River", 6400, "kilometres"),
-    ("Which came FIRST?", "Nintendo (founded 1889)", 1889, "PlayStation (1994)", 1994, "earlier year wins"),
-    ("Which has MORE players every month?", "Roblox", 380, "Fortnite", 110, "million players"),
-    ("Which song has MORE Spotify streams?", "Blinding Lights", 4.6, "Shape of You", 4.2, "billion streams"),
-    ("Which animal has MORE teeth?", "Snail", 14000, "Shark", 3000, "teeth"),
-    ("Which country has MORE people?", "India", 1.45, "China", 1.42, "billion people"),
-    ("Which is HOTTER?", "Venus (surface)", 464, "Mercury (surface)", 167, "degrees C average"),
-    ("Which console sold MORE?", "PlayStation 2", 160, "Nintendo Switch", 150, "million units"),
-    ("Which has MORE bones?", "Baby (at birth)", 300, "Adult human", 206, "bones"),
-    ("Which is HEAVIER?", "Blue Whale", 180, "Elephant", 6, "tonnes"),
-    ("Which language has MORE native speakers?", "Mandarin Chinese", 940, "Spanish", 490, "million speakers"),
-    ("Which has MORE calories?", "Big Mac", 590, "Large fries", 510, "calories"),
-]
+claims.txt     "F | claim | Category"  or  "C | claim | Category"
+clashes.txt    "max|min | Question | A | valueA | B | valueB | unit"
+               (max: bigger value wins; min: smaller wins, e.g. earlier year)
+wildcards.txt  one Round 3 wildcard per line
+templates.txt  one pitch template per line with exactly one {A} and one {B}
+verbs.txt      one base-form verb per line (pitch action-verb bonus)
+"""
+import re
 
-# WILDCARDS for Round 3 pitches (Blueprint §2 examples style).
-WILDCARDS = [
-    "Sharks", "High School Cafeteria", "Skateboards", "Pizza", "Invisibility",
-    "Dragons", "Homework", "Wi-Fi", "Zombies", "Unicorns", "Robots", "Bananas",
-    "Video Games", "The Moon", "Pirates", "Ninjas", "Dinosaurs", "Aliens",
-    "Superheroes", "Vampires", "Werewolves", "Ghosts", "Wizards", "Knights",
-    "Time Travel", "Teleportation", "Mind Reading", "Flying Cars", "Hoverboards",
-    "Jetpacks", "Laser Tag", "Water Parks", "Haunted Houses", "Roller Coasters",
-    "Arcade Machines", "Drones", "Smartphones", "Social Media", "Memes",
-    "Cats", "Dogs", "Penguins", "Octopuses", "Llamas", "Sloths", "Capybaras",
-    "Bubble Tea", "Tacos", "Ice Cream", "Donuts", "French Fries", "Sushi",
-    "Chocolate", "Popcorn", "Marshmallows", "Gummy Bears", "Pickles", "Cheese",
-    "Volcanoes", "Earthquakes", "Tornadoes", "Rainbows", "Lightning", "Snow",
-    "Beaches", "Mountains", "Forests", "Deserts", "Islands", "Castles",
-    "Spaceships", "Black Holes", "Comets", "Asteroids", "Planets", "Stars",
-    "Exams", "Detention", "Recess", "Field Trips", "Science Fairs", "Prom",
-    "Summer Camp", "Sleepovers", "Birthday Parties", "Talent Shows", "Book Clubs",
-    "Esports", "Streaming", "Podcasts", "Vinyl Records", "Cassette Tapes", "Polaroids",
-]
+from . import CorpusError, cells, lines
+from .text import normalize
 
-PITCH_TEMPLATES = [
-    "Pitch a brand-new video game combining: {A} + {B}",
-    "Invent a new Olympic sport using: {A} + {B}",
-    "Create the worst possible superhero weakness for: {A}",
-    "Pitch a Netflix show about: {A} + {B}",
-    "Invent a fast-food menu item fusing: {A} + {B}",
-    "Design a theme park ride based on: {A} + {B}",
-    "Pitch a band whose whole gimmick is: {A} + {B}",
-    "Invent a school subject teaching: {A} + {B}",
-]
+
+def load_claims():
+    out, seen = [], set()
+    for line in lines("claims.txt"):
+        c = cells(line)
+        if len(c) != 3 or c[0] not in ("F", "C") or not c[1]:
+            raise CorpusError(f"claims.txt: bad line {line!r}")
+        key = normalize(c[1])
+        if key in seen:
+            raise CorpusError(f"claims.txt: duplicate claim {c[1]!r}")
+        seen.add(key)
+        out.append({"claim": c[1], "isFact": c[0] == "F", "category": c[2]})
+    return out
+
+
+def _num(s, line):
+    try:
+        return float(s) if "." in s else int(s)
+    except ValueError as exc:
+        raise CorpusError(f"clashes.txt: bad number {s!r} in {line!r}") from exc
+
+
+def load_clashes():
+    out = []
+    for line in lines("clashes.txt"):
+        c = cells(line)
+        if len(c) != 7 or c[0] not in ("max", "min"):
+            raise CorpusError(f"clashes.txt: bad line {line!r}")
+        mode, q, a, av, b, bv, unit = c
+        av, bv = _num(av, line), _num(bv, line)
+        scale = max(abs(av), abs(bv))
+        if "year" in unit.lower():
+            too_close = abs(av - bv) < 1
+        else:
+            too_close = scale == 0 or abs(av - bv) / scale < 0.05
+        if too_close:
+            print(f"[corpus] skipping clash with values too close: {line!r}")
+            continue
+        for label in (a, b):
+            if re.search(r"\d{3,}", label):
+                raise CorpusError(f"clashes.txt: option label leaks a number: {label!r}")
+        out.append({"mode": mode, "question": q, "a": a, "aValue": av,
+                    "b": b, "bValue": bv, "unit": unit})
+    return out
+
+
+def load_list(name):
+    out, seen = [], set()
+    for line in lines(name):
+        k = normalize(line)
+        if k and k not in seen:
+            seen.add(k)
+            out.append(line)
+    return out
+
+
+def load_templates():
+    out = load_list("templates.txt")
+    for t in out:
+        if t.count("{A}") != 1 or t.count("{B}") != 1:
+            raise CorpusError(f"templates.txt: needs one {{A}} and one {{B}}: {t!r}")
+    return out
+
+
+FUNCTION_VERBS = {"be", "is", "am", "are", "was", "were", "have", "has", "had", "do",
+                  "does", "did", "can", "will", "shall", "may", "might", "must",
+                  "should", "would", "could"}
+
+
+def load_verbs():
+    return sorted({v.lower() for v in load_list("verbs.txt")
+                   if re.fullmatch(r"[a-zA-Z]+", v) and v.lower() not in FUNCTION_VERBS})

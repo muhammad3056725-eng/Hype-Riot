@@ -1,0 +1,35 @@
+# Pitch prompt templates - each uses {A} and {B} exactly once
+Pitch a brand-new video game combining {A} and {B}
+Invent an Olympic sport that uses {A} and {B}
+Pitch a streaming show where {A} meets {B}
+Pitch a summer blockbuster starring {A} and {B}
+Write an ad slogan for a product made of {A} and {B}
+Design a theme-park ride themed on {A} and {B}
+Start a school club all about {A} and {B}
+Create a superhero whose powers come from {A} and {B}
+Open a restaurant that serves {A} with a side of {B}
+Pitch an app that connects {A} with {B}
+Name a band formed by {A} and {B} and sell their first hit
+Invent a new holiday celebrating {A} and {B}
+Pitch a reality show where {A} competes against {B}
+Pitch a cooking show hosted by {A} inside {B}
+Invent a board game where {A} battles {B}
+Pitch a horror movie where {A} is haunted by {B}
+Sell a new breakfast cereal inspired by {A} and {B}
+Pitch a buddy-cop movie starring {A} and {B}
+Design a new energy drink flavored like {A} and {B}
+Create a dating app that matches {A} with {B}
+Pitch a musical about the love story of {A} and {B}
+Invent a gadget that turns {A} into {B}
+Pitch a nature documentary following {A} and {B}
+Design a vacation resort run entirely by {A} for {B}
+Write a news headline where {A} saves {B}
+Invent a dance move inspired by {A} and {B}
+Pitch a kids' cartoon about {A} and their best friend {B}
+Create a new ice cream flavor mixing {A} and {B}
+Pitch a game show where contestants use {A} to win {B}
+Invent a new fashion trend combining {A} and {B}
+Pitch a mystery novel where {A} solves a case involving {B}
+Start a business that delivers {A} straight to {B}
+Design a sports team mascot: {A} riding {B}
+Pitch a talk show where {A} interviews {B}

@@ -1,11 +1,15 @@
 # HYPE RIOT art source
 
-- `neon_32.gpl` — the blueprint §3 exact 32-color neon palette (GIMP/Aseprite-importable).
-- Sprites in this build are **code-drawn** (MC VOLT, the 64-member crowd,
-  avatars, and the 16×16 Pixel Zoom-Out bitmaps in
-  `pipeline/corpus/zoom.py`) — the same approach NEXUS RELAY shipped with.
+Everything the game draws is vector/canvas code — there are no bitmap
+sprites to edit:
 
-Deviation (flagged, not hidden): the blueprint's repo layout lists
-`.aseprite` source files. Aseprite is not available in this build
-environment, so there are no .aseprite masters; the .gpl palette plus
-the in-code pixel data are the editable sources.
+- Arena, spotlights, jumbotron, crowd, particles: `apps/web/src/engine/`
+  (`Renderer.ts`, `CrowdSystem.ts`, `Particles.ts`, `Shaders.ts`).
+- Host MC VOLT: `apps/web/src/engine/HostMcVolt.ts`.
+- Player avatar + cosmetics: `apps/web/src/engine/AvatarBuilder.ts`.
+- Theme colors: `ARENA_THEMES` in `Renderer.ts` and the CSS variables in
+  `apps/web/src/styles.css`.
+- Favicon: `public/favicon.svg`.
+
+`neon_32.gpl` is the palette of the retired pixel-art version (v1), kept
+for reference only; the v2 renderer does not use it.

@@ -1,11 +1,12 @@
-// HYPE RIOT Round 2 — FACT OR CAP?! (Blueprint §2): 28 seconds,
-// 4 questions x 7 seconds. Claim Smash (FACT/CAP), Stream/Stat Clash
-// (pick the bigger number), Pixel Zoom-Out (sprite de-pixelates at
-// 20%/second). Streak multipliers: 2 in a row = 1.5x, 3+ = 2.0x.
-import type { FactOrCapCard } from "@hype-riot/shared-types";
+// HYPE RIOT Round 2 — FACT OR CAP?!: 4 cards x 7 seconds. Claim (FACT /
+// CAP), Clash (pick A or B — "max" or "min" questions), Zoom-in mystery
+// (emoji pulls back from extreme close-up). Streak: 2 in a row = 1.5x,
+// 3+ = 2x. After every answer or timeout a short reveal shows the right
+// answer (input is locked, so a double-tap can't answer the next card).
+import type { ClashCard, FactOrCapCard } from "@hype-riot/shared-types";
 
-export const ROUND2_SECONDS = 28;
 export const SECONDS_PER_CARD = 7;
+export const REVEAL_MS = 1300;
 export const BASE_POINTS = 400;
 
 export function streakMultiplier(streak: number): number {
@@ -14,82 +15,127 @@ export function streakMultiplier(streak: number): number {
   return 1.0;
 }
 
+export function clashWinner(card: ClashCard): "A" | "B" {
+  const aWins = card.mode === "max" ? card.aValue > card.bValue : card.aValue < card.bValue;
+  return aWins ? "A" : "B";
+}
+
+/** The correct option, as display text. */
+export function correctAnswerText(card: FactOrCapCard): string {
+  if (card.type === "CLAIM") return card.isFact ? "FACT" : "CAP";
+  if (card.type === "CLASH") return clashWinner(card) === "A" ? card.a : card.b;
+  return card.answer;
+}
+
 export interface CardResult {
   card: FactOrCapCard;
   correct: boolean;
+  timedOut: boolean;
+  picked: string | null;
   points: number;
   streakAfter: number;
 }
 
+export type Round2Phase = "ask" | "reveal" | "done";
+
 export class Round2FactOrCap {
   readonly cards: FactOrCapCard[];
   index = 0;
-  cardTimeLeft = SECONDS_PER_CARD;
+  phase: Round2Phase = "ask";
   streak = 0;
   bestStreak = 0;
   score = 0;
   results: CardResult[] = [];
-  finished = false;
+  private deadline: number;
+  private revealUntil = 0;
+  private cardStart: number;
 
-  constructor(cards: FactOrCapCard[]) {
+  constructor(cards: FactOrCapCard[], now: number) {
     this.cards = cards.slice(0, 4);
-    if (this.cards.length < 4) this.finished = true;
+    this.cardStart = now;
+    this.deadline = now + SECONDS_PER_CARD * 1000;
+    if (this.cards.length === 0) this.phase = "done";
+  }
+
+  get finished(): boolean {
+    return this.phase === "done";
   }
 
   get current(): FactOrCapCard | null {
-    return this.finished ? null : this.cards[this.index];
+    return this.phase === "done" ? null : this.cards[this.index];
   }
 
-  /** Zoom reveal fraction for the current card (0 = fully pixelated). */
-  get zoomReveal(): number {
-    return 1 - this.cardTimeLeft / SECONDS_PER_CARD;
+  get lastResult(): CardResult | null {
+    return this.results[this.results.length - 1] ?? null;
   }
 
-  private resolve(correct: boolean): CardResult {
+  cardRemaining(now: number): number {
+    return this.phase === "ask" ? Math.max(0, (this.deadline - now) / 1000) : 0;
+  }
+
+  /** 0 = fully zoomed/blurred, 1 = fully revealed. */
+  zoomReveal(now: number): number {
+    if (this.phase !== "ask") return 1;
+    return Math.min(1, Math.max(0, (now - this.cardStart) / (SECONDS_PER_CARD * 1000)));
+  }
+
+  private resolve(correct: boolean, picked: string | null, now: number, timedOut = false): CardResult {
     const card = this.cards[this.index];
     this.streak = correct ? this.streak + 1 : 0;
     this.bestStreak = Math.max(this.bestStreak, this.streak);
-    const points = correct
-      ? Math.round(BASE_POINTS * streakMultiplier(this.streak))
-      : 0;
+    const points = correct ? Math.round(BASE_POINTS * streakMultiplier(this.streak)) : 0;
     this.score += points;
-    const result: CardResult = { card, correct, points, streakAfter: this.streak };
+    const result: CardResult = { card, correct, timedOut, picked, points, streakAfter: this.streak };
     this.results.push(result);
-    this.index += 1;
-    this.cardTimeLeft = SECONDS_PER_CARD;
-    if (this.index >= this.cards.length) this.finished = true;
+    this.phase = "reveal";
+    this.revealUntil = now + REVEAL_MS;
     return result;
   }
 
-  /** Claim Smash answer: true = player tapped FACT. */
-  answerClaim(saysFact: boolean): CardResult | null {
+  answerClaim(saysFact: boolean, now: number): CardResult | null {
     const card = this.current;
-    if (!card || card.type !== "CLAIM") return null;
-    return this.resolve(saysFact === card.isFact);
+    if (this.phase !== "ask" || !card || card.type !== "CLAIM") return null;
+    return this.resolve(saysFact === card.isFact, saysFact ? "FACT" : "CAP", now);
   }
 
-  /** Clash answer: "A" or "B". */
-  answerClash(pick: "A" | "B"): CardResult | null {
+  answerClash(pick: "A" | "B", now: number): CardResult | null {
     const card = this.current;
-    if (!card || card.type !== "CLASH") return null;
-    const correctPick = card.aValue >= card.bValue ? "A" : "B";
-    return this.resolve(pick === correctPick);
+    if (this.phase !== "ask" || !card || card.type !== "CLASH") return null;
+    return this.resolve(pick === clashWinner(card), pick === "A" ? card.a : card.b, now);
   }
 
-  /** Zoom answer: the tapped option string. */
-  answerZoom(option: string): CardResult | null {
+  answerZoom(option: string, now: number): CardResult | null {
     const card = this.current;
-    if (!card || card.type !== "ZOOM") return null;
-    return this.resolve(option === card.answer);
+    if (this.phase !== "ask" || !card || card.type !== "ZOOM") return null;
+    return this.resolve(option === card.answer, option, now);
   }
 
-  tick(dt: number): CardResult | null {
-    if (this.finished) return null;
-    this.cardTimeLeft -= dt;
-    if (this.cardTimeLeft <= 0) {
-      // time out = wrong answer, streak resets
-      return this.resolve(false);
+  /**
+   * Advances wall-clock state. Returns what happened, in order: timeouts
+   * ("timeout" results) and card changes ("next"). Long gaps (a hidden
+   * tab) are processed card by card.
+   */
+  update(now: number): Array<{ kind: "timeout"; result: CardResult } | { kind: "next" }> {
+    const events: Array<{ kind: "timeout"; result: CardResult } | { kind: "next" }> = [];
+    for (let guard = 0; guard < 16 && this.phase !== "done"; guard++) {
+      if (this.phase === "ask" && now >= this.deadline) {
+        events.push({ kind: "timeout", result: this.resolve(false, null, this.deadline, true) });
+        continue;
+      }
+      if (this.phase === "reveal" && now >= this.revealUntil) {
+        this.index += 1;
+        if (this.index >= this.cards.length) {
+          this.phase = "done";
+        } else {
+          this.phase = "ask";
+          this.cardStart = this.revealUntil;
+          this.deadline = this.revealUntil + SECONDS_PER_CARD * 1000;
+        }
+        events.push({ kind: "next" });
+        continue;
+      }
+      break;
     }
-    return null;
+    return events;
   }
 }

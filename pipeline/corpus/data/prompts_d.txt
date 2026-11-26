@@ -1,0 +1,1921 @@
+# HYPE RIOT prompt corpus - batch D
+# Format: "@ slug | categoryId | Prompt text", then one answer per line: "Canonical | alias | alias"
+# Answers ordered from most commonly said to least.
+
+@ school-subjects | 10 | School subjects
+Math | maths | mathematics
+English | language arts | ela
+Science
+History
+PE | phys ed | gym | physical education
+Art
+Music
+Geography
+Spanish
+Biology | bio
+Chemistry | chem
+Physics
+French
+Computer Science | computing | coding | programming | ict | information technology
+Drama | theater | theatre
+Health
+Social Studies
+Reading
+Algebra
+Geometry
+Writing
+Calculus
+German
+Economics | econ
+Psychology | psych
+Latin
+Chinese | mandarin
+Home Economics | home ec | cooking | food tech | food technology
+Religious Education | religious studies | religion
+Woodshop | shop | woodwork
+Statistics | stats
+Government | civics | politics
+Literature | lit
+Business Studies | business
+Philosophy
+Sociology
+Design and Technology | design tech
+Earth Science
+Spelling
+Trigonometry | trig
+Japanese
+Italian
+Anatomy
+Choir
+Band
+Photography
+Dance
+Accounting
+Law
+Journalism
+
+@ backpack | 10 | Things in a backpack or pencil case
+Pencil
+Pen
+Eraser | rubber
+Notebook | exercise book
+Ruler
+Calculator
+Water bottle
+Textbook | book
+Highlighter
+Pencil sharpener | sharpener
+Lunch box | lunch | lunchbox | packed lunch
+Folder | file
+Binder | ring binder
+Colored pencils | coloured pencils | colouring pencils | coloring pencils
+Markers | felt tips | felt-tip pens
+Crayons
+Scissors
+Glue stick | glue
+Phone | cell phone | mobile phone | mobile
+Laptop | chromebook
+Headphones | earphones
+Earbuds | airpods
+Snacks
+Paper | loose leaf | notebook paper
+Planner | agenda | diary
+Pencil case
+Compass
+Protractor
+Tape | sellotape | scotch tape
+Sticky notes | post-its | post-it notes
+Mechanical pencil
+Gel pens
+Correction tape | white-out | tipp-ex | correction fluid
+Keys
+Wallet
+Charger | phone charger
+Hand sanitizer
+Tissues | kleenex
+Gum | chewing gum
+Gym clothes | pe kit | gym kit
+Hoodie | sweatshirt
+Jacket | coat
+Umbrella
+Lip balm | chapstick
+Stapler
+Paper clips
+Flash cards | index cards
+Tablet | ipad
+Hair tie | scrunchie | hair elastic
+Homework
+
+@ classroom | 10 | Things in a classroom
+Desk
+Chair
+Whiteboard | dry erase board
+Teacher
+Students | pupils | kids | classmates
+Clock
+Chalkboard | blackboard
+Books
+Computer | pc
+Projector
+Pencil sharpener
+Trash can | bin | garbage can | wastebasket | rubbish bin
+Flag
+Map
+Globe
+Posters
+Window
+Door
+Bookshelf | bookcase
+Markers | dry erase markers | whiteboard markers
+Chalk
+Board eraser | whiteboard eraser | chalkboard eraser | eraser
+Calendar
+Smartboard | interactive whiteboard | promethean board
+Laptop | chromebook
+Bulletin board | notice board | cork board | pinboard
+Lockers
+Backpacks | bags | schoolbags | school bags
+Pencils
+Paper
+Scissors
+Glue
+Stapler
+Tissues | kleenex
+Hand sanitizer
+Speakers
+TV | television
+Lights
+Rug | carpet
+Sink
+Periodic table
+Worksheets
+Intercom | pa system | loudspeaker
+Calculator
+Cubbies | cubby
+Tablet | ipad
+Plants
+Fan
+Tape
+Ruler
+
+@ jobs | 10 | Jobs and careers
+Doctor | physician
+Teacher
+Nurse
+Firefighter | fireman
+Police officer | cop | policeman | police
+Lawyer | attorney
+Chef | cook
+Engineer
+Dentist
+Pilot
+Vet | veterinarian
+Scientist
+Farmer
+Artist
+Accountant
+Plumber
+Electrician
+Mechanic
+Software developer | programmer | coder | software engineer
+Actor | actress
+Singer
+Athlete | professional athlete
+Architect
+Construction worker | builder
+Carpenter
+Cashier
+Waiter | waitress | server
+Barber
+Hairdresser | hairstylist
+Journalist | reporter
+Photographer
+Judge
+Soldier
+Astronaut
+Pharmacist
+Librarian
+Mail carrier | postman | mailman | postal worker
+Truck driver | trucker
+Bus driver
+Taxi driver | cab driver
+Writer | author
+Musician
+Dancer
+YouTuber | content creator
+Surgeon
+Psychologist | therapist
+Lifeguard
+Zookeeper
+Flight attendant | stewardess | air hostess
+Baker
+Janitor | custodian | cleaner
+Banker
+Principal | headteacher | headmaster
+Receptionist
+Coach
+Graphic designer | designer
+Entrepreneur | business owner
+Babysitter | nanny
+Fisherman
+Gardener | landscaper
+
+@ birthday-party | 10 | Things at a birthday party
+Cake | birthday cake
+Balloons
+Presents | gifts
+Candles
+Party hats
+Ice cream
+Friends | guests
+Games | party games
+Decorations | decor
+Music
+Pizza
+Cupcakes
+Banner | birthday banner
+Birthday cards | cards
+Piñata
+Confetti
+Streamers
+Party favors | goody bags | party bags | party favours | loot bags
+Happy Birthday song | happy birthday | singing
+Candy | sweets | lollies
+Snacks
+Chips | crisps
+Soda | pop | fizzy drinks | soft drinks
+Juice
+Wrapping paper | gift wrap
+Party poppers
+Party blowers | noisemakers | party horns
+Paper plates | plates
+Cups | paper cups
+Napkins | serviettes
+Tablecloth
+Bounce house | bouncy castle
+Clown
+Magician
+Face painting
+Dancing
+Karaoke
+DJ
+Cookies
+Popcorn
+Hot dogs
+Sandwiches
+Punch | fruit punch
+Family
+Birthday crown | crown | tiara
+Photos | pictures | camera
+Lighter | matches
+
+@ kitchen | 10 | Things in a kitchen
+Fridge | refrigerator
+Oven
+Stove | stovetop | hob | range
+Microwave
+Sink
+Dishwasher
+Toaster
+Plates | dishes
+Forks
+Knives
+Spoons
+Pots
+Pans | frying pan | skillet
+Cups
+Bowls
+Freezer
+Kettle
+Blender
+Coffee maker | coffee machine
+Cabinets | cupboards
+Counter | countertop | worktop
+Table | kitchen table
+Glasses
+Mugs
+Spatula
+Whisk
+Cutting board | chopping board
+Ladle
+Can opener | tin opener
+Oven mitts | oven gloves
+Dish towel | tea towel
+Sponge
+Dish soap | washing up liquid
+Trash can | bin | garbage can
+Air fryer
+Food
+Spices | spice rack
+Salt
+Pepper
+Mixer | stand mixer
+Rolling pin
+Grater | cheese grater
+Colander | strainer
+Peeler | potato peeler
+Tongs
+Measuring cups
+Paper towels | kitchen roll
+Aluminum foil | tin foil | foil | aluminium foil
+Plastic wrap | cling film | saran wrap
+Chairs
+
+@ bathroom | 10 | Things in a bathroom
+Toilet | loo
+Sink | basin
+Shower
+Bathtub | tub | bath
+Toothbrush
+Toothpaste
+Mirror
+Towel
+Soap
+Toilet paper | toilet roll | tp
+Shampoo
+Conditioner
+Hairbrush
+Comb
+Floss | dental floss
+Mouthwash
+Bath mat
+Shower curtain
+Hair dryer | blow dryer
+Razor
+Shaving cream
+Deodorant
+Lotion | moisturizer
+Plunger
+Trash can | bin
+Toilet brush
+Scale | bathroom scale | scales
+Cotton swabs | q-tips | cotton buds
+Medicine cabinet
+Body wash | shower gel
+Loofah | sponge
+Rubber duck
+Bath bomb
+Bubble bath
+Makeup
+Perfume | cologne
+Air freshener
+Tissues | kleenex
+Nail clippers
+Tweezers
+Faucet | tap
+Towel rack | towel rail
+Hair straightener | flat iron | straighteners
+Curling iron
+Face wash | cleanser
+Cotton balls
+
+@ clothes | 10 | Clothes and accessories
+T-shirt | tee | tshirt
+Pants | trousers
+Jeans
+Shoes
+Socks
+Hat
+Jacket
+Dress
+Hoodie
+Shorts
+Skirt
+Sweater | jumper | pullover
+Coat
+Sneakers | trainers | tennis shoes | kicks
+Shirt | button-up | dress shirt
+Boots
+Scarf
+Gloves
+Belt
+Tie | necktie
+Sunglasses | shades
+Watch
+Necklace
+Earrings
+Ring
+Bracelet
+Cap | baseball cap
+Beanie | toque | woolly hat
+Sandals
+Flip-flops | jandals
+Leggings
+Pajamas | pyjamas | pjs
+Underwear | boxers | briefs
+Suit
+Blazer
+Cardigan
+Tank top
+Swimsuit | bathing suit | swimming costume
+Mittens
+Purse | handbag
+Sweatpants | joggers | trackies | tracksuit bottoms
+Crop top
+Polo shirt | polo
+Slippers
+High heels | heels
+Bow tie
+Overalls | dungarees
+Raincoat
+Blouse
+Bra
+Wallet
+Onesie
+
+@ beach | 10 | Things at the beach
+Sand
+Ocean | sea | water
+Waves
+Sun | sunshine
+Towel | beach towel
+Umbrella | beach umbrella | parasol
+Sunscreen | sunblock | suncream | sun cream
+Seashells | shells
+Sandcastle
+Swimsuit | bathing suit | swimming costume
+Sunglasses | shades
+Bucket | pail
+Shovel | spade
+Crabs
+Seagulls | gulls
+Lifeguard
+Surfboard
+Beach ball
+Flip-flops | sandals
+Cooler | esky | ice chest
+Beach chair | deck chair | lounger
+Ice cream
+Fish
+Boats
+Seaweed
+Dolphins
+Jellyfish
+Rocks
+Pier
+Boardwalk
+Sun hat | hat
+Frisbee
+Volleyball | beach volleyball
+Kite
+Picnic
+Starfish | sea star
+Sharks
+Snorkel
+Boogie board | bodyboard
+Palm trees
+Surfers | surfing
+Lifeguard tower
+Sand dollar
+Bikini
+Tide pools
+Driftwood
+Pebbles
+
+@ holidays | 10 | Holidays and celebrations
+Christmas | xmas
+Halloween
+Thanksgiving
+Easter
+New Year's | new years eve | new year | nye
+Valentine's Day | valentines
+Birthday
+Fourth of July | independence day | july 4th
+Hanukkah | chanukah
+St. Patrick's Day | st patricks day | saint patricks day | paddys day
+Mother's Day
+Father's Day
+Diwali
+Chinese New Year | lunar new year
+Ramadan
+Eid | eid al-fitr | eid al-adha
+Kwanzaa
+Day of the Dead | dia de los muertos
+Cinco de Mayo
+April Fools' Day | april fools
+Labor Day | labour day
+Memorial Day
+Martin Luther King Jr. Day | mlk day
+Veterans Day
+Presidents' Day
+Earth Day
+Groundhog Day
+Passover
+Mardi Gras
+Boxing Day
+Christmas Eve
+Graduation
+Wedding
+Anniversary
+Baby shower
+Rosh Hashanah
+Yom Kippur
+Holi
+Juneteenth
+Canada Day
+Bonfire Night | guy fawkes night
+Pancake Day | shrove tuesday
+Pi Day
+Oktoberfest
+Australia Day
+Bastille Day
+Remembrance Day
+Carnival
+
+@ hobbies | 10 | Hobbies
+Reading
+Video games | gaming
+Drawing
+Painting
+Singing
+Dancing
+Cooking
+Playing music | playing an instrument | music
+Sports
+Photography
+Swimming
+Fishing
+Hiking
+Writing
+Baking
+Gardening
+Knitting
+Skateboarding
+Cycling | biking | bike riding
+Running | jogging
+Collecting
+Chess
+Camping
+Arts and crafts | crafts | crafting
+Sewing
+Puzzles | jigsaw puzzles
+Yoga
+Traveling | travelling | travel
+Watching movies | movies
+Shopping
+Coding | programming
+Building Lego | lego
+Board games
+Surfing
+Skiing
+Snowboarding
+Rock climbing | climbing
+Bird watching | birding
+Scrapbooking
+Crochet | crocheting
+Pottery | ceramics
+Woodworking
+Martial arts | karate
+Horse riding | horseback riding
+Acting | theater
+Origami
+Journaling
+Working out | gym | exercise | exercising
+Skating | ice skating | roller skating
+Magic tricks
+Model building
+
+@ house-furniture | 10 | Furniture and things in a living room or bedroom
+Couch | sofa | settee
+Bed
+TV | television
+Chair
+Table
+Lamp
+Dresser | chest of drawers
+Bookshelf | bookcase
+Desk
+Rug | carpet
+Pillows | cushions
+Coffee table
+Armchair | recliner
+Nightstand | bedside table | night table
+Wardrobe | closet | armoire
+Mirror
+Curtains | drapes
+Blanket
+TV stand | entertainment center
+Ottoman | footstool | pouf
+Fireplace
+Clock
+Paintings | artwork | art
+Plants | houseplants
+Ceiling fan | fan
+Beanbag | bean bag chair
+Shelves | shelf
+Blinds
+Vase
+Candles
+Remote | remote control
+Bunk bed
+Mattress
+Sheets | bed sheets
+Comforter | duvet | quilt
+Alarm clock
+Picture frames | photos | photo frames
+Game console
+Side table | end table
+Rocking chair
+Futon
+Laundry basket | hamper
+Chandelier
+Cabinet
+Speakers
+Window
+
+@ vehicles | 10 | Vehicles and ways to travel
+Car
+Bus
+Train
+Airplane | plane | aeroplane | jet
+Boat
+Bicycle | bike
+Motorcycle | motorbike
+Truck | lorry
+Helicopter
+Ship
+Walking | on foot | walk
+Taxi | cab
+Subway | metro | underground | tube
+Scooter
+Skateboard
+Van
+Tram | streetcar | trolley
+Rocket | spaceship
+Hot air balloon
+Submarine
+Canoe
+Kayak
+Sailboat
+Yacht
+Cruise ship
+Ferry
+Jet ski
+Golf cart
+Tractor
+Ambulance
+Fire truck | fire engine
+Police car | cop car
+Limousine | limo
+Horse | horseback
+Horse and carriage | carriage
+Roller skates | rollerblades | skates
+Segway
+Hoverboard
+Snowmobile
+Unicycle
+Tricycle
+Electric scooter | e-scooter
+Cable car | gondola
+Monorail
+Blimp
+Glider
+SUV
+RV | camper | motorhome
+Pickup truck | pickup
+Raft
+
+@ tools | 10 | Tools in a toolbox
+Hammer
+Screwdriver
+Wrench | spanner
+Pliers
+Saw | hand saw
+Drill | power drill
+Tape measure | measuring tape
+Level | spirit level
+Nails
+Screws
+Utility knife | box cutter | stanley knife
+Allen key | allen wrench | hex key
+Sandpaper
+Clamp
+Chisel
+Flashlight | torch
+Mallet
+Crowbar | pry bar
+Socket wrench | ratchet
+Adjustable wrench | adjustable spanner | monkey wrench
+Duct tape
+Hacksaw
+Stud finder
+Pencil
+Safety glasses | goggles
+Work gloves | gloves
+File
+Wire cutters
+Nail gun
+Staple gun
+Hot glue gun | glue gun
+Bolts
+Nuts
+Washers
+Square | speed square | try square
+Putty knife | scraper
+Paintbrush
+Multimeter
+Zip ties | cable ties
+Pipe wrench
+Electrical tape
+Wire strippers
+Vise grips | locking pliers
+Jigsaw
+Circular saw
+Sledgehammer
+Caulk gun | caulking gun
+Pocket knife
+
+@ halloween-costumes | 10 | Halloween costumes
+Witch
+Ghost
+Vampire | dracula
+Zombie
+Skeleton
+Pumpkin | jack-o'-lantern
+Superhero
+Princess
+Pirate
+Mummy
+Werewolf
+Frankenstein | frankenstein's monster
+Black cat | cat
+Spider-Man
+Batman
+Devil
+Angel
+Clown
+Ninja
+Cowboy | cowgirl
+Dinosaur | t-rex
+Fairy
+Wizard
+Superman
+Wonder Woman
+Elsa
+Harry Potter
+Grim Reaper
+Doctor
+Police officer | cop
+Firefighter
+Astronaut
+Mermaid
+Unicorn
+Minion
+Pikachu
+Mario
+Iron Man
+Captain America
+Joker
+Scarecrow
+Alien
+Robot
+Bat
+Hot dog
+Banana
+Bumblebee | bee
+Ladybug
+Darth Vader
+Spider
+
+@ christmas | 10 | Things you see at Christmas
+Christmas tree | tree
+Santa Claus | santa | father christmas | saint nick | st nick
+Presents | gifts
+Christmas lights | lights | fairy lights
+Snow
+Reindeer
+Stockings
+Ornaments | baubles
+Elves
+Candy canes
+Snowman
+Wreath
+Mistletoe
+Star
+Gingerbread man
+Gingerbread house
+Sleigh
+Rudolph
+Wrapping paper
+Bows | ribbons
+Tinsel
+Garland
+Cookies | christmas cookies
+Hot chocolate | hot cocoa
+Eggnog
+Nativity scene | nativity | manger
+Angel
+Baby Jesus | jesus
+Bells
+Carolers | christmas carols | carols
+Candles
+Poinsettia
+Holly
+Turkey
+Ham
+Fireplace
+Chimney
+Christmas cards | cards
+Advent calendar
+Ugly sweater | christmas sweater | christmas jumper
+Snowflakes
+Grinch
+Nutcracker
+Mince pies
+Christmas crackers | crackers
+Elf on the Shelf
+Pine cones
+Decorations
+
+@ hospital | 10 | Things in a hospital
+Doctors
+Nurses
+Patients | sick people
+Hospital beds | beds
+Wheelchair
+Ambulance
+Stethoscope
+Needles | syringe | shots | injections
+Medicine | medication | pills
+X-ray
+Surgeons
+Bandages | band-aids | plasters
+Gloves | rubber gloves | latex gloves
+Masks | face masks | surgical masks
+Scrubs
+Hospital gown | gown
+IV | iv drip | drip
+Stretcher | gurney
+Thermometer
+Crutches
+Cast
+Heart monitor | monitor
+Operating room | operating theatre
+Emergency room | er | a&e | emergency department
+Waiting room
+Reception | front desk
+Elevator | lift
+Cafeteria | canteen
+Gift shop
+Flowers
+Babies | newborns
+Blood | blood bags
+MRI | mri machine
+Defibrillator | defib | aed
+Oxygen tank | oxygen | oxygen mask
+Blood pressure cuff
+Hand sanitizer
+Sling
+Clipboard
+Scalpel
+Paramedics | emts
+Helicopter | air ambulance
+Pharmacy
+Visitors
+Wristband | hospital bracelet
+Vending machine
+Ultrasound
+Get well cards | cards
+
+@ carnival | 10 | Things at a carnival or amusement park
+Roller coaster | rollercoaster | coaster
+Ferris wheel
+Cotton candy | candy floss | fairy floss
+Carnival games | games
+Rides
+Funnel cake
+Carousel | merry-go-round
+Bumper cars | dodgems
+Popcorn
+Prizes | stuffed animals
+Corn dogs
+Tickets
+Clowns
+Hot dogs
+Teacups | spinning teacups
+Haunted house | ghost train
+Funhouse
+Hall of mirrors
+Drop tower | free fall
+Swing ride | swings
+Log flume | log ride
+Pirate ship
+Ring toss
+Balloon darts | darts
+Duck pond | hook a duck
+High striker | strength test | strongman game
+Face painting
+Lemonade
+Snow cones | shaved ice
+Slushies | slurpee
+Ice cream
+Candy apples | caramel apples | toffee apples
+Pretzels
+Churros
+Nachos
+Turkey legs
+Fried Oreos
+Lines | queues
+Crowds
+Mascots
+Souvenirs | gift shop
+Fireworks
+Parade
+Arcade
+Go-karts
+Tilt-a-Whirl
+Gravitron
+Bounce house
+Petting zoo
+Water slides
+
+@ camping | 10 | Camping gear and outdoor stuff
+Tent
+Sleeping bag
+Campfire | fire | bonfire
+Flashlight | torch
+Marshmallows
+S'mores
+Lantern
+Backpack | rucksack
+Cooler | esky | ice chest
+Hot dogs
+Bug spray | insect repellent | mosquito repellent
+Map
+Compass
+Water bottle
+Matches
+Lighter
+Pocket knife | swiss army knife
+Camping chair | camp chair | folding chair
+Firewood | logs
+Sleeping pad | sleeping mat | air mattress | camping mat
+Pillow
+Blanket
+Camp stove | camping stove | stove
+Pots and pans | cookware
+Tarp
+Rope
+First aid kit
+Sunscreen
+Hiking boots | boots
+Rain jacket | raincoat | poncho
+Hammock
+Trees | forest | woods
+Stars
+Bears
+Mosquitoes | bugs
+Fishing rod | fishing pole
+Canoe
+Trail mix
+Binoculars
+Headlamp | head torch
+Axe | hatchet
+Toilet paper
+Roasting sticks | sticks
+Lake
+Tent stakes | tent pegs
+Water filter
+Snacks
+RV | camper | caravan
+Multitool
+Hat
+
+@ garden | 10 | Things in a garden or backyard
+Flowers
+Grass | lawn
+Trees
+Plants
+Bushes | shrubs | hedge
+Swing | swing set
+Pool | swimming pool
+Trampoline
+Fence
+Lawn mower | mower | lawnmower
+Hose | garden hose
+Shed
+Grill | bbq | barbecue
+Vegetables | veggies
+Bird feeder
+Birdbath
+Birds
+Bees
+Butterflies
+Squirrels
+Worms
+Dirt | soil
+Rocks | stones
+Shovel | spade
+Rake
+Watering can
+Wheelbarrow
+Sprinkler
+Patio | deck | terrace
+Picnic table | patio table | garden table
+Lawn chairs | garden chairs | patio chairs
+Garden gnome | gnome
+Pond
+Fountain
+Treehouse
+Slide
+Sandbox | sandpit
+Dog
+Doghouse | kennel
+Hammock
+Fire pit
+Weeds
+Roses
+Tomatoes
+Flower pots | pots | planters
+Gate
+Path | pathway
+Greenhouse
+Compost
+Snails
+Clothesline | washing line
+Sunflowers
+Leaves
+
+@ apps-websites | 5 | Apps and websites everyone uses
+YouTube
+TikTok
+Instagram | insta | ig
+Google
+Snapchat | snap
+Netflix
+Spotify
+Discord
+Amazon
+WhatsApp
+Twitter | x
+Facebook | fb
+Roblox
+Reddit
+Pinterest
+ChatGPT
+Wikipedia | wiki
+Twitch
+Gmail
+Google Maps
+FaceTime
+Zoom
+Duolingo
+Disney+ | disney plus
+Uber
+Messenger | facebook messenger
+Apple Music
+Canva
+CapCut
+Shazam
+eBay
+Etsy
+Shein
+Temu
+Uber Eats
+DoorDash
+PayPal
+Venmo
+Cash App
+LinkedIn
+Telegram
+BeReal
+Threads
+Google Drive
+Google Classroom
+Quizlet
+Kahoot
+Microsoft Teams | teams
+iMessage
+Hulu
+Prime Video | amazon prime video
+Google Docs
+Waze
+Airbnb
+
+@ youtubers | 5 | YouTubers and streamers
+MrBeast | mr beast | jimmy donaldson
+Markiplier | mark fischbach
+Ninja | tyler blevins
+Dude Perfect
+Jacksepticeye | sean mcloughlin
+Ryan's World | ryan kaji | ryan toysreview
+DanTDM | dan tdm | thediamondminecart
+MKBHD | marques brownlee
+Preston | prestonplayz
+Unspeakable
+Mark Rober
+Ryan Trahan
+Aphmau
+Pokimane
+Technoblade
+TommyInnit
+Emma Chamberlain
+Smosh
+Good Mythical Morning | rhett and link | gmm
+Zach King
+CoryxKenshin
+Valkyrae
+Ludwig
+SSundee
+Ali-A
+Lazarbeam
+Typical Gamer
+Ms Rachel
+Blippi
+Cocomelon
+Brent Rivera
+Lexi Rivera
+Veritasium
+Vsauce
+Kurzgesagt
+Linus Tech Tips | linus sebastian | ltt
+Rosanna Pansino | nerdy nummies
+Philza
+Tubbo
+Ranboo
+CaseOh
+SypherPK
+Lilly Singh | superwoman
+Liza Koshy
+KreekCraft
+Airrack
+Like Nastya
+Vlad and Niki
+Jenna Marbles
+Danny Gonzalez
+
+@ slang | 5 | Internet slang and memes
+Rizz
+Sus
+LOL | laughing out loud
+No cap
+Slay
+GOAT | greatest of all time
+Bussin
+Skibidi | skibidi toilet
+Bruh
+OMG | oh my god
+Lit
+Vibe | vibes | vibe check
+Bet
+Yeet
+Mid
+Lowkey
+Sheesh
+Salty
+Ghosting | ghosted
+FOMO | fear of missing out
+YOLO | you only live once
+Flex
+Cap
+Stan
+Sigma
+Ohio
+Fanum tax
+NPC
+Delulu
+Aura | aura points
+Cringe
+Ratio
+Dub | w
+Take the L | took an l
+Main character | main character energy
+It's giving
+Ate | ate and left no crumbs
+BRB | be right back
+Tea | spill the tea
+Shook
+Glow up
+Bae
+Fam
+Touch grass
+Rent free
+Hits different
+Let him cook
+Brainrot | brain rot
+Six seven | 6 7 | 67 | 6-7
+SMH | shaking my head
+TBH | to be honest
+IDK | i don't know
+Noob
+GG | good game
+Rickroll
+Doge
+Stonks
+Nyan Cat
+This is fine
+Chill guy
+
+@ awesome-words | 12 | Words that mean cool or awesome
+Cool
+Awesome
+Amazing
+Lit
+Fire
+Epic
+Sick
+Great
+Dope
+Rad
+Fantastic
+Incredible
+Wicked
+Legendary
+Excellent
+Brilliant
+Wonderful
+Fabulous | fab
+Outstanding
+Superb
+Phenomenal
+Spectacular
+Magnificent
+Stellar
+Sweet
+Neat
+Groovy
+Da bomb | the bomb | bomb
+Tight
+Fly
+Goated
+Boss
+Clutch
+Ace
+Swag
+Gnarly
+Tubular
+Far out
+Super
+Marvelous | marvellous
+Terrific
+Fresh
+Top-notch
+Unreal
+Insane
+Mind-blowing
+Mint
+Smashing
+Splendid
+Next level
+Out of this world
+First-class | first-rate
+Bangin' | banging
+Hype
+
+@ car-brands | 11 | Car brands
+Toyota
+Ford
+Honda
+Tesla
+BMW
+Chevrolet | chevy
+Mercedes-Benz | mercedes | benz
+Ferrari
+Lamborghini | lambo
+Audi
+Nissan
+Porsche
+Hyundai
+Kia
+Volkswagen | vw
+Jeep
+Dodge
+Subaru
+Mazda
+Lexus
+Bugatti
+McLaren
+Cadillac
+Jaguar
+Land Rover | range rover
+Volvo
+Mitsubishi
+Rolls-Royce
+Bentley
+Aston Martin
+Maserati
+GMC
+Buick
+Chrysler
+Lincoln
+Acura
+Infiniti
+Fiat
+Mini
+Peugeot
+Renault
+Alfa Romeo
+Ram
+Genesis
+Rivian
+Lucid
+Suzuki
+Koenigsegg
+Pagani
+Citroën
+Škoda
+Polestar
+BYD
+Lotus
+
+@ clothing-brands | 11 | Clothing and shoe brands
+Nike
+Adidas
+Gucci
+Puma
+Under Armour | under armor
+Jordan | air jordan
+H&M | h and m
+Zara
+Vans
+Converse
+Levi's
+Gap
+Supreme
+Louis Vuitton | lv
+Champion
+Old Navy
+Reebok
+New Balance
+The North Face | tnf
+Lululemon
+Ralph Lauren | polo ralph lauren
+Tommy Hilfiger
+American Eagle
+Hollister
+Abercrombie & Fitch | abercrombie
+Prada
+Chanel
+Versace
+Balenciaga
+Calvin Klein
+Uniqlo
+Forever 21
+Skechers
+Crocs
+Timberland
+Fila
+Shein
+Dior
+Burberry
+Hermès
+Fendi
+Columbia
+Patagonia
+Carhartt
+Lacoste
+Hugo Boss
+Guess
+Off-White
+Dr. Martens | doc martens
+UGG
+Birkenstock
+Asics
+Hoka
+Gymshark
+Primark
+Aéropostale
+
+@ tech-brands | 11 | Tech and electronics brands
+Apple
+Samsung
+Microsoft
+Sony
+Google
+Dell
+HP | hewlett-packard
+Lenovo
+LG
+Intel
+Nintendo
+Nvidia
+Asus
+Acer
+Xbox
+PlayStation
+Canon
+Panasonic
+Huawei
+Xiaomi
+Bose
+JBL
+Beats | beats by dre
+Logitech
+Razer
+AMD
+Alienware
+Motorola
+Nokia
+Toshiba
+Nikon
+Philips
+GoPro
+Fitbit
+Garmin
+OnePlus
+Amazon
+Meta | oculus
+Vizio
+TCL
+Sharp
+Sennheiser
+Skullcandy
+Corsair
+Dyson
+IBM
+Sonos
+DJI
+Hisense
+Roku
+Casio
+BlackBerry
+HTC
+Fujifilm
+SanDisk
+
+@ toys | 11 | Toys and toy brands
+Lego
+Barbie
+Hot Wheels
+Nerf
+Teddy bear | stuffed animal | plushie | soft toy | plush
+Yo-yo
+Rubik's Cube
+Play-Doh | playdough
+Action figures
+Dolls
+Toy cars
+Slinky
+Jump rope | skipping rope
+Kite
+Puzzle | jigsaw puzzle
+Fidget spinner
+Pop It
+Squishmallows
+Beyblade
+Pokémon cards
+Furby
+Tamagotchi
+Etch A Sketch
+Mr. Potato Head
+Transformers
+G.I. Joe
+My Little Pony
+Polly Pocket
+Cabbage Patch Kids
+Matchbox
+Fisher-Price
+Mattel
+Hasbro
+Water gun | squirt gun | super soaker
+Remote control car | rc car
+Hula hoop
+Frisbee
+Marbles
+Spinning top
+Jack-in-the-box
+Rocking horse
+Building blocks | blocks
+Silly Putty
+Funko Pop
+Labubu
+Beanie Babies
+LOL Surprise
+Bratz
+American Girl
+Tonka
+K'Nex
+Lincoln Logs
+Magna-Tiles
+Slime
+Kinetic Sand
+Bubbles
+Ball
+
+@ mascots | 11 | Brand mascots
+Ronald McDonald
+Tony the Tiger
+Geico Gecko | gecko
+Pillsbury Doughboy | doughboy | poppin fresh
+Mr. Peanut
+Colonel Sanders | the colonel
+M&M's | red m&m | yellow m&m
+Energizer Bunny
+Kool-Aid Man
+Trix Rabbit | trix bunny
+Lucky the Leprechaun | lucky
+Michelin Man
+Wendy
+Jolly Green Giant | green giant
+Cap'n Crunch | captain crunch
+Toucan Sam
+Chester Cheetah
+Mr. Clean
+Snap, Crackle and Pop | snap crackle pop
+The King | burger king
+Duo the Owl | duo | duolingo owl
+Chuck E. Cheese
+Smokey Bear | smokey the bear
+Mr. Pringles | pringles man | julius pringles
+Geoffrey the Giraffe
+Flo | progressive flo
+Aflac Duck
+Charmin Bears
+Keebler Elves
+Sonny the Cuckoo Bird | sonny
+Buzz the Bee | honey nut cheerios bee
+Little Caesar
+Morton Salt Girl
+Hamburglar
+Grimace
+Quaker Oats Man | quaker man
+Mr. Monopoly | rich uncle pennybags | monopoly man
+Gerber Baby
+Big Boy
+Jack Box | jack in the box
+Snuggle Bear
+Mr. Owl | tootsie pop owl
+Count Chocula
+Starbucks Siren | starbucks mermaid
+Nesquik Bunny | quicky
+Cornelius the Rooster | cornelius
+
+@ fairy-tales | 12 | Fairy tale and storybook characters
+Cinderella
+Snow White
+Little Red Riding Hood | red riding hood
+Goldilocks
+Rapunzel
+Sleeping Beauty | aurora | briar rose
+Big Bad Wolf
+Three Little Pigs
+Jack | jack and the beanstalk
+Hansel and Gretel | hansel | gretel
+Pinocchio
+Peter Pan
+Tinker Bell
+Captain Hook
+Alice
+The Little Mermaid | ariel
+Belle | beauty
+The Beast
+Prince Charming
+Fairy Godmother
+Evil Queen | wicked queen
+Seven Dwarfs
+Gingerbread Man
+Three Bears | papa bear | mama bear | baby bear
+Rumpelstiltskin
+Cheshire Cat
+Mad Hatter
+White Rabbit
+Queen of Hearts
+Wicked Stepmother | stepmother
+Ugly Stepsisters | stepsisters
+Humpty Dumpty
+Puss in Boots
+Ugly Duckling
+Thumbelina
+Frog Prince
+Princess and the Pea
+Wendy | wendy darling
+Pied Piper
+Mother Goose
+Little Bo Peep
+Winnie the Pooh | pooh
+Peter Rabbit
+The Cat in the Hat
+Dorothy
+Tin Man
+Scarecrow
+Cowardly Lion
+Wicked Witch of the West | wicked witch
+Mary Poppins
+Paddington Bear
+The Grinch
+Robin Hood
+Aladdin
+Genie
+Snow Queen
+
+@ superpowers | 12 | Superpowers
+Flying | flight
+Invisibility
+Super strength
+Super speed
+Teleportation
+Mind reading | telepathy
+Time travel
+Laser eyes | heat vision | laser vision
+X-ray vision
+Shapeshifting
+Healing | regeneration | super healing
+Immortality
+Telekinesis | psychokinesis
+Freezing time | time stop | stopping time
+Mind control
+Fire powers | pyrokinesis | fire control
+Ice powers | cryokinesis | ice control
+Weather control
+Breathing underwater | water breathing
+Shrinking
+Growing | giant size
+Super jump
+Web slinging | web shooting
+Stretching | elasticity
+Wall crawling | wall climbing
+Night vision
+Super hearing
+Talking to animals
+Electricity | lightning powers
+Force fields
+Cloning | duplication
+Walking through walls | intangibility | phasing
+Water control | hydrokinesis
+Earth control
+Wind control | air control
+Seeing the future | precognition | future sight
+Magic
+Super intelligence | genius
+Spider sense
+Sonic scream
+Power absorption
+Camouflage
+Plant control
+Invulnerability | indestructible | bulletproof
+
+@ books | 12 | Famous books and book series
+Harry Potter
+The Hunger Games
+Diary of a Wimpy Kid | wimpy kid
+Percy Jackson
+Twilight
+The Lord of the Rings | lotr
+The Hobbit
+The Chronicles of Narnia | narnia
+Charlotte's Web
+The Cat in the Hat
+Green Eggs and Ham
+To Kill a Mockingbird
+The Great Gatsby | gatsby
+Dog Man
+Matilda
+Charlie and the Chocolate Factory
+The Very Hungry Caterpillar
+Goosebumps
+Captain Underpants
+1984 | nineteen eighty-four
+Wonder
+The Giver
+Holes
+Divergent
+The Maze Runner
+Pride and Prejudice
+Alice in Wonderland | alice's adventures in wonderland
+Frankenstein
+Dracula
+Moby-Dick
+Little Women
+Of Mice and Men
+The Catcher in the Rye
+Animal Farm
+The Outsiders
+The Little Prince
+Where the Wild Things Are
+Goodnight Moon
+Magic Tree House
+The Fault in Our Stars
+A Series of Unfortunate Events
+Warriors | warrior cats
+Wings of Fire
+Geronimo Stilton
+Junie B. Jones
+Treasure Island
+The Jungle Book
+Lord of the Flies
+Hatchet
+Bridge to Terabithia
+Fahrenheit 451
+The Odyssey
+Sherlock Holmes
+Peter Pan
+Don Quixote
+War and Peace
+
+@ dances | 12 | Dances and dance moves
+Floss | flossing
+Dab | dabbing
+Moonwalk
+Ballet
+Hip hop
+Salsa
+Macarena
+The Worm
+The Robot
+Tango
+Waltz
+Breakdancing | breaking | breakdance
+Tap dance | tap
+Cha Cha Slide
+Cupid Shuffle
+Electric Slide
+Chicken Dance
+Hokey Pokey | hokey cokey
+YMCA
+Gangnam Style
+Griddy
+Running Man
+Shuffle | cutting shapes
+Cha-cha | cha-cha-cha
+Line dancing
+Square dance
+Swing
+Disco
+Jazz
+Twist
+Charleston
+Foxtrot
+Samba
+Rumba
+Irish dance | riverdance | irish step dance
+Belly dance
+Hula
+Conga | conga line
+Limbo
+Orange Justice
+Default dance
+Renegade
+Whip | nae nae | whip nae nae
+Stanky Leg
+Cotton Eye Joe
+Thriller
+Sprinkler
+Harlem Shake
+Wobble
+Flamenco
+Contemporary
+Polka
+Bachata
+Jive
+
+@ playground-games | 12 | Playground and party games
+Tag | tig
+Hide and Seek
+Hopscotch
+Duck Duck Goose
+Musical Chairs
+Simon Says
+Red Light Green Light
+Freeze Tag
+Tug of War
+Dodgeball
+Red Rover
+Four Square
+Kickball
+Jump rope | skipping | double dutch
+Hot Potato
+Pin the Tail on the Donkey
+Truth or Dare
+Charades
+Marco Polo
+Capture the Flag
+Tetherball
+Rock Paper Scissors
+Musical Statues | statues
+Twister
+Telephone | chinese whispers | broken telephone
+Hot and Cold
+What's the Time Mr Wolf | mr wolf
+Mother May I
+Cops and Robbers
+Leapfrog
+Wall ball
+Handball
+Marbles
+Sack race | potato sack race
+Egg and spoon race
+Three-legged race
+Bobbing for apples | apple bobbing
+Scavenger hunt | treasure hunt
+Pass the Parcel
+Sleeping Lions
+Heads Up Seven Up | heads down thumbs up
+Never Have I Ever
+Would You Rather
+Twenty Questions | 20 questions
+Mafia | werewolf
+Wink Murder
+Sardines
+Limbo
+Sharks and Minnows
+Kick the Can
+Stuck in the Mud
+Ring Around the Rosie | ring a ring o roses
+Freeze dance | dance freeze
+Hangman
+
+@ emotions | 12 | Emotions and feelings
+Happy | happiness
+Sad | sadness
+Angry | anger | mad
+Scared | fear | afraid | frightened
+Excited | excitement
+Nervous
+Surprised | surprise
+Love
+Bored | boredom
+Jealous | jealousy | envy
+Anxious | anxiety
+Tired | sleepy
+Confused | confusion
+Lonely | loneliness
+Embarrassed | embarrassment
+Proud | pride
+Disgusted | disgust | grossed out
+Calm
+Shy
+Hopeful | hope
+Grateful | thankful | gratitude
+Frustrated | frustration
+Guilty | guilt
+Stressed | stress
+Joy | joyful
+Content | satisfied
+Relieved | relief
+Annoyed | irritated
+Ashamed | shame
+Worried | worry
+Hurt
+Curious | curiosity
+Confident | confidence
+Peaceful
+Silly
+Grumpy
+Overwhelmed
+Hate | hatred
+Sympathy | compassion
+Empathy
+Nostalgic | nostalgia
+Depressed
+Upset
+Furious | rage
+Cheerful
+Disappointed | disappointment
+Terrified | terror
+Hangry
+Awkward
+
+@ artists | 12 | Famous painters and artists
+Leonardo da Vinci | da vinci | leonardo
+Pablo Picasso | picasso
+Vincent van Gogh | van gogh
+Michelangelo
+Claude Monet | monet
+Salvador Dalí | dalí
+Andy Warhol | warhol
+Frida Kahlo | frida | kahlo
+Rembrandt
+Bob Ross
+Raphael
+Johannes Vermeer | vermeer
+Georgia O'Keeffe | o'keeffe
+Jackson Pollock | pollock
+Edvard Munch | munch
+Banksy
+Henri Matisse | matisse
+Keith Haring | haring
+Jean-Michel Basquiat | basquiat
+Gustav Klimt | klimt
+Paul Cézanne | cézanne
+Pierre-Auguste Renoir | renoir
+Edgar Degas | degas
+Roy Lichtenstein | lichtenstein
+Norman Rockwell | rockwell
+Edward Hopper | hopper
+Sandro Botticelli | botticelli
+Caravaggio
+Diego Rivera | rivera
+Francisco Goya | goya
+Paul Gauguin | gauguin
+Wassily Kandinsky | kandinsky
+René Magritte | magritte
+Yayoi Kusama | kusama
+Hokusai | katsushika hokusai
+Georges Seurat | seurat
+Piet Mondrian | mondrian
+Mark Rothko | rothko
+Joan Miró | miró
+Donatello
+Auguste Rodin | rodin
+J. M. W. Turner | turner | william turner
+Diego Velázquez | velázquez
+Ai Weiwei
+Jeff Koons | koons
+Damien Hirst | hirst
+Albrecht Dürer | dürer
+Titian
+Édouard Manet | manet
+Takashi Murakami | murakami
+Jan van Eyck | van eyck
+Peter Paul Rubens | rubens
+Mary Cassatt | cassatt

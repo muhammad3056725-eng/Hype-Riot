@@ -1,0 +1,1617 @@
+# HYPE RIOT prompt corpus - batch C
+# Format: "@ slug | categoryId | Prompt text", then one answer per line: "Canonical | alias | alias"
+# Answers ordered most famous -> least famous. First 10 = top-10 targets.
+
+@ pets | 7 | Pets people keep
+Dog | puppy | doggy | doggo
+Cat | kitten | kitty
+Fish
+Hamster
+Rabbit | bunny
+Goldfish
+Guinea Pig | cavy
+Parrot
+Turtle
+Snake
+Bird
+Lizard
+Horse
+Budgie | parakeet | budgerigar
+Gerbil
+Mouse | mice
+Rat
+Ferret
+Bearded Dragon
+Gecko | leopard gecko
+Tortoise
+Hedgehog
+Chinchilla
+Canary
+Cockatiel
+Chicken | hen
+Pony
+Pig | mini pig | pot-bellied pig
+Goat
+Frog
+Hermit Crab
+Iguana
+Axolotl
+Tarantula
+Betta Fish | betta | siamese fighting fish
+Guppy
+Duck
+Sugar Glider
+Lovebird
+Cockatoo
+Finch
+Chameleon
+Donkey
+Alpaca
+Koi
+Stick Insect | stick bug
+
+@ ocean-animals | 7 | Ocean animals
+Shark
+Whale
+Dolphin
+Octopus
+Jellyfish
+Sea Turtle
+Starfish | sea star
+Crab
+Seal
+Squid
+Orca | killer whale
+Lobster
+Clownfish | clown fish
+Stingray | sting ray
+Seahorse
+Great White Shark | great white
+Blue Whale
+Sea Lion
+Walrus
+Eel | moray eel
+Shrimp | prawn
+Manta Ray | manta
+Hammerhead Shark | hammerhead
+Humpback Whale | humpback
+Narwhal
+Beluga | beluga whale
+Sea Urchin
+Coral
+Pufferfish | blowfish | puffer fish
+Swordfish
+Tuna
+Penguin
+Sea Otter | otter
+Manatee | sea cow
+Whale Shark
+Sea Anemone | anemone
+Clam
+Oyster
+Anglerfish
+Barracuda
+Sperm Whale
+Sea Cucumber
+Krill
+Lionfish
+Marlin
+Porpoise
+Cuttlefish
+Nautilus
+Flying Fish
+Sunfish | ocean sunfish | mola
+Barnacle
+Sardine
+Plankton
+
+@ safari-animals | 7 | African safari animals
+Lion
+Elephant
+Giraffe
+Zebra
+Rhinoceros | rhino
+Hippopotamus | hippo
+Cheetah
+Leopard
+Gorilla
+Hyena
+Buffalo | cape buffalo
+Wildebeest | gnu
+Crocodile | croc | nile crocodile
+Chimpanzee | chimp
+Meerkat
+Warthog
+Gazelle
+Antelope
+Ostrich
+Baboon
+Impala
+Flamingo
+Vulture
+Jackal
+African Wild Dog | wild dog | painted dog
+Mongoose
+Okapi
+Kudu
+Eland
+Oryx | gemsbok
+Springbok
+Dik-dik
+Serval
+Caracal
+Aardvark
+Honey Badger
+Pangolin
+Secretary Bird
+Marabou Stork
+Hornbill
+Mandrill
+Black Mamba | mamba
+Python | rock python
+Porcupine
+Waterbuck
+Hartebeest
+Vervet Monkey
+Bat-eared Fox
+
+@ birds | 7 | Birds
+Eagle
+Owl
+Parrot
+Penguin
+Flamingo
+Pigeon
+Robin
+Crow
+Hawk
+Ostrich
+Peacock | peafowl | peahen
+Duck
+Chicken | hen | rooster
+Hummingbird
+Swan
+Blue Jay
+Cardinal
+Seagull | gull
+Toucan
+Woodpecker
+Turkey
+Goose
+Sparrow
+Pelican
+Falcon
+Vulture
+Raven
+Dove
+Emu
+Kiwi
+Bald Eagle
+Stork
+Heron
+Crane
+Canary
+Puffin
+Albatross
+Cockatoo
+Macaw
+Budgie | parakeet | budgerigar
+Kingfisher
+Magpie
+Finch
+Condor
+Osprey
+Roadrunner
+Pheasant
+Starling
+Swallow
+Mockingbird
+Kookaburra
+Cassowary
+Quail
+Blackbird
+Wren
+
+@ bugs | 7 | Insects, spiders and creepy-crawlies
+Spider
+Ant
+Bee | honeybee
+Butterfly
+Mosquito
+Fly | housefly
+Ladybug | ladybird
+Cockroach | roach
+Beetle
+Grasshopper
+Wasp
+Dragonfly
+Moth
+Caterpillar
+Cricket
+Scorpion
+Centipede
+Worm | earthworm
+Termite
+Flea
+Tick
+Firefly | lightning bug
+Praying Mantis | mantis
+Millipede
+Snail
+Slug
+Tarantula
+Black Widow
+Hornet
+Stick Insect | stick bug | walking stick
+Louse | lice | head lice
+Bumblebee
+Gnat
+Cicada
+Earwig
+Bed Bug | bedbug
+Silverfish
+Aphid
+Locust
+Stink Bug
+Daddy Longlegs | daddy long legs | harvestman
+Pill Bug | roly poly | woodlouse
+Dung Beetle
+Mite
+Brown Recluse
+Horsefly
+Fruit Fly
+Weevil
+Leech
+Wolf Spider
+Katydid
+Mayfly
+
+@ dinosaurs | 7 | Dinosaurs and prehistoric creatures
+Tyrannosaurus Rex | t rex | trex | tyrannosaurus
+Triceratops
+Velociraptor | raptor
+Stegosaurus
+Brachiosaurus
+Pterodactyl | pterodactylus
+Spinosaurus
+Ankylosaurus
+Diplodocus
+Woolly Mammoth | mammoth | wooly mammoth
+Brontosaurus
+Saber-toothed Tiger | sabertooth | saber-toothed cat | sabre-toothed tiger | smilodon
+Megalodon
+Allosaurus
+Parasaurolophus
+Iguanodon
+Pachycephalosaurus
+Mosasaurus
+Pteranodon
+Plesiosaurus | plesiosaur
+Apatosaurus
+Archaeopteryx
+Dilophosaurus
+Giganotosaurus
+Carnotaurus
+Gallimimus
+Argentinosaurus
+Compsognathus
+Deinonychus
+Utahraptor
+Therizinosaurus
+Baryonyx
+Oviraptor
+Protoceratops
+Dimetrodon
+Ichthyosaurus | ichthyosaur
+Quetzalcoatlus
+Woolly Rhinoceros | woolly rhino
+Mastodon
+Trilobite
+Ammonite
+Edmontosaurus
+Styracosaurus
+Microraptor
+Maiasaura
+Albertosaurus
+Coelophysis
+Elasmosaurus
+Liopleurodon
+Titanoboa
+Glyptodon
+Giant Ground Sloth | megatherium | ground sloth
+Dunkleosteus
+Sarcosuchus | supercroc
+Irish Elk | megaloceros
+
+@ dog-breeds | 7 | Dog breeds
+Labrador Retriever | labrador | lab
+Golden Retriever | golden
+German Shepherd | alsatian
+Poodle
+Bulldog | english bulldog
+Chihuahua
+Beagle
+Pug
+Husky | siberian husky
+Dachshund | wiener dog | sausage dog
+Rottweiler | rottie
+Pit Bull | pitbull | american pit bull terrier
+Corgi | welsh corgi
+French Bulldog | frenchie
+Boxer
+Great Dane
+Shih Tzu
+Yorkshire Terrier | yorkie
+Dalmatian
+Border Collie
+Doberman | doberman pinscher | dobermann
+Pomeranian
+Saint Bernard | st bernard
+Greyhound
+Maltese
+Australian Shepherd | aussie
+Shiba Inu | shiba
+Cocker Spaniel
+Bernese Mountain Dog | bernese
+Chow Chow
+Bloodhound
+Basset Hound
+Jack Russell Terrier | jack russell
+Bichon Frise | bichon
+Akita
+Mastiff
+Collie | rough collie
+Alaskan Malamute | malamute
+Samoyed
+Newfoundland | newfie
+Cavalier King Charles Spaniel | cavalier | king charles spaniel
+Schnauzer
+Weimaraner
+Pekingese
+Whippet
+Boston Terrier
+Bull Terrier
+Shar Pei
+Afghan Hound
+Great Pyrenees
+Irish Setter
+Papillon
+West Highland White Terrier | westie
+Scottish Terrier | scottie
+Lhasa Apso
+Basenji
+Vizsla
+Havanese
+
+@ reptiles-amphibians | 7 | Reptiles and amphibians
+Snake
+Lizard
+Turtle
+Frog
+Crocodile | croc
+Alligator | gator
+Tortoise
+Toad
+Chameleon
+Iguana
+Gecko
+Salamander
+Komodo Dragon
+Python
+Cobra | king cobra
+Rattlesnake
+Newt
+Axolotl
+Bearded Dragon
+Anaconda
+Boa Constrictor | boa
+Sea Turtle
+Poison Dart Frog | poison frog | dart frog
+Tree Frog
+Bullfrog
+Gila Monster
+Black Mamba | mamba
+Monitor Lizard
+Caiman
+Gharial
+Garter Snake
+Viper
+Tuatara
+Skink
+Copperhead
+Cottonmouth | water moccasin
+Coral Snake
+Corn Snake
+Snapping Turtle
+Galapagos Tortoise | giant tortoise
+Cane Toad
+Frilled Lizard | frill-necked lizard
+Anole
+Horned Lizard | horned toad
+Basilisk Lizard
+Hellbender
+Caecilian
+Leatherback Turtle | leatherback
+Sea Snake
+Thorny Devil
+Taipan
+
+@ australian-animals | 7 | Australian animals
+Kangaroo | roo
+Koala | koala bear
+Emu
+Platypus | duck-billed platypus
+Wombat
+Tasmanian Devil
+Dingo
+Kookaburra
+Wallaby
+Echidna | spiny anteater
+Quokka
+Saltwater Crocodile | crocodile | croc | saltie
+Cassowary
+Possum | brushtail possum
+Sugar Glider
+Cockatoo
+Budgerigar | budgie
+Box Jellyfish
+Redback Spider | redback
+Funnel-web Spider | funnel web
+Frilled Lizard | frill-necked lizard
+Thorny Devil
+Bilby
+Numbat
+Tasmanian Tiger | thylacine
+Galah
+Lyrebird
+Cane Toad
+Blue-tongued Lizard | blue tongue lizard | bluey
+Goanna
+Bandicoot
+Quoll
+Little Penguin | fairy penguin
+Dugong
+Flying Fox | fruit bat
+Eastern Brown Snake | brown snake
+Inland Taipan | taipan
+Rainbow Lorikeet | lorikeet
+Black Swan
+Tree Kangaroo
+Australian Magpie | magpie
+Huntsman Spider | huntsman
+Bearded Dragon
+Wallaroo
+Pademelon
+Ibis | bin chicken
+
+@ farm-animals | 7 | Farm animals
+Cow | cattle | calf | heifer
+Pig | hog | piglet | swine
+Chicken | hen | chick
+Horse | stallion | mare | foal
+Sheep | lamb | ewe | ram
+Goat
+Duck | duckling
+Turkey
+Donkey | burro
+Goose
+Rooster | cockerel
+Bull
+Rabbit | bunny
+Dog | sheepdog | farm dog
+Cat | barn cat
+Pony
+Llama
+Alpaca
+Mule
+Ox | oxen
+Bee | honeybee
+Water Buffalo
+Yak
+Guinea Fowl
+Quail
+Ostrich
+Emu
+Camel
+Reindeer
+Peacock | peafowl
+Pheasant
+Pigeon
+Guinea Pig
+Mouse | mice
+Barn Owl
+Bison
+
+@ mythical-creatures | 12 | Mythical creatures and legendary monsters
+Dragon
+Unicorn
+Phoenix
+Mermaid | merman
+Vampire
+Werewolf
+Bigfoot | sasquatch
+Loch Ness Monster | nessie
+Centaur
+Griffin | gryphon | griffon
+Pegasus
+Yeti | abominable snowman
+Zombie
+Medusa | gorgon
+Minotaur
+Kraken
+Fairy | faerie
+Troll
+Goblin
+Elf | elves
+Hydra
+Cyclops
+Sphinx
+Ghost
+Chupacabra
+Leprechaun
+Gnome
+Ogre
+Banshee
+Basilisk
+Cerberus
+Genie | djinn | jinn
+Siren
+Harpy
+Chimera
+Kitsune | nine-tailed fox
+Thunderbird
+Wendigo
+Satyr | faun
+Mothman
+Jersey Devil
+Kelpie
+Golem
+Leviathan
+Pixie
+Dwarf | dwarves
+Giant
+Gargoyle
+Manticore
+Hippogriff
+Mummy
+Wyvern
+Jackalope
+Sea Serpent
+Bunyip
+Cockatrice
+
+@ space | 8 | Things in space (planets, moons, stars and more)
+Sun
+Moon
+Earth
+Mars
+Jupiter
+Saturn
+Star
+Venus
+Mercury
+Neptune
+Uranus
+Pluto
+Black Hole
+Comet
+Asteroid
+Galaxy
+Milky Way
+Meteor | shooting star | meteoroid
+Nebula
+Supernova
+International Space Station | iss | space station
+Satellite
+Constellation
+Meteorite
+Halley's Comet
+Asteroid Belt
+North Star | polaris | pole star
+Andromeda Galaxy | andromeda
+Big Dipper
+Orion | orion's belt
+Hubble Space Telescope | hubble
+James Webb Space Telescope | james webb | jwst
+Titan
+Europa
+Io
+Ganymede
+Callisto
+Phobos
+Deimos
+Enceladus
+Triton
+Charon
+Ceres
+Eris
+Sirius | dog star
+Betelgeuse
+Alpha Centauri
+Kuiper Belt
+Oort Cloud
+Neutron Star
+Pulsar
+Quasar
+White Dwarf
+Red Giant
+Exoplanet
+Solar Flare
+Sunspot
+Dark Matter
+Space Junk | space debris
+
+@ elements | 8 | Chemical elements
+Hydrogen
+Oxygen
+Carbon
+Gold
+Iron
+Helium
+Silver
+Nitrogen
+Copper
+Sodium
+Aluminum | aluminium
+Calcium
+Lead
+Uranium
+Neon
+Zinc
+Mercury
+Platinum
+Chlorine
+Potassium
+Magnesium
+Titanium
+Lithium
+Sulfur | sulphur
+Silicon
+Tin
+Nickel
+Plutonium
+Phosphorus
+Fluorine
+Iodine
+Argon
+Cobalt
+Chromium
+Tungsten
+Radium
+Radon
+Boron
+Beryllium
+Manganese
+Arsenic
+Krypton
+Xenon
+Bismuth
+Cesium | caesium
+Gallium
+Barium
+Palladium
+Strontium
+Polonium
+Bromine
+Selenium
+Germanium
+Vanadium
+Einsteinium
+Osmium
+
+@ weather | 8 | Weather and natural disasters
+Rain
+Snow
+Tornado | twister
+Hurricane
+Earthquake
+Thunderstorm
+Lightning
+Tsunami | tidal wave
+Flood | flooding | flash flood
+Hail | hailstorm
+Blizzard | snowstorm
+Wind | windy
+Volcanic Eruption | volcano | eruption
+Drought
+Fog | foggy
+Thunder
+Wildfire | forest fire | bushfire
+Avalanche
+Storm
+Sunshine | sunny | sun
+Cloud | cloudy
+Heat Wave | heatwave
+Sleet
+Typhoon
+Cyclone
+Monsoon
+Landslide | mudslide
+Rainbow
+Frost
+Drizzle
+Sandstorm | dust storm
+Ice Storm
+Freezing Rain
+Humidity
+Mist
+Smog
+Haze
+Breeze
+Gale
+Dew
+Waterspout
+Sinkhole
+Storm Surge
+Polar Vortex
+Derecho
+El Niño
+Whiteout
+Black Ice
+Squall
+Cold Snap
+
+@ body-parts | 8 | Parts of the human body
+Head
+Heart
+Brain
+Eye
+Hand
+Arm
+Leg
+Foot | feet
+Nose
+Mouth
+Ear
+Finger
+Toe
+Hair
+Knee
+Stomach | tummy | belly
+Lung
+Elbow
+Shoulder
+Tooth | teeth
+Tongue
+Neck
+Liver
+Kidney
+Skin
+Lip
+Chin
+Cheek
+Forehead
+Eyebrow
+Eyelash
+Ankle
+Wrist
+Hip
+Thumb
+Back
+Chest
+Belly Button | navel
+Skull
+Spine | backbone
+Rib
+Bone
+Muscle
+Intestine | gut | bowel
+Bladder
+Pancreas
+Appendix
+Thigh
+Heel
+Fingernail | nail | toenail
+Jaw
+Throat
+Waist
+Gallbladder
+Spleen
+Femur
+Tonsil
+Calf
+Blood
+Eyelid
+
+@ scientists | 8 | Famous scientists and inventors
+Albert Einstein | einstein
+Isaac Newton | newton
+Thomas Edison | edison
+Nikola Tesla | tesla
+Marie Curie | curie
+Charles Darwin | darwin
+Galileo Galilei | galileo
+Stephen Hawking | hawking
+Benjamin Franklin | ben franklin
+Alexander Graham Bell | graham bell
+Leonardo da Vinci | da vinci | leonardo
+Wright Brothers | orville wright | wilbur wright
+Louis Pasteur | pasteur
+Archimedes
+Nicolaus Copernicus | copernicus
+Johannes Gutenberg | gutenberg
+Alexander Fleming | fleming
+Ada Lovelace | lovelace
+Alan Turing | turing
+Gregor Mendel | mendel
+Michael Faraday | faraday
+James Watt
+Johannes Kepler | kepler
+Pythagoras
+Aristotle
+Carl Sagan | sagan
+Dmitri Mendeleev | mendeleev
+Rosalind Franklin
+Niels Bohr | bohr
+Max Planck | planck
+Ernest Rutherford | rutherford
+Edward Jenner | jenner
+George Washington Carver | carver
+Guglielmo Marconi | marconi
+Samuel Morse | morse
+Alessandro Volta | volta
+Jane Goodall | goodall
+Euclid
+Robert Hooke | hooke
+Tim Berners-Lee | berners-lee
+Grace Hopper
+Katherine Johnson
+Hedy Lamarr
+Alfred Nobel | nobel
+Louis Braille | braille
+Antoine Lavoisier | lavoisier
+Rachel Carson
+Carl Linnaeus | linnaeus
+Blaise Pascal | pascal
+James Clerk Maxwell
+
+@ flowers | 8 | Flowers
+Rose
+Sunflower
+Tulip
+Daisy
+Lily
+Orchid
+Daffodil
+Lavender
+Dandelion
+Carnation
+Lotus
+Poppy
+Violet
+Hibiscus
+Marigold
+Jasmine
+Peony
+Chrysanthemum | mum
+Iris
+Lilac
+Cherry Blossom | sakura
+Magnolia
+Hydrangea
+Petunia
+Pansy
+Geranium
+Begonia
+Gardenia
+Azalea
+Camellia
+Snapdragon
+Buttercup
+Bluebell
+Forget-me-not
+Dahlia
+Zinnia
+Gladiolus | gladiola
+Morning Glory
+Lily of the Valley
+Hyacinth
+Crocus
+Primrose
+Foxglove
+Honeysuckle
+Bird of Paradise
+Freesia
+Aster
+Cosmos
+Sweet Pea
+Wisteria
+Bougainvillea
+Edelweiss
+Water Lily
+Plumeria | frangipani
+Calla Lily
+Anemone
+Rhododendron
+
+@ trees | 8 | Trees
+Oak
+Pine
+Maple
+Palm Tree | palm
+Apple Tree | apple
+Birch
+Willow | weeping willow
+Redwood
+Cherry Tree | cherry
+Spruce
+Elm
+Fir | douglas fir
+Cedar
+Sequoia | giant sequoia
+Baobab
+Ash
+Beech
+Cypress
+Eucalyptus | gum tree
+Olive Tree | olive
+Orange Tree | orange
+Lemon Tree | lemon
+Magnolia
+Sycamore
+Poplar
+Aspen
+Chestnut
+Walnut
+Hickory
+Mahogany
+Teak
+Cottonwood
+Dogwood
+Juniper
+Yew
+Hemlock
+Larch
+Holly
+Joshua Tree
+Linden | basswood
+Acacia
+Mango Tree | mango
+Fig Tree | fig
+Peach Tree | peach
+Pear Tree | pear
+Hazel
+Rowan
+Alder
+Banyan
+Ginkgo | gingko
+Jacaranda
+Rubber Tree
+
+@ gemstones | 8 | Gemstones, crystals and precious metals
+Diamond
+Ruby
+Emerald
+Sapphire
+Gold
+Silver
+Amethyst
+Pearl
+Opal
+Topaz
+Jade
+Platinum
+Quartz
+Turquoise
+Garnet
+Aquamarine
+Onyx
+Obsidian
+Amber
+Rose Quartz
+Peridot
+Citrine
+Tanzanite
+Lapis Lazuli | lapis
+Moonstone
+Tourmaline
+Jasper
+Agate
+Malachite
+Tiger's Eye | tiger eye
+Alexandrite
+Zircon
+Cubic Zirconia | cz
+Spinel
+Morganite
+Labradorite
+Hematite
+Jet
+Palladium
+Rhodium
+Bloodstone
+Carnelian
+Sunstone
+Fluorite
+Selenite
+Pyrite | fool's gold
+Beryl
+Coral
+
+@ colors | 8 | Colors
+Red
+Blue
+Green
+Yellow
+Orange
+Purple
+Pink
+Black
+White
+Brown
+Gray | grey
+Gold
+Silver
+Turquoise
+Teal
+Navy | navy blue
+Maroon
+Magenta
+Cyan
+Indigo
+Violet
+Lavender
+Beige
+Tan
+Cream
+Ivory
+Crimson
+Scarlet
+Lime | lime green
+Olive | olive green
+Mint | mint green
+Peach
+Coral
+Salmon
+Burgundy
+Aqua
+Lilac
+Mauve
+Fuchsia
+Khaki
+Bronze
+Charcoal
+Amber
+Emerald | emerald green
+Sky Blue | light blue
+Royal Blue
+Hot Pink
+Chartreuse
+Periwinkle
+Rust
+Copper
+Ochre
+
+@ inventions | 8 | Inventions that changed the world
+Wheel
+Internet
+Light Bulb | lightbulb
+Printing Press
+Telephone
+Computer
+Airplane | aeroplane | plane
+Car | automobile
+Smartphone | cell phone | mobile phone | iphone
+Television | tv
+Steam Engine
+Radio
+Vaccine | vaccination
+Penicillin | antibiotics
+Refrigerator | fridge
+Camera
+Paper
+Compass
+Gunpowder
+Clock
+Microscope
+Telescope
+Train | locomotive | railway | railroad
+Bicycle | bike
+Battery
+Rocket
+X-ray
+GPS
+Email
+Microwave
+Air Conditioning | air conditioner | ac
+Washing Machine
+Plastic
+Glass
+Plow | plough
+Eyeglasses | glasses | spectacles
+Toilet | flush toilet
+Sewing Machine
+Typewriter
+Telegraph
+Satellite
+Transistor
+Microchip | computer chip | integrated circuit
+Solar Panel
+Assembly Line
+Electric Motor
+Thermometer
+Matches
+Elevator
+Vacuum Cleaner
+Wi-Fi
+Artificial Intelligence | ai
+Anesthesia | anaesthesia
+Calculator
+Lightning Rod
+
+@ countries | 9 | Countries
+United States | usa | us | america | united states of america
+Canada
+Mexico
+China
+Japan
+United Kingdom | uk | britain | great britain | england
+France
+Germany
+Italy
+Brazil
+India
+Russia
+Australia
+Spain
+Egypt
+South Africa
+Argentina
+South Korea
+Ireland
+Greece
+Sweden
+Norway
+Netherlands | holland
+Portugal
+Switzerland
+Turkey | turkiye
+Nigeria
+Kenya
+Thailand
+Vietnam
+Philippines
+Indonesia
+Saudi Arabia
+Israel
+Poland
+New Zealand
+Colombia
+Peru
+Chile
+Cuba
+Jamaica
+Ukraine
+Denmark
+Finland
+Belgium
+Austria
+Morocco
+Ethiopia
+Ghana
+Iceland
+Singapore
+North Korea
+Pakistan
+Iran
+Iraq
+Venezuela
+Nepal
+Malaysia
+
+@ capitals | 9 | Capital cities
+London
+Paris
+Washington, D.C. | washington | dc
+Tokyo
+Rome
+Beijing | peking
+Moscow
+Berlin
+Madrid
+Ottawa
+Mexico City
+Canberra
+Cairo
+Athens
+Dublin
+Seoul
+New Delhi | delhi
+Lisbon
+Amsterdam
+Brasília
+Buenos Aires
+Bangkok
+Vienna
+Stockholm
+Oslo
+Copenhagen
+Helsinki
+Warsaw
+Prague
+Budapest
+Brussels
+Kyiv | kiev
+Ankara
+Nairobi
+Lima
+Santiago
+Bogotá
+Havana
+Manila
+Hanoi
+Kuala Lumpur
+Reykjavík
+Wellington
+Riyadh
+Tehran
+Baghdad
+Islamabad
+Kathmandu
+Abuja
+Pretoria
+Addis Ababa
+Accra
+Rabat
+Doha
+Abu Dhabi
+Kingston
+Bucharest
+Dhaka
+Caracas
+Singapore
+
+@ us-states | 9 | US states
+California | cali
+Texas
+Florida
+New York
+Hawaii
+Alaska
+Washington | washington state
+Nevada
+Arizona
+Colorado
+Georgia
+Illinois
+Ohio
+Michigan
+Pennsylvania | pensylvania
+Massachusetts | massachusets
+New Jersey
+Louisiana
+Tennessee | tennesee
+Oregon
+Utah
+Virginia
+North Carolina
+South Carolina
+Kentucky
+Alabama
+Mississippi | mississipi
+Missouri
+Minnesota
+Wisconsin
+Indiana
+Iowa
+Kansas
+Nebraska
+Oklahoma
+Arkansas
+Montana
+Idaho
+Wyoming
+North Dakota
+South Dakota
+New Mexico
+Maine
+Vermont
+New Hampshire
+Connecticut | conneticut
+Rhode Island
+Delaware
+Maryland
+West Virginia
+
+@ big-cities | 9 | Big cities that are NOT national capitals
+New York City | nyc | new york
+Los Angeles | la
+Chicago
+Sydney
+Dubai
+Shanghai
+Rio de Janeiro | rio
+Barcelona
+Hong Kong
+Mumbai | bombay
+Toronto
+Las Vegas | vegas
+Miami
+San Francisco | sf
+Istanbul
+Milan
+Venice
+Munich
+Melbourne
+Houston
+Boston
+Seattle
+Dallas
+Philadelphia | philly
+Atlanta
+São Paulo
+Osaka
+Kyoto
+Manchester
+Liverpool
+Vancouver
+Montreal
+St. Petersburg | saint petersburg
+Florence
+Naples
+Hamburg
+Frankfurt
+Marseille
+Geneva
+Zurich
+Johannesburg | joburg
+Lagos
+Karachi
+Kolkata | calcutta
+Bangalore | bengaluru
+Ho Chi Minh City | saigon
+Guangzhou
+Shenzhen
+Auckland
+Detroit
+New Orleans
+Orlando
+Denver
+San Diego
+Glasgow
+Casablanca
+Lyon
+Chennai | madras
+
+@ landmarks | 9 | Famous landmarks and buildings
+Eiffel Tower
+Statue of Liberty
+Great Wall of China | great wall
+Pyramids of Giza | pyramids | great pyramid | great pyramid of giza | egyptian pyramids
+Taj Mahal
+Colosseum | coliseum
+Big Ben | elizabeth tower
+Leaning Tower of Pisa | tower of pisa
+Golden Gate Bridge
+Sydney Opera House | opera house
+Mount Rushmore
+Empire State Building
+Christ the Redeemer
+Machu Picchu
+Stonehenge
+White House
+Buckingham Palace
+Burj Khalifa
+Great Sphinx of Giza | sphinx | great sphinx
+Hollywood Sign
+Petra
+London Eye
+Tower Bridge
+Parthenon
+Acropolis
+Kremlin
+Saint Basil's Cathedral | st basil's
+Angkor Wat
+Chichen Itza
+Notre-Dame Cathedral | notre dame
+Sagrada Família
+Arc de Triomphe
+Louvre | louvre museum
+Brandenburg Gate
+Neuschwanstein Castle | neuschwanstein
+Space Needle
+Gateway Arch | st louis arch
+Lincoln Memorial
+Washington Monument
+Times Square
+Forbidden City
+Alhambra
+Hagia Sophia
+St. Peter's Basilica | saint peter's basilica
+Sistine Chapel
+Trevi Fountain
+Pantheon
+CN Tower
+Moai | easter island statues | easter island heads
+Brooklyn Bridge
+Petronas Towers
+Alcatraz
+United States Capitol | capitol building | us capitol
+Tower of London
+Edinburgh Castle
+Chrysler Building
+Central Park
+
+@ natural-wonders | 9 | Mountains, rivers, deserts and natural wonders
+Mount Everest | everest
+Grand Canyon
+Niagara Falls
+Amazon River
+Nile River | nile
+Sahara Desert | sahara
+Great Barrier Reef
+Amazon Rainforest | amazon jungle
+Mississippi River | mississippi
+Mount Kilimanjaro | kilimanjaro
+Victoria Falls
+Mount Fuji | fuji
+Rocky Mountains | rockies
+Alps
+Himalayas
+Andes
+Yellowstone
+Old Faithful
+Dead Sea
+Mount Vesuvius | vesuvius
+Northern Lights | aurora borealis
+Uluru | ayers rock
+Death Valley
+K2
+Matterhorn
+Angel Falls
+Iguazu Falls
+Yangtze River | yangtze
+Gobi Desert | gobi
+Mojave Desert | mojave
+Mount Etna | etna
+Ha Long Bay | halong bay
+Mariana Trench
+Lake Baikal | baikal
+Great Lakes
+Lake Superior
+Danube River | danube
+River Thames | thames
+Colorado River
+Rhine River | rhine
+Ganges River | ganges
+Denali | mount mckinley
+Mont Blanc
+Mount St. Helens
+Giant's Causeway
+Cliffs of Moher
+Atacama Desert | atacama
+Kalahari Desert | kalahari
+Table Mountain
+Sugarloaf Mountain
+Galápagos Islands | galapagos
+Everglades
+Appalachian Mountains | appalachians
+Mount Olympus
+Lake Titicaca
+Salar de Uyuni
+Yosemite Valley | yosemite
+Mammoth Cave
+
+@ islands | 9 | Islands
+Hawaii | big island
+Iceland
+Greenland
+Madagascar
+Jamaica
+Cuba
+Bali
+Ireland
+Great Britain | britain
+Puerto Rico
+Sicily
+Bahamas
+Maldives
+Fiji
+Manhattan
+Tahiti
+Bora Bora
+Galápagos Islands | galapagos
+Easter Island | rapa nui
+Long Island
+Bermuda
+Barbados
+Aruba
+Malta
+Cyprus
+Crete
+Sardinia
+Corsica
+Tasmania
+Maui
+Oahu
+Santorini
+Mykonos
+Capri
+Ibiza
+Mallorca | majorca
+Tenerife
+Canary Islands
+Sri Lanka
+Borneo
+Sumatra
+Java
+Phuket
+Taiwan
+New Zealand
+Alcatraz
+Ellis Island
+Martha's Vineyard
+Nantucket
+Key West
+Isle of Man
+Isle of Wight
+Isle of Skye | skye
+Zanzibar
+Mauritius
+Newfoundland
+Prince Edward Island | pei
+Okinawa
+Hokkaido
+Kauai
+
+@ languages | 9 | Languages of the world
+English
+Spanish
+French
+Chinese | mandarin | mandarin chinese
+German
+Japanese
+Italian
+Russian
+Arabic
+Portuguese
+Korean
+Hindi
+Greek
+Latin
+Dutch
+Swedish
+Turkish
+Hebrew
+Polish
+Vietnamese
+Thai
+Swahili
+Irish | irish gaelic
+Welsh
+Norwegian
+Danish
+Finnish
+Ukrainian
+Bengali | bangla
+Urdu
+Punjabi
+Persian | farsi
+Tagalog | filipino
+Indonesian | bahasa indonesia
+Cantonese
+American Sign Language | asl | sign language
+Czech
+Hungarian
+Romanian
+Icelandic
+Afrikaans
+Zulu
+Hawaiian
+Navajo
+Cherokee
+Esperanto
+Sanskrit
+Tamil
+Scottish Gaelic | scots gaelic
+Catalan
+Basque
+Yiddish
+Malay
+Croatian
+Serbian
+Quechua
+Māori
+Amharic
+Yoruba
+Mongolian

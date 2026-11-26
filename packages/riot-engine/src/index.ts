@@ -1,3 +1,4 @@
+export * from "./text";
 export * from "./AnswerMatcher";
 export * from "./ComboTagEvaluator";
 export * from "./PitchScorer";

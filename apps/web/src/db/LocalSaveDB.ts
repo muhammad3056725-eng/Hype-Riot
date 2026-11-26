@@ -1,11 +1,21 @@
-// HYPE RIOT persistence (Blueprint §6 LocalSaveDB): profile, XP/coins,
-// daily streak, unlocked cosmetics, settings. localStorage-backed.
+// HYPE RIOT persistence: profile, XP/coins, daily streak + one scored
+// Daily attempt per date, unlocked cosmetics ("slot:id"), settings.
+// localStorage-backed; every access is guarded (private mode, quotas).
+
+export type QualitySetting = "auto" | "high" | "low";
 
 export interface Settings {
-  crt: "off" | "subtle" | "arcade";
-  reducedMotion: boolean;
-  legibleFont: boolean;
   sound: boolean;
+  reducedMotion: boolean;
+  quality: QualitySetting;
+}
+
+export interface Equipped {
+  hoodie: string;
+  visor: string;
+  sneakers: string;
+  pet: string;
+  dance: string;
 }
 
 export interface SaveData {
@@ -15,24 +25,42 @@ export interface SaveData {
   gamesPlayed: number;
   lastDailyDate: string | null;
   dailyStreak: number;
+  /** date -> scored total of that day's first Daily attempt. */
+  dailyScores: Record<string, number>;
+  /** "slot:id" keys. */
   unlocked: string[];
-  equipped: { hoodie: string; visor: string; sneakers: string; pet: string; dance: string };
+  equipped: Equipped;
   settings: Settings;
 }
 
 const KEY = "hype-riot:save-v1";
 
-export const DEFAULT_SAVE: SaveData = {
-  xp: 0,
-  coins: 0,
-  bestScore: 0,
-  gamesPlayed: 0,
-  lastDailyDate: null,
-  dailyStreak: 0,
-  unlocked: [],
-  equipped: { hoodie: "default", visor: "none", sneakers: "default", pet: "none", dance: "none" },
-  settings: { crt: "subtle", reducedMotion: false, legibleFont: false, sound: true },
+const prefersReducedMotion = (): boolean => {
+  try {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch {
+    return false;
+  }
 };
+
+export function defaultSave(): SaveData {
+  return {
+    xp: 0,
+    coins: 0,
+    bestScore: 0,
+    gamesPlayed: 0,
+    lastDailyDate: null,
+    dailyStreak: 0,
+    dailyScores: {},
+    unlocked: [],
+    equipped: { hoodie: "default", visor: "none", sneakers: "default", pet: "none", dance: "none" },
+    settings: { sound: true, reducedMotion: prefersReducedMotion(), quality: "auto" },
+  };
+}
+
+function dayDiff(fromISO: string, toISO: string): number {
+  return Math.round((Date.parse(toISO) - Date.parse(fromISO)) / 86400000);
+}
 
 export class LocalSaveDB {
   private data: SaveData;
@@ -42,18 +70,23 @@ export class LocalSaveDB {
   }
 
   private read(): SaveData {
+    const base = defaultSave();
     try {
       const raw = localStorage.getItem(KEY);
-      if (!raw) return structuredClone(DEFAULT_SAVE);
-      const parsed = JSON.parse(raw) as SaveData;
+      if (!raw) return base;
+      const parsed = JSON.parse(raw) as Partial<SaveData> & { unlocked?: string[] };
+      const settings = { ...base.settings, ...(parsed.settings ?? {}) } as Settings & Record<string, unknown>;
       return {
-        ...structuredClone(DEFAULT_SAVE),
+        ...base,
         ...parsed,
-        equipped: { ...DEFAULT_SAVE.equipped, ...parsed.equipped },
-        settings: { ...DEFAULT_SAVE.settings, ...parsed.settings },
+        dailyScores: { ...(parsed.dailyScores ?? {}) },
+        // v1 saves stored bare ids; they were unique per slot, so migrate by lookup later
+        unlocked: (parsed.unlocked ?? []).map((u) => (u.includes(":") ? u : `legacy:${u}`)),
+        equipped: { ...base.equipped, ...(parsed.equipped ?? {}) },
+        settings: { sound: settings.sound, reducedMotion: settings.reducedMotion, quality: settings.quality ?? "auto" },
       };
     } catch {
-      return structuredClone(DEFAULT_SAVE);
+      return base;
     }
   }
 
@@ -71,18 +104,41 @@ export class LocalSaveDB {
     return this.data;
   }
 
-  /** Records a completed Daily Riot; returns the new streak. */
-  recordDaily(dateISO: string): number {
+  isUnlocked(slot: string, id: string): boolean {
+    return this.data.unlocked.includes(`${slot}:${id}`) || this.data.unlocked.includes(`legacy:${id}`);
+  }
+
+  /** The streak as of `todayISO`: a missed day resets it to 0. */
+  currentStreak(todayISO: string): number {
+    const last = this.data.lastDailyDate;
+    if (!last) return 0;
+    const gap = dayDiff(last, todayISO);
+    return gap <= 1 ? this.data.dailyStreak : 0;
+  }
+
+  /** Clears a stale streak on boot so the HUD never shows a dead streak. */
+  refreshStreak(todayISO: string): void {
+    const s = this.currentStreak(todayISO);
+    if (s !== this.data.dailyStreak) this.update({ dailyStreak: s });
+  }
+
+  hasPlayedDaily(dateISO: string): boolean {
+    return dateISO in this.data.dailyScores;
+  }
+
+  /**
+   * Records the first (scored) Daily attempt of a date. Returns the new
+   * streak, or null when this date was already played (practice run).
+   */
+  recordDaily(dateISO: string, score: number): number | null {
+    if (this.hasPlayedDaily(dateISO)) return null;
     const prev = this.data.lastDailyDate;
-    let streak = 1;
-    if (prev) {
-      const diffDays = Math.round(
-        (Date.parse(dateISO) - Date.parse(prev)) / 86400000,
-      );
-      if (diffDays === 0) streak = this.data.dailyStreak;
-      else if (diffDays === 1) streak = this.data.dailyStreak + 1;
-    }
-    this.update({ lastDailyDate: dateISO, dailyStreak: streak });
+    const streak = prev && dayDiff(prev, dateISO) === 1 ? this.data.dailyStreak + 1 : 1;
+    const scores = { ...this.data.dailyScores, [dateISO]: score };
+    // keep the last 60 days only
+    const keys = Object.keys(scores).sort();
+    for (const k of keys.slice(0, Math.max(0, keys.length - 60))) delete scores[k];
+    this.update({ lastDailyDate: dateISO, dailyStreak: streak, dailyScores: scores });
     return streak;
   }
 }

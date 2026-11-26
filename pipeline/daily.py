@@ -1,23 +1,34 @@
 #!/usr/bin/env python3
-"""
-HYPE RIOT daily seed computation (Blueprint §2 Daily Riot, §6 daily-riot.yml).
-One global sequence per UTC date: seed = days since epoch, riot number
-counts days since launch epoch (2026-01-01), pack and arena derive from
-the seed. The web client computes the identical values locally; this
-module produces the published daily/YYYY-MM-DD.json artifacts.
+"""HYPE RIOT Daily Riot schedule — identical math to apps/web/src/data.ts.
+
+riotNumber = days since the 2026-01-01 launch + 1 (UTC dates)
+packId     = (offset + (riotNumber - 1) * stride) mod packCount
+The stride is coprime with packCount, so the Daily visits every pack
+exactly once before anything repeats (packCount consecutive days), and a
+golden-ratio stride keeps consecutive days far apart (categories mix).
 """
 import datetime
+import math
 
 LAUNCH_EPOCH = datetime.date(2026, 1, 1)
 
 
-def daily_for(date: datetime.date, pack_count: int) -> dict:
+def pick_stride(pack_count: int) -> int:
+    if pack_count <= 2:
+        return 1
+    s = max(1, round(pack_count * 0.381966))
+    while math.gcd(s, pack_count) != 1:
+        s += 1
+    return s
+
+
+def daily_for(date: datetime.date, pack_count: int, stride: int, offset: int = 0) -> dict:
     seed = (date - datetime.date(1970, 1, 1)).days
-    riot_number = (date - LAUNCH_EPOCH).days + 1
+    riot = (date - LAUNCH_EPOCH).days + 1
     return {
         "date": date.isoformat(),
         "seed": seed,
-        "riotNumber": riot_number,
-        "packId": seed % pack_count,
+        "riotNumber": riot,
+        "packId": (offset + (riot - 1) * stride) % pack_count,
         "arenaTheme": seed % 6,
     }

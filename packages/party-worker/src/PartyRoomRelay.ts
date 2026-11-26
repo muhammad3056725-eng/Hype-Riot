@@ -20,12 +20,10 @@ const MAX_PLAYERS = 12;
 const CODE_RE = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{4}$/;
 
 export class PartyRoom {
-  private state: DurableObjectState;
   private sockets = new Map<WebSocket, { name: string }>();
 
-  constructor(state: DurableObjectState) {
-    this.state = state;
-  }
+  // Durable Object constructor signature; the relay keeps no storage state.
+  constructor(_state: DurableObjectState) {}
 
   async fetch(req: Request): Promise<Response> {
     if (req.headers.get("Upgrade") !== "websocket") {
