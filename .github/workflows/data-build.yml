@@ -1,0 +1,49 @@
+name: Wikidata data build
+
+# Grows the HYPE RIOT dataset from Wikidata (owner addition, Nov 26 2026):
+# pulls entities + aliases per category, rebuilds pools/packs/entities.bin/
+# trie shards through the full pipeline (coverage + safety gates included),
+# and commits the enlarged dataset back to main, which redeploys Pages.
+on:
+  workflow_dispatch:
+    inputs:
+      per_category:
+        description: "Max entities pulled per category this run"
+        required: true
+        default: "250"
+      categories:
+        description: "Comma-separated category ids (blank = all 10)"
+        required: false
+        default: ""
+  schedule:
+    # Weekly growth run, Mondays 04:00 UTC, at the default cap.
+    - cron: "0 4 * * 1"
+
+permissions:
+  contents: write
+
+jobs:
+  grow-dataset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pull from Wikidata
+        run: |
+          ARGS="--per-category ${{ inputs.per_category || '250' }}"
+          if [ -n "${{ inputs.categories }}" ]; then
+            ARGS="$ARGS --categories ${{ inputs.categories }}"
+          fi
+          python3 pipeline/wikidata_ingest.py $ARGS
+      - name: Rebuild + validate the dataset
+        run: python3 pipeline/run_pipeline.py
+      - name: Commit the enlarged dataset
+        run: |
+          git config user.name "hype-riot-bot"
+          git config user.email "actions@github.com"
+          git add public/data pipeline/output
+          git diff --cached --quiet || git commit -m "data: wikidata growth run"
+          git push
+          
